@@ -1,10 +1,9 @@
-package com.example
+package com.example.ui
 
 import javafx.scene.control.Dialog
 import ktfx.dialogs.buttons
 
 class AboutDialog : Dialog<Unit>() {
-
     init {
         title = "Homework 1.1"
         headerText = "by Hendra Anggrian (hwijaya@hawk.iit.edu)"

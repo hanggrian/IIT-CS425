@@ -1,14 +1,12 @@
 [versions]
 jdk = "11"
 kotlin = "1.7.20"
-logback = "1.2.11"
 exposed = "0.41.1"
 mysql-connector = "8.0.31"
+logback = "1.2.11"
 
 [plugins]
-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
-git-publish = "org.ajoberstar.git-publish:3.0.1"
-pages = "com.hendraanggrian.pages:0.1"
+shadow = "com.github.johnrengelman.shadow:7.1.2"
 
 [libraries]
 # lint

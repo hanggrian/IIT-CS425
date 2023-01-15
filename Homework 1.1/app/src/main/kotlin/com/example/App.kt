@@ -1,11 +1,13 @@
 package com.example
 
-import com.example.dao.ClassStudents
 import com.example.dao.Classes
 import com.example.dao.Courses
 import com.example.dao.Lecturers
+import com.example.dao.Registrations
 import com.example.dao.Schedules
 import com.example.dao.Students
+import com.example.ui.AboutDialog
+import com.example.ui.MainStage
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.geometry.HPos
@@ -34,7 +36,7 @@ import ktfx.layouts.scene
 import ktfx.layouts.textField
 import ktfx.layouts.vbox
 import ktfx.runLater
-import org.apache.commons.lang3.SystemUtils
+import org.apache.commons.lang3.SystemUtils.IS_OS_MAC_OSX
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Slf4jSqlDebugLogger
@@ -46,13 +48,13 @@ class App : Application() {
     private lateinit var database: Database
     private lateinit var preferences: Preferences
 
-    private lateinit var stage: Stage
-    private lateinit var hostIpField: TextField
-    private lateinit var hostPortField: TextField
-    private lateinit var schemaField: TextField
-    private lateinit var userField: TextField
-    private lateinit var passwordField: TextField
-    private lateinit var keepSignCheck: CheckBox
+    lateinit var stage: Stage
+    lateinit var hostIpField: TextField
+    lateinit var hostPortField: TextField
+    lateinit var schemaField: TextField
+    lateinit var userField: TextField
+    lateinit var passwordField: TextField
+    lateinit var keepSignCheck: CheckBox
 
     companion object {
         private const val WIDTH_SHORT = 60.0
@@ -73,7 +75,7 @@ class App : Application() {
         stage.scene {
             vbox {
                 menuBar {
-                    isUseSystemMenuBar = SystemUtils.IS_OS_MAC_OSX
+                    isUseSystemMenuBar = IS_OS_MAC_OSX
                     "File" {
                         menuItem("Quit") {
                             accelerator = SHORTCUT_DOWN + Q
@@ -125,7 +127,7 @@ class App : Application() {
                         }
                         button("Connect") {
                             isDefaultButton = true
-                            onAction { proceed() }
+                            onAction { connect() }
                         }
                     }.grid(5, 0 to 3)
                 }
@@ -134,17 +136,11 @@ class App : Application() {
         stage.show()
 
         if (keepSignCheck.isSelected) {
-            proceed()
+            connect()
         }
     }
 
-    private fun proceed() {
-        if (connect()) {
-            stage.close()
-        }
-    }
-
-    private fun connect(): Boolean {
+    private fun connect() {
         val hostIp = hostIpField.text
         val hostPort = hostPortField.text
         val schema = schemaField.text
@@ -170,10 +166,10 @@ class App : Application() {
         try {
             transaction {
                 addLogger(Slf4jSqlDebugLogger)
-                SchemaUtils.create(Classes, ClassStudents, Courses, Lecturers, Schedules, Students)
+                SchemaUtils.create(Classes, Registrations, Courses, Lecturers, Schedules, Students)
             }
             MainStage().show()
-            return true
+            stage.close()
         } catch (e: Exception) {
             Dialog<Unit>().apply {
                 headerTitle = "Connect Failed"
@@ -183,7 +179,6 @@ class App : Application() {
                     close()
                 }
             }.showAndWait()
-            return false
         }
     }
 }

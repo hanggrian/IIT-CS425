@@ -1,22 +1,31 @@
 package com.example.internals
 
-import com.example.dao.Person
+import com.example.dao.PersonDocument
 import javafx.scene.control.DatePicker
-import ktfx.layouts.KtfxGridPane
+import javafx.scene.control.TextField
 import ktfx.layouts.datePicker
 import ktfx.layouts.label
+import ktfx.layouts.textField
+import ktfx.runLater
+import org.jetbrains.exposed.dao.Entity
 import java.time.LocalDate
 
-abstract class PersonDialog<T : Person>(prefill: T?, title: String) :
-    NamedDialog<T>(prefill, title) {
+/** Maybe a [com.example.dao.Student] or [com.example.dao.Lecturer]. */
+abstract class PersonDialog<T>(title: String, prefill: T?) : EntryDialog<T, Int>(title, prefill)
+    where T : Entity<*>, T : PersonDocument {
+    val nameField: TextField
     val dateJoinPicker: DatePicker
 
     init {
-        (dialogPane.content as KtfxGridPane).run {
-            label("Join").grid(1, 0)
+        grid.run {
+            label("Name").grid(++row, 0)
+            nameField = textField(prefill?.name.orEmpty()) {
+                runLater { requestFocus() }
+            }.grid(row, 1)
+            label("Join date").grid(++row, 0)
             dateJoinPicker = datePicker(prefill?.dateJoin ?: LocalDate.now()) {
                 isDisable = true
-            }.grid(1, 1)
+            }.grid(row, 1)
         }
     }
 }

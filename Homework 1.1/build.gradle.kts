@@ -6,12 +6,11 @@ plugins {
     kotlin("android") version libs.versions.kotlin apply false
     kotlin("android.extensions") version libs.versions.kotlin apply false
     kotlin("kapt") version libs.versions.kotlin apply false
-    alias(libs.plugins.dokka)
 }
 
 allprojects {
-    group = RELEASE_GROUP
-    version = RELEASE_VERSION
+    group = "com.example"
+    version = "0.1"
 }
 
 subprojects {
@@ -20,11 +19,6 @@ subprojects {
     }
 }
 
-tasks {
-    register(LifecycleBasePlugin.CLEAN_TASK_NAME) {
-        delete(buildDir)
-    }
-    dokkaHtmlMultiModule {
-        outputDirectory.set(buildDir.resolve("dokka/dokka/"))
-    }
+tasks.register(LifecycleBasePlugin.CLEAN_TASK_NAME) {
+    delete(buildDir)
 }

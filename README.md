@@ -1,1 +1,1 @@
-# IIT CS425
+# IIT CS425: Database Organisation
