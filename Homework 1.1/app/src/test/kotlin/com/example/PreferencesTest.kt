@@ -5,9 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /** Checks local preferences access. */
-
 class PreferencesTest {
-
     @Test
     fun test() {
         val preferences = Preferences.userNodeForPackage(App::class.java)

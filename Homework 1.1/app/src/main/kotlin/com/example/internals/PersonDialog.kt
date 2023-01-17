@@ -13,6 +13,7 @@ import java.time.LocalDate
 /** Maybe a [com.example.dao.Student] or [com.example.dao.Lecturer]. */
 abstract class PersonDialog<T>(title: String, prefill: T?) : EntryDialog<T, Int>(title, prefill)
     where T : Entity<*>, T : PersonDocument {
+
     val nameField: TextField
     val dateJoinPicker: DatePicker
 

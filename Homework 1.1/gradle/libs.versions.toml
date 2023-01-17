@@ -10,7 +10,7 @@ shadow = "com.github.johnrengelman.shadow:7.1.2"
 
 [libraries]
 # lint
-ktlint = "com.pinterest:ktlint:0.47.1"
+ktlint = "com.pinterest:ktlint:0.48.1"
 rulebook-ktlint = "com.hendraanggrian.rulebook:rulebook-ktlint:0.2-SNAPSHOT"
 # main
 kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"

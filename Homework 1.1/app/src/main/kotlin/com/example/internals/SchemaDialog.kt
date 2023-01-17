@@ -1,5 +1,6 @@
 package com.example.internals
 
+import javafx.scene.control.ButtonType.NO
 import javafx.scene.control.ButtonType.YES
 import javafx.scene.control.Dialog
 import javafx.scene.control.TableView
@@ -8,6 +9,7 @@ import ktfx.collections.toMutableObservableList
 import ktfx.controls.constrained
 import ktfx.coroutines.onAction
 import ktfx.dialogs.buttons
+import ktfx.dialogs.confirmAlert
 import ktfx.dialogs.headerTitle
 import ktfx.layouts.contextMenu
 import ktfx.layouts.separatorMenuItem
@@ -38,13 +40,12 @@ abstract class SchemaDialog<T : Entity<*>>(
     }
 
     open fun onClear() {
-        ConfirmDialog("Clear table in this dialog?").showAndWait()
-            .ifPresent {
-                if (it == YES) {
-                    transaction { tableObject.deleteAll() }
-                    table.items.clear()
-                }
+        confirmAlert("Clear table in this dialog?", NO, YES).ifPresent {
+            if (it == YES) {
+                transaction { tableObject.deleteAll() }
+                table.items.clear()
             }
+        }
     }
 
     val table: TableView<T>

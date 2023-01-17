@@ -4,7 +4,6 @@ import com.example.dao.Class
 import com.example.dao.Classes
 import com.example.dao.Registration
 import com.example.dao.Schedule
-import com.example.internals.ConfirmDialog
 import com.example.internals.intCell
 import com.example.internals.stringCell
 import com.example.ui.class2.AddScheduleDialog
@@ -15,6 +14,8 @@ import com.example.ui.lecturer.LecturerSchemaDialog
 import com.example.ui.student.StudentSchemaDialog
 import javafx.application.Platform
 import javafx.geometry.Orientation.VERTICAL
+import javafx.scene.control.ButtonType.CLOSE
+import javafx.scene.control.ButtonType.NO
 import javafx.scene.control.ButtonType.YES
 import javafx.scene.control.Menu
 import javafx.scene.control.MenuItem
@@ -36,6 +37,8 @@ import ktfx.controls.columns
 import ktfx.controls.constrained
 import ktfx.controls.isNotSelected
 import ktfx.coroutines.onAction
+import ktfx.dialogs.confirmAlert
+import ktfx.dialogs.errorAlert
 import ktfx.inputs.plus
 import ktfx.layouts.contextMenu
 import ktfx.layouts.menu
@@ -189,7 +192,7 @@ class MainStage : Stage() {
                                     }
                                 )
                                 onAction {
-                                    ConfirmDialog("Remove all classes?").showAndWait().ifPresent {
+                                    confirmAlert("Remove all classes?", NO, YES).ifPresent {
                                         if (it == YES) {
                                             transaction { Classes.deleteAll() }
                                             this@tableView.items.clear()
@@ -230,10 +233,20 @@ class MainStage : Stage() {
                                     )
                                     onAction {
                                         StudentPickerDialog().showAndWait().ifPresent { s ->
-                                            classRegistrationTable.items += transaction {
-                                                Registration.new {
-                                                    `class` = classTable.selectionModel.selectedItem
-                                                    student = s
+                                            if (classRegistrationTable.items
+                                                    .any { transaction { it.student.id } == s.id }
+                                            ) {
+                                                errorAlert(
+                                                    "The student is already in this class.",
+                                                    CLOSE
+                                                )
+                                            } else {
+                                                classRegistrationTable.items += transaction {
+                                                    Registration.new {
+                                                        `class` =
+                                                            classTable.selectionModel.selectedItem
+                                                        student = s
+                                                    }
                                                 }
                                             }
                                         }

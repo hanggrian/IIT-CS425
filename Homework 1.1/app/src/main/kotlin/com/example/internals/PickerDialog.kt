@@ -24,6 +24,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 /** Choose a document with filtering support. */
 abstract class PickerDialog<T : Entity<*>>(title: String, entityClass: EntityClass<*, T>) :
     Dialog<T>() {
+
     val searchField: TextField
     val list: ListView<T>
 

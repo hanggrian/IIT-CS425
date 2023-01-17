@@ -11,8 +11,8 @@ import com.example.ui.MainStage
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.geometry.HPos
+import javafx.scene.control.ButtonType.CLOSE
 import javafx.scene.control.CheckBox
-import javafx.scene.control.Dialog
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.scene.input.KeyCode.Q
@@ -20,8 +20,7 @@ import javafx.scene.input.KeyCombination.SHORTCUT_DOWN
 import javafx.stage.Stage
 import ktfx.controls.insetsOf
 import ktfx.coroutines.onAction
-import ktfx.dialogs.buttons
-import ktfx.dialogs.headerTitle
+import ktfx.dialogs.errorAlert
 import ktfx.inputs.plus
 import ktfx.launchApplication
 import ktfx.layouts.button
@@ -171,14 +170,9 @@ class App : Application() {
             MainStage().show()
             stage.close()
         } catch (e: Exception) {
-            Dialog<Unit>().apply {
-                headerTitle = "Connect Failed"
-                contentText = "Expand dialog to show error details."
+            errorAlert("Connect Failed", null, "Expand dialog to show error details.", CLOSE) {
                 dialogPane.expandableContent = TextArea(e.message)
-                buttons {
-                    close()
-                }
-            }.showAndWait()
+            }
         }
     }
 }
