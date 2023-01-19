@@ -9,7 +9,7 @@ dependencyResolutionManagement.repositories {
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
-rootProject.name = "Homework 1.1"
+rootProject.name = "University Database"
 
 include("app")
 include("website")
