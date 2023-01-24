@@ -22,10 +22,12 @@ abstract class PersonDialog<T>(title: String, prefill: T?) : EntryDialog<T, Int>
             label("Name").grid(++row, 0)
             nameField = textField(prefill?.name.orEmpty()) {
                 runLater { requestFocus() }
+                promptText = "Name"
             }.grid(row, 1)
             label("Join date").grid(++row, 0)
             dateJoinPicker = datePicker(prefill?.dateJoin ?: LocalDate.now()) {
                 isDisable = true
+                promptText = "Join date"
             }.grid(row, 1)
         }
     }

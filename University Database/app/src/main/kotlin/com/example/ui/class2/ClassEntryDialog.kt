@@ -37,6 +37,7 @@ class ClassEntryDialog(prefill: Class? = null) :
             courseField = textField(courseProperty.value?.toString().orEmpty()) {
                 runLater { requestFocus() }
                 isEditable = false
+                promptText = "Pick course"
                 onMouseClicked {
                     CoursePickerDialog().showAndWait().ifPresent {
                         courseProperty.value = it
@@ -47,6 +48,7 @@ class ClassEntryDialog(prefill: Class? = null) :
             label("Lecturer").grid(++row, 0)
             lecturerField = textField(lecturerProperty.value?.toString().orEmpty()) {
                 isEditable = false
+                promptText = "Pick lecture"
                 onMouseClicked {
                     LecturerPickerDialog().showAndWait().ifPresent {
                         lecturerProperty.value = it
@@ -55,9 +57,13 @@ class ClassEntryDialog(prefill: Class? = null) :
                 }
             }.grid(row, 1)
             label("Initial date").grid(++row, 0)
-            dateInitialPicker = datePicker(prefill?.dateInitial ?: LocalDate.now()).grid(row, 1)
+            dateInitialPicker = datePicker(prefill?.dateInitial ?: LocalDate.now()) {
+                promptText = "Initial date"
+            }.grid(row, 1)
             label("Final date").grid(++row, 0)
-            dateFinalPicker = datePicker(prefill?.dateFinal ?: LocalDate.now()).grid(row, 1)
+            dateFinalPicker = datePicker(prefill?.dateFinal ?: LocalDate.now()) {
+                promptText = "Final date"
+            }.grid(row, 1)
         }
         dialogPane.lookupButton(OK).disableProperty().bind(
             booleanBindingOf(

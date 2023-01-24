@@ -26,6 +26,7 @@ class CourseEntryDialog(prefill: Course? = null) :
                 if (prefill != null) {
                     runLater { requestFocus() }
                 }
+                promptText = "Name"
             }.grid(row, 1)
         }
         dialogPane.lookupButton(OK).disableProperty().bind(nameField.textProperty().isEmpty())

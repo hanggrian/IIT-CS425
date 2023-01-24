@@ -4,6 +4,7 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.sql.transactions.transaction
 
 object Registrations : IntIdTable("Registrations") {
     val classId = reference("class_id", Classes)
@@ -18,5 +19,5 @@ class Registration(id: EntityID<Int>) : IntEntity(id) {
     var student by Student referencedOn Registrations.studentId
     var grade by Registrations.grade
 
-    override fun toString(): String = "$student (${grade ?: "-"})"
+    override fun toString(): String = "${transaction { student }} (${grade ?: "-"})"
 }

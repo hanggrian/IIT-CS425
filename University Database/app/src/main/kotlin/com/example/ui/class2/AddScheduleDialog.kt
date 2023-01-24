@@ -44,21 +44,25 @@ class AddScheduleDialog(scheduleClass: Class) : Dialog<Schedule>() {
                 }.grid(0, 1 to 2)
                 label("Start time").grid(1, 0)
                 timeStartHourSpinner = spinner<Int> {
+                    promptText = "HH"
                     prefWidth = SIZE_SPINNER
-                    valueFactory = IntegerSpinnerValueFactory(0, 24)
+                    valueFactory = IntegerSpinnerValueFactory(0, 24, 0)
                 }.grid(1, 1)
                 timeStartMinuteSpinner = spinner<Int> {
+                    promptText = "mm"
                     prefWidth = SIZE_SPINNER
-                    valueFactory = IntegerSpinnerValueFactory(0, 60)
+                    valueFactory = IntegerSpinnerValueFactory(0, 60, 0)
                 }.grid(1, 2)
                 label("End time").grid(2, 0)
                 timeEndHourSpinner = spinner<Int> {
+                    promptText = "HH"
                     prefWidth = SIZE_SPINNER
-                    valueFactory = IntegerSpinnerValueFactory(0, 24)
+                    valueFactory = IntegerSpinnerValueFactory(0, 24, 0)
                 }.grid(2, 1)
                 timeEndMinuteSpinner = spinner<Int> {
+                    promptText = "mm"
                     prefWidth = SIZE_SPINNER
-                    valueFactory = IntegerSpinnerValueFactory(0, 60)
+                    valueFactory = IntegerSpinnerValueFactory(0, 60, 0)
                 }.grid(2, 2)
             }
         }

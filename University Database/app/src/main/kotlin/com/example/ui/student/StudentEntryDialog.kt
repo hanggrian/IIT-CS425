@@ -17,7 +17,9 @@ class StudentEntryDialog(prefill: Student? = null) :
     init {
         grid.run {
             label("Graduate date").grid(++row, 0)
-            dateGraduatePicker = datePicker(prefill?.dateGraduate).grid(row, 1)
+            dateGraduatePicker = datePicker(prefill?.dateGraduate) {
+                promptText = "Graduate date"
+            }.grid(row, 1)
         }
         dialogPane.lookupButton(OK).disableProperty().bind(nameField.textProperty().isEmpty())
         setResultConverter {

@@ -5,6 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.javatime.date
+import org.jetbrains.exposed.sql.transactions.transaction
 
 object Classes : IntIdTable("Classes") {
     val courseId = reference("course_id", Courses)
@@ -24,5 +25,6 @@ class Class(id: EntityID<Int>) : IntEntity(id) {
     val schedules by Schedule referrersOn Schedules.classId
     val classStudents by Registration referrersOn Registrations.classId
 
-    override fun toString(): String = "${course.id.value} by ${lecturer.name}"
+    override fun toString(): String =
+        transaction { "${course.id.value}-${this@Class.id.value} ${course.name}" }
 }

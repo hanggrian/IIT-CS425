@@ -27,6 +27,7 @@ abstract class EntryDialog<T : Entity<*>, ID>(title: String, prefill: T?) : Dial
                 label("ID").grid(row, 0)
                 idField = textField(prefill?.id?.value?.toString().orEmpty()) {
                     isDisable = true
+                    promptText = "ID"
                 }.grid(row, 1)
             } as KtfxGridPane
         }

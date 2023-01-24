@@ -1,10 +1,10 @@
 package com.example.ui
 
+import com.example.App
 import com.example.dao.Class
 import com.example.dao.Classes
 import com.example.dao.Registration
 import com.example.dao.Schedule
-import com.example.internals.intCell
 import com.example.internals.stringCell
 import com.example.ui.class2.AddScheduleDialog
 import com.example.ui.class2.ClassEntryDialog
@@ -56,6 +56,7 @@ import org.apache.commons.lang3.SystemUtils.IS_OS_MAC_OSX
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.DayOfWeek
+import java.util.prefs.Preferences
 
 class MainStage : Stage() {
     private companion object {
@@ -72,7 +73,7 @@ class MainStage : Stage() {
     lateinit var classScheduleAddMenu: MenuItem
 
     init {
-        title = "Homework 1.1"
+        title = "University Database"
         minSize = MIN_SIZE_STAGE
         size2 = MIN_SIZE_STAGE
         scene {
@@ -80,6 +81,16 @@ class MainStage : Stage() {
                 menuBar {
                     isUseSystemMenuBar = IS_OS_MAC_OSX
                     "File" {
+                        "Logout" {
+                            onAction {
+                                Preferences.userNodeForPackage(App::class.java).run {
+                                    clear()
+                                    sync()
+                                    flush()
+                                }
+                                Platform.exit()
+                            }
+                        }
                         "Quit" {
                             accelerator = SHORTCUT_DOWN + Q
                             onAction { Platform.exit() }
@@ -144,10 +155,7 @@ class MainStage : Stage() {
                     ) {
                         constrained()
                         columns {
-                            append<Int>("Class ID").intCell { id.value }
-                            append<String>("Course").stringCell {
-                                transaction { course }.toString()
-                            }
+                            append<String>("Class").stringCell { toString() }
                             append<String>("Lecturer").stringCell {
                                 transaction { lecturer }.toString()
                             }

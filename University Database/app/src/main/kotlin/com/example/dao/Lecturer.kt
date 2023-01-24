@@ -14,5 +14,5 @@ class Lecturer(id: EntityID<Int>) : IntEntity(id), PersonDocument {
 
     val classes by Class referrersOn Classes.lecturerId
 
-    override fun toString(): String = name
+    override fun toString(): String = "${id.value}. $name"
 }
