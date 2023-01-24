@@ -23,16 +23,14 @@ DROP TABLE IF EXISTS `Registrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Registrations` (
-  `id` int NOT NULL AUTO_INCREMENT,
   `class_id` int NOT NULL,
   `student_id` int NOT NULL,
   `grade` char(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Registrations_class_id__id` (`class_id`),
+  PRIMARY KEY (`class_id`,`student_id`),
   KEY `fk_Registrations_student_id__id` (`student_id`),
   CONSTRAINT `fk_Registrations_class_id__id` FOREIGN KEY (`class_id`) REFERENCES `Classes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_Registrations_student_id__id` FOREIGN KEY (`student_id`) REFERENCES `Students` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +39,7 @@ CREATE TABLE `Registrations` (
 
 LOCK TABLES `Registrations` WRITE;
 /*!40000 ALTER TABLE `Registrations` DISABLE KEYS */;
-INSERT INTO `Registrations` VALUES (1,1,1,NULL),(2,1,2,NULL),(3,1,3,NULL),(4,2,1,NULL),(5,2,2,NULL),(6,2,3,NULL),(7,3,1,NULL),(8,3,2,NULL),(9,3,3,NULL);
+INSERT INTO `Registrations` VALUES (1,1,NULL),(1,2,NULL),(1,3,NULL),(2,1,NULL),(2,2,NULL),(2,3,NULL),(3,1,NULL),(3,2,NULL),(3,3,NULL);
 /*!40000 ALTER TABLE `Registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-22 12:48:23
+-- Dump completed on 2023-01-23 23:03:45
