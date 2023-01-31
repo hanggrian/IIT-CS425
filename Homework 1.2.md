@@ -1,4 +1,4 @@
-# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/Homework%201.2.pdf)
+# CS425: [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/Homework%201.2.pdf)
 
 > Database schema from Homework 1.1 is used.
 
@@ -7,7 +7,7 @@ A university database usually revolves around 3 main entities: **Students**,
 insufficient. Given a larger set of example, it became clear that extra tables
 are needed to maintain a correct format of data.
 
-## Registrations
+## *Registrations*
 
 For example, with just *Students* and *Classes*, multiple students enrolling the
 same class would require multiple entries of *Classes*.
@@ -63,7 +63,7 @@ To mitigate this behavior, *Registrations* table bridge the connection between
 </td></tr>
 </table>
 
-## Courses
+## *Courses*
 
 Every year, a class with the same name is repeated over and over again. They are
 unrelated from the class last year, but may share some of the same elements.
@@ -102,7 +102,7 @@ primary key, because course codes are unique (e.g.: CS425, CS430, etc.).
 </td></tr>
 </table>
 
-## Others
+## *Others*
 
 Some classes may have multiple events repeated every week. Based on this
 assumption, there should be a one-to-many relationship between *Classes* and a
