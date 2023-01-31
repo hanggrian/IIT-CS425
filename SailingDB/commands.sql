@@ -20,8 +20,6 @@ INSERT INTO Sailors(`Sname`, `SID`, `Rating`, `Age`)
   VALUES('Carrey', 33, 10, 22);
 
 -- Captains
-  -- According to the PDF, this table has the same schema as Sailors
-  -- but not linked to any other table.
 
 CREATE TABLE Captains(
   `Cname` VARCHAR(20) NOT NULL,
