@@ -1,0 +1,31 @@
+TmID,ConfID,Ranking,Playoff,Name,Won,Lost,Games
+ATL,EC,3,CS,Atlanta Hawks,44,38,82
+BOS,EC,1,CS,Boston Celtics,56,26,82
+CHA,EC,4,,Charlotte Bobcats,34,48,82
+CHI,EC,1,CF,Chicago Bulls,62,20,82
+CLE,EC,5,,Cleveland Cavaliers,19,63,82
+DAL,WC,2,NC,Dallas Mavericks,57,25,82
+DEN,WC,2,C1,Denver Nuggets,50,32,82
+DET,EC,4,,Detroit Pistons,30,52,82
+GSW,WC,3,,Golden State Warriors,36,46,82
+HOU,WC,5,,Houston Rockets,43,39,82
+IND,EC,2,C1,Indiana Pacers,37,45,82
+LAC,WC,4,,Los Angeles Clippers,32,50,82
+LAL,WC,1,CS,Los Angeles Lakers,57,25,82
+MEM,WC,4,CS,Memphis Grizzlies,46,36,82
+MIA,EC,1,F,Miami Heat,58,24,82
+MIL,EC,3,,Milwaukee Bucks,35,47,82
+MIN,WC,5,,Minnesota Timberwolves,17,65,82
+NJN,EC,4,,New Jersey Nets,24,58,82
+NOH,WC,3,C1,New Orleans Hornets,46,36,82
+NYK,EC,2,C1,New York Knicks,42,40,82
+OKC,WC,1,CF,Oklahoma City Thunder,55,27,82
+ORL,EC,2,C1,Orlando Magic,52,30,82
+PHI,EC,3,C1,Philadelphia 76ers,41,41,82
+PHO,WC,2,,Phoenix Suns,40,42,82
+POR,WC,3,C1,Portland Trail Blazers,48,34,82
+SAC,WC,5,,Sacramento Kings,24,58,82
+SAS,WC,1,C1,San Antonio Spurs,61,21,82
+TOR,EC,5,,Toronto Raptors,22,60,82
+UTA,WC,4,,Utah Jazz,39,43,82
+WAS,EC,5,,Washington Wizards,23,59,82
