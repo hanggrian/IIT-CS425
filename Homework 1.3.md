@@ -47,147 +47,147 @@ name.
 ## 1. Get everything in the Sailors table.
 
 ```sql
-SELECT * FROM Sailors
+SELECT * FROM Sailors;
 ```
 
-![Screenschot for question 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/1.png)
 
 ## 2. Get sailor ID, rank & age of all sailors, ordered from highest to lowest rank. Rank is 10 times rating.
 
 ```sql
-SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC
+SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 ```
 
-![Screenschot for question 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/2.png)
 
 ## 3. Get alphabetical list of sailors with rating less than 10.
 
 ```sql
-SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`
+SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 ```
 
-![Screenschot for question 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/3.png)
 
 ## 4. Find how much deposit money there is in total and how many tuples are in the reserves table.
 
 ```sql
-SELECT SUM(`Deposit`) AS `Total`, COUNT(`Deposit`) AS `Howmany` FROM Reserves
+SELECT SUM(`Deposit`) AS `Total`, COUNT(`Deposit`) AS `HowMany` FROM Reserves;
 ```
 
-![Screenschot for question 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/4.png)
 
 ## 5. Get all info on boats in Fishhoek but l'm not sure how you spell Fishoek.
 
 ```sql
-SELECT * FROM Boats WHERE `Location` LIKE '_IS%K'
+SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 ```
 
-![Screenschot for question 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/5.png)
 
 ## 6. In what locations are boats kept?
 
 ```sql
-SELECT DISTINCT `Location` FROM Boats
+SELECT DISTINCT `Location` FROM Boats;
 ```
 
-![Screenschot for question 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/6.png)
 
 ## 7. Get the names of all Boats that have a fee value recorded in the database.
 
 ```sql
-SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL
+SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 ```
 
-![Screenschot for question 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/7.png)
 
 ## 8. Get ID of all boats that have not been reserved.
 
 ```sql
-SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves)
+SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 ```
 
-![Screenschot for question 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/8.png)
 
 ## 9. Get all reservation info, including all details on the boats being reserved.
 
 ```sql
-SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`
+SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`;
 ```
 
-![Screenschot for question 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/9.png)
 
 ## 10. For all reservations, get the name of the sailor, along with the day and name of the boat booked.
 
 ```sql
 SELECT `Sname`, `Day`, `Bname`
   FROM Sailors AS S, Reserves AS R, Boats AS B
-  WHERE S.`SID` = R.`SID` AND R.`BID` = B.`BID`
+  WHERE S.`SID` = R.`SID` AND R.`BID` = B.`BID`;
 ```
 
-![Screenschot for question 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/10.png)
 
 ## 11. Get the average deposit paid for each boat.
 
 ```sql
-SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
+SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`;
 ```
 
-![Screenschot for question 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/11.png)
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/11.png)
 
 ## 12. Get the average deposit paid for each boat that has been booked by more than one person.
 
 ```sql
 SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
-  HAVING COUNT(DISTINCT `SID`) > 1
+  HAVING COUNT(DISTINCT `SID`) > 1;
 ```
 
-![Screenschot for question 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/12.png)
+![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/12.png)
 
 ## 13. Get the average firm deposit paid for each boat that has been booked by more than one person, in increasing order of amount. A firm deposit is one which exceeds R10
 
 ```sql
 SELECT `BID`, AVG(`Deposit`) AS `AverageDeposit` FROM Reserves
   WHERE `Deposit` > 10 GROUP BY `BID` HAVING COUNT(DISTINCT `SID`) > 1
-  ORDER BY `AverageDeposit`
+  ORDER BY `AverageDeposit`;
 ```
 
-![Screenschot for question 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/13.png)
+![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/13.png)
 
 ## 14. Get name & rating of sailors with rating exceeding 7 who made any reservation with 0 deposit.
 
 ```sql
 SELECT `Sname`, `Rating` FROM Sailors
   WHERE `Rating` > 7
-    AND `SID` IN(SELECT `SID` FROM Reserves WHERE `Deposit` = 0)
+    AND `SID` IN(SELECT `SID` FROM Reserves WHERE `Deposit` = 0);
 ```
 
-![Screenschot for question 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/14.png)
+![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/14.png)
 
 ## 15. Get names of boats located in a place other than Hout Bay or Fish Hoek.
 
 ```sql
-SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek')
+SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek');
 ```
 
-![Screenschot for question 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/15.png)
+![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/15.png)
 
 ## 16. Get names of boats having a fee larger than any boat located in Hout Bay.
 
 ```sql
 SELECT DISTINCT `Bname` FROM Boats
-  WHERE `Fee` > SOME(SELECT `Fee` FROM Boats WHERE `Location` = 'Hout Bay')
+  WHERE `Fee` > SOME(SELECT `Fee` FROM Boats WHERE `Location` = 'Hout Bay');
 ```
 
-![Screenschot for question 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/16.png)
+![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/16.png)
 
 ## 17. Get names that are in both the sailors and the captains relations.
 
 ```sql
 SELECT `Sname` FROM Sailors
-  WHERE EXISTS(SELECT * FROM Captains WHERE Captains.`CID` = Sailors.`SID`)
+  WHERE EXISTS(SELECT * FROM Captains WHERE Captains.`CID` = Sailors.`SID`);
 ```
 
-![Screenschot for question 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/17.png)
+![Screenschot for answer 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/17.png)
 
 ## 18. Get names of boats that have exactly 1 reservation.
 
@@ -195,44 +195,42 @@ SELECT `Sname` FROM Sailors
 
 ```sql
 SELECT `Bname` FROM Boats AS B
-  WHERE UNIQUE(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = B.`BID`)
+  WHERE UNIQUE(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = B.`BID`);
 ```
 
-![Screenschot for question 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/18.png)
+![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/18.png)
 
 ## 19. Get sailor ID and total deposit paid for sailors who have booked more than 1 boat.
 
 ```sql
-SELECT `SID`, `TotalDeposit` FROM(
-  SELECT `SID`,
-  COUNT(`BID`),
-  SUM(`Deposit`) FROM Reserves
-    WHERE `Deposit` IS NOT NULL AND `Deposit` > 0 GROUP BY `SID`
-) AS RESULT(`SID`, `NumBoats`, `TotalDeposit`) WHERE `NumBoats` > 1
+SELECT `SID`, `TotalDeposit`
+  FROM(SELECT `SID`, COUNT(`BID`), SUM(`Deposit`) FROM Reserves
+    WHERE `Deposit` IS NOT NULL AND `Deposit` > 0 GROUP BY `SID`)
+  AS RESULT(`SID`, `NumBoats`, `TotalDeposit`) WHERE `NumBoats` > 1;
 ```
 
-![Screenschot for question 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/19.png)
+![Screenschot for answer 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/19.png)
 
 ## 20. Get all reservation info including details of the boat booked.
 
 ```sql
-SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`
+SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for question 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/20.png)
+![Screenschot for answer 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/20.png)
 
 ## 21. Get all information on every boat. If a boat has reservations, including all its reservations info.
 
 ```sql
-SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID
+SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for question 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/21.png)
+![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/21.png)
 
 ## 22. Create a new tuple for the boat named "Nino" which has fee R150, BID 110, and is in Fish Hoek.
 
 ```sql
-INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek')
+INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 ```
 
 ### Added *Boats*
