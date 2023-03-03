@@ -1,8 +1,21 @@
-# CS425: [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/raw/assets/Homework%201.3.docx)
+[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/homework-1.3.docx)
+/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
 
-Given SQL tables below, show the screenshot output of each command.
+# CS425: Homework 1.3
 
-### *Sailors*
+Implement the database schema (SailingDB) found in the attachment pdf below and
+insert the data as shown in each table. You are provided with the query
+statements and the SQL commands labelled from no.1 to 29, respectively. You are
+required to screenshot the resultant table for each SQL command.
+
+## Schema
+
+> *Captains* are implied to be a carbon copy of *Sailors*, but I made slight
+  changes in columns' name.
+
+<table>
+<tr><th>Sailors</th><th>Captains</th></tr>
+<tr><td>
 
 | Sname | SID | Rating | Age |
 | --- | ---: | ---: | ---: |
@@ -11,10 +24,7 @@ Given SQL tables below, show the screenshot output of each command.
 | Adams | 27 | 8 | 36 |
 | Carrey | 33 | 10 | 22 |
 
-### *Captains*
-
-Implied to be a carbon copy of *Sailors*, but I made slight changes in columns'
-name.
+</td><td>
 
 | Cname | CID | Rating | Age |
 | --- | ---: | ---: | ---: |
@@ -23,7 +33,12 @@ name.
 | Adams | 27 | 8 | 36 |
 | Carrey | 33 | 10 | 22 |
 
-### *Boats*
+</td></tr>
+</table>
+
+<table>
+<tr><th>Boats</th><th>Reserves</th></tr>
+<tr><td>
 
 | Bname | BID | Fee | Location |
 | --- | ---: | ---: | --- |
@@ -32,7 +47,7 @@ name.
 | Yupie | 101 | 400 | Hout Bay |
 | Joy | 104 | 200 | Hout Bay |
 
-### *Reserves*
+</td><td>
 
 | SID | BID | Day | Deposit |
 | ---: | ---: | :---: | ---: |
@@ -44,7 +59,50 @@ name.
 | 33 | 109 | 2014-09-04 | 0 |
 | 33 | 104 | 2014-09-11 | 0 |
 
-## 1. Get everything in the Sailors table.
+</td></tr>
+</table>
+
+```sql
+CREATE SCHEMA IF NOT EXISTS SailingDB;
+USE SailingDB;
+
+CREATE TABLE Sailors(
+  `Sname` VARCHAR(20) NOT NULL,
+  `SID` INT AUTO_INCREMENT PRIMARY KEY,
+  `Rating` INT,
+  `Age` INT NOT NULL
+);
+
+CREATE TABLE Captains(
+  `Cname` VARCHAR(20) NOT NULL,
+  `CID` INT AUTO_INCREMENT PRIMARY KEY,
+  `Rating` INT,
+  `Age` INT NOT NULL
+);
+
+CREATE TABLE Boats(
+  `Bname` VARCHAR(20) NOT NULL,
+  `BID` INT AUTO_INCREMENT PRIMARY KEY,
+  `Fee` INT NOT NULL,
+  `Location` VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Reserves(
+  `SID` INT NOT NULL,
+  `BID` INT NOT NULL,
+  `Day` DATE NOT NULL,
+  `Deposit` INT NOT NULL,
+  PRIMARY KEY(`SID`, `BID`),
+  CONSTRAINT Reserves_SID FOREIGN KEY(`SID`) REFERENCES Sailors(`SID`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Reserves_BID FOREIGN KEY(`BID`) REFERENCES Boats(`BID`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+```
+
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/SailingDB/initialize.sql)
+
+## 1. Get everything in *Sailors*.
 
 ```sql
 SELECT * FROM Sailors;
@@ -52,7 +110,7 @@ SELECT * FROM Sailors;
 
 ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/1.png)
 
-## 2. Get sailor ID, rank & age of all sailors, ordered from highest to lowest rank. Rank is 10 times rating.
+## 2. Get `SID`, `Rating` & `Age` of all sailors, ordered from highest to lowest rank. `Rating` is 10 times rating.
 
 ```sql
 SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
@@ -68,15 +126,15 @@ SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 
 ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/3.png)
 
-## 4. Find how much deposit money there is in total and how many tuples are in the reserves table.
+## 4. Find how much deposit money there is in total and how many tuples are in *Reserves*.
 
 ```sql
-SELECT SUM(`Deposit`) AS `Total`, COUNT(`Deposit`) AS `HowMany` FROM Reserves;
+SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 ```
 
 ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/4.png)
 
-## 5. Get all info on boats in Fishhoek but l'm not sure how you spell Fishoek.
+## 5. Get all info on boats in Fishhoek.
 
 ```sql
 SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
@@ -92,7 +150,7 @@ SELECT DISTINCT `Location` FROM Boats;
 
 ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/6.png)
 
-## 7. Get the names of all Boats that have a fee value recorded in the database.
+## 7. Get the names of all boats that have a fee value recorded in the database.
 
 ```sql
 SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
@@ -143,12 +201,12 @@ SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
 
 ![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/12.png)
 
-## 13. Get the average firm deposit paid for each boat that has been booked by more than one person, in increasing order of amount. A firm deposit is one which exceeds R10
+## 13. Get the average firm deposit paid for each boat that has been booked by more than one person, in increasing order of amount. A firm deposit is one which exceeds 10.
 
 ```sql
-SELECT `BID`, AVG(`Deposit`) AS `AverageDeposit` FROM Reserves
+SELECT `BID`, AVG(`Deposit`) AS `AVERAGEDEPOSIT` FROM Reserves
   WHERE `Deposit` > 10 GROUP BY `BID` HAVING COUNT(DISTINCT `SID`) > 1
-  ORDER BY `AverageDeposit`;
+  ORDER BY `AVERAGEDEPOSIT`;
 ```
 
 ![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/13.png)
@@ -191,11 +249,9 @@ SELECT `Sname` FROM Sailors
 
 ## 18. Get names of boats that have exactly 1 reservation.
 
-> There seem to be a SQL syntax error on this statement.
-
 ```sql
 SELECT `Bname` FROM Boats AS B
-  WHERE UNIQUE(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = B.`BID`);
+  WHERE EXISTS(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = B.`BID`);
 ```
 
 ![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/18.png)
@@ -227,11 +283,13 @@ SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 
 ![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/21.png)
 
-## 22. Create a new tuple for the boat named "Nino" which has fee R150, BID 110, and is in Fish Hoek.
+## 22. Create a new tuple for the boat named "Nino" which has fee 150, BID 110, and is in Fish Hoek.
 
 ```sql
 INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 ```
+
+![Screenschot for answer 22.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/22.png)
 
 ### Added *Boats*
 
@@ -239,11 +297,13 @@ INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 | --- | ---: | ---: | --- |
 | Nino | 110 | 150 | Fish Hoek |
 
-## 23. Remove all bookings from Reserves where there is no deposit.
+## 23. Remove all bookings from *Reserves* where there is no deposit.
 
 ```sql
-DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0
+DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 ```
+
+![Screenschot for answer 23.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/23.png)
 
 ### Removed *Reserves*
 
@@ -256,8 +316,10 @@ DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0
 ## 24. Increase the fee of every boat by 12%.
 
 ```sql
-UPDATE Boats SET `Fee` = `Fee` * 1.12
+UPDATE Boats SET `Fee` = `Fee` * 1.12;
 ```
+
+![Screenschot for answer 24.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/24.png)
 
 ### Updated **Boats**
 
@@ -269,11 +331,14 @@ UPDATE Boats SET `Fee` = `Fee` * 1.12
 | Joy | 104 | **224** | Hout Bay |
 | Nino | 110 | **168** | Fish Hoek |
 
-## 25. Make a view called Bookings which hides the Deposit value i.e. only has the other 3 attributes.
+## 25. Make a view called 'Bookings' which hides the `Deposit` value (i.e. only has the other 3 attributes).
 
 ```sql
-CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves
+CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
 ```
+
+![Screenschot for answer 25.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/25.png)
+
 #### Created *Bookings* view
 
 | SID | BID | Day |
@@ -283,20 +348,35 @@ CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves
 | 27 | 101 | 2014-08-09 |
 | 27 | 109 | 2014-08-15 |
 
-## 26. Create a table called Reserves with 3 integer attributes BID, SID & deposit, and a date attribute Day. Allow only deposit to be omitted, and ensure SID and BID values exist in the database. When someone books a boat it is for the whole day.
+## 26. Create a table called *Reserves* with 3 integer attributes `BID`, `SID` & `Deposit`, and a date attribute `Day`. Allow only deposit to be omitted, and ensure `SID` and `BID` values exist in the database. When someone books a boat it is for the whole day.
+
+> There seem to be a `reserves_chk_1` error.
 
 ```sql
+CREATE TABLE Reserves(
+  `SID` INT NOT NULL,
+  `BID` INT NOT NULL,
+  `Day` DATE NOT NULL,
+  `Deposit` INT NOT NULL,
+  PRIMARY KEY(`SID`, `BID`),
+  CHECK(`BID` IN(SELECT `BID` FROM Boats)),
+  CHECK(`SID` IN(SELECT `SID` FROM Sailors))
+);
 ```
 
-## 27. Add a new attribute NEEDSREPAIR to the Boats table. It is usually "N".
+![Screenschot for answer 26.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/26.png)
+
+## 27. Add a new attribute `NEEDSREPAIR` to *Boats*, it is usually "N".
 
 ```sql
-ALTER TABLE Boats ADD `NeedsRepair` CHAR(1) DEFAULT 'N'
+ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 ```
+
+![Screenschot for answer 27.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/27.png)
 
 ### Updated *Boats*
 
-| Bname | BID | Fee | Location | NeedsRepair |
+| Bname | BID | Fee | Location | NEEDSREPAIR |
 | --- | ---: | ---: | --- | --- |
 | Wayfarer | 109 | 134 | Hout Bay | **N** |
 | SeaPride | 108 | 560 | Fish Hoek | **N** |
@@ -304,11 +384,13 @@ ALTER TABLE Boats ADD `NeedsRepair` CHAR(1) DEFAULT 'N'
 | Joy | 104 | 224 | Hout Bay | **N** |
 | Nino | 110 | 158 | Fish Hoek | **N** |
 
-## 28. We should not be ageist. Remove the Age attribute.
+## 28. Remove the `Age` attribute.
 
 ```sql
-ALTER TABLE Sailors DROP `Age`
+ALTER TABLE Sailors DROP `Age`;
 ```
+
+![Screenschot for answer 28.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/28.png)
 
 ### Updated *Sailors*
 
@@ -319,8 +401,10 @@ ALTER TABLE Sailors DROP `Age`
 | Adams | 27 | 8 |
 | Carrey | 33 | 10 |
 
-## 29. Remove the Captains relation altogether so that nobody can try insert or use Captains in future.
+## 29. Remove the *Captains* relation altogether so that nobody can try insert or use *Captains* in future.
 
 ```sql
-DROP TABLE Captains
+DROP TABLE Captains;
 ```
+
+![Screenschot for answer 29.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/29.png)

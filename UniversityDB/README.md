@@ -1,4 +1,4 @@
-# University Database
+# UniversityDB
 
 > Part of Homework 1.1 and Homework 2.2.
 

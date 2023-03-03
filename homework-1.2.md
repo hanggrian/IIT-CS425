@@ -1,13 +1,22 @@
-# CS425: [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/Homework%201.2.pdf)
+[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/homework-1.2.pdf)
+/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
 
-> Database schema from Homework 1.1 is used.
+# CS425: Homework 1.2
+
+Implement the database schema submitted as “Homework 1.1”. You are required to
+specify clearly, and completely all possible assumptions undertaken on your
+database design and implementation.
+
+## Schema
+
+> Database schema from [Homework 1.1](Homework%201.1.md) is being used.
 
 A university database usually revolves around 3 main entities: **Students**,
 **Lecturers**, and **Classes**. But this would be overly simple and
 insufficient. Given a larger set of example, it became clear that extra tables
 are needed to maintain a correct format of data.
 
-## *Registrations*
+### *Registrations*
 
 For example, with just *Students* and *Classes*, multiple students enrolling the
 same class would require multiple entries of *Classes*.
@@ -31,11 +40,11 @@ same class would require multiple entries of *Classes*.
 </td></tr>
 </table>
 
-The problem with *Classes* table above is that its perception can be misleading.
-Two entries in the table would suggest that there are 2 classrooms, while in
-fact there is only 1 classroom with 2 students.
+The problem with *Classes* above is that its perception can be misleading. Two
+entries in the table would suggest that there are 2 classrooms, while in fact
+there is only 1 classroom with 2 students.
 
-To mitigate this behavior, *Registrations* table bridge the connection between
+To mitigate this behavior, *Registrations* bridge the connection between
 *Students* and *Classes*.
 
 <table>
@@ -63,7 +72,7 @@ To mitigate this behavior, *Registrations* table bridge the connection between
 </td></tr>
 </table>
 
-## *Courses*
+### *Courses*
 
 Every year, a class with the same name is repeated over and over again. They are
 unrelated from the class last year, but may share some of the same elements.
@@ -102,7 +111,7 @@ primary key, because course codes are unique (e.g.: CS425, CS430, etc.).
 </td></tr>
 </table>
 
-## *Others*
+### *Others*
 
 Some classes may have multiple events repeated every week. Based on this
 assumption, there should be a one-to-many relationship between *Classes* and a
