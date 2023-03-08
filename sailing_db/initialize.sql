@@ -15,10 +15,11 @@ CREATE TABLE Sailors(
   `Age` INT NOT NULL
 );
 
-INSERT INTO Sailors VALUES('Marx', 23, 8, 52);
-INSERT INTO Sailors VALUES('Martin', 25, 9, 51);
-INSERT INTO Sailors VALUES('Adams', 27, 8, 36);
-INSERT INTO Sailors VALUES('Carrey', 33, 10, 22);
+INSERT INTO Sailors VALUES
+  ('Marx', 23, 8, 52),
+  ('Martin', 25, 9, 51),
+  ('Adams', 27, 8, 36),
+  ('Carrey', 33, 10, 22);
 
 -- Captains
 
@@ -29,10 +30,11 @@ CREATE TABLE Captains(
   `Age` INT NOT NULL
 );
 
-INSERT INTO Captains VALUES('Marx', 23, 8, 52);
-INSERT INTO Captains VALUES('Martin', 25, 9, 51);
-INSERT INTO Captains VALUES('Adams', 27, 8, 36);
-INSERT INTO Captains VALUES('Carrey', 33, 10, 22);
+INSERT INTO Captains VALUES
+  ('Marx', 23, 8, 52),
+  ('Martin', 25, 9, 51),
+  ('Adams', 27, 8, 36),
+  ('Carrey', 33, 10, 22);
 
 -- Boats
 
@@ -43,10 +45,11 @@ CREATE TABLE Boats(
   `Location` VARCHAR(20) NOT NULL
 );
 
-INSERT INTO Boats VALUES('Wayfarer', 109, 120, 'Hout Bay');
-INSERT INTO Boats VALUES('SeaPride', 108, 500, 'Fish Hock');
-INSERT INTO Boats VALUES('Yuppie', 101, 400, 'Hout Bay');
-INSERT INTO Boats VALUES('Joy', 104, 200, 'Hout Bay');
+INSERT INTO Boats VALUES
+  ('Wayfarer', 109, 120, 'Hout Bay'),
+  ('SeaPride', 108, 500, 'Fish Hock'),
+  ('Yuppie', 101, 400, 'Hout Bay'),
+  ('Joy', 104, 200, 'Hout Bay');
 
 -- Reserves
 
@@ -62,10 +65,11 @@ CREATE TABLE Reserves(
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO Reserves VALUES(23, 109, '2014-08-01', 120);
-INSERT INTO Reserves VALUES(23, 108, '2014-08-08', 120);
-INSERT INTO Reserves VALUES(25, 101, '2014-08-08', 0);
-INSERT INTO Reserves VALUES(27, 101, '2014-08-09', 100);
-INSERT INTO Reserves VALUES(27, 109, '2014-08-15', 120);
-INSERT INTO Reserves VALUES(33, 109, '2014-09-04', 0);
-INSERT INTO Reserves VALUES(33, 104, '2014-09-11', 0);
+INSERT INTO Reserves VALUES
+  (23, 109, '2014-08-01', 120),
+  (23, 108, '2014-08-08', 120),
+  (25, 101, '2014-08-08', 0),
+  (27, 101, '2014-08-09', 100),
+  (27, 109, '2014-08-15', 120),
+  (33, 109, '2014-09-04', 0),
+  (33, 104, '2014-09-11', 0);

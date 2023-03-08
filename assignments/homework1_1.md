@@ -1,4 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/homework-1.1.docx)
+[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx)
 / [homepage](https://github.com/hendraanggrian/IIT-CS425/)
 
 # CS425: Homework 1.1
@@ -12,7 +12,7 @@ database.
 
 ## Schema
 
-![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/UniversityDB/schema.png)
+![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university_db/schema.png)
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS UniversityDB;
@@ -70,4 +70,4 @@ CREATE TABLE Schedules(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/UniversityDB/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university_db/initialize.sql)

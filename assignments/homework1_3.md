@@ -1,4 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/homework-1.3.docx)
+[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_3.docx)
 / [homepage](https://github.com/hendraanggrian/IIT-CS425/)
 
 # CS425: Homework 1.3
@@ -100,7 +100,7 @@ CREATE TABLE Reserves(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/SailingDB/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/sailing_db/initialize.sql)
 
 ## 1. Get everything in *Sailors*.
 
@@ -108,7 +108,7 @@ CREATE TABLE Reserves(
 SELECT * FROM Sailors;
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/1.png)
 
 ## 2. Get `SID`, `Rating` & `Age` of all sailors, ordered from highest to lowest rank. `Rating` is 10 times rating.
 
@@ -116,7 +116,7 @@ SELECT * FROM Sailors;
 SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/2.png)
 
 ## 3. Get alphabetical list of sailors with rating less than 10.
 
@@ -124,7 +124,7 @@ SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/3.png)
 
 ## 4. Find how much deposit money there is in total and how many tuples are in *Reserves*.
 
@@ -132,7 +132,7 @@ SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/4.png)
 
 ## 5. Get all info on boats in Fishhoek.
 
@@ -140,7 +140,7 @@ SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/5.png)
 
 ## 6. In what locations are boats kept?
 
@@ -148,7 +148,7 @@ SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 SELECT DISTINCT `Location` FROM Boats;
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/6.png)
 
 ## 7. Get the names of all boats that have a fee value recorded in the database.
 
@@ -156,7 +156,7 @@ SELECT DISTINCT `Location` FROM Boats;
 SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/7.png)
 
 ## 8. Get ID of all boats that have not been reserved.
 
@@ -164,7 +164,7 @@ SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/8.png)
 
 ## 9. Get all reservation info, including all details on the boats being reserved.
 
@@ -172,17 +172,17 @@ SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`;
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/9.png)
 
 ## 10. For all reservations, get the name of the sailor, along with the day and name of the boat booked.
 
 ```sql
 SELECT `Sname`, `Day`, `Bname`
-  FROM Sailors AS S, Reserves AS R, Boats AS B
-  WHERE S.`SID` = R.`SID` AND R.`BID` = B.`BID`;
+  FROM Sailors AS s, Reserves AS r, Boats AS b
+  WHERE s.`SID` = r.`SID` AND r.`BID` = b.`BID`;
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/10.png)
 
 ## 11. Get the average deposit paid for each boat.
 
@@ -190,7 +190,7 @@ SELECT `Sname`, `Day`, `Bname`
 SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`;
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/11.png)
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/11.png)
 
 ## 12. Get the average deposit paid for each boat that has been booked by more than one person.
 
@@ -199,7 +199,7 @@ SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
   HAVING COUNT(DISTINCT `SID`) > 1;
 ```
 
-![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/12.png)
+![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/12.png)
 
 ## 13. Get the average firm deposit paid for each boat that has been booked by more than one person, in increasing order of amount. A firm deposit is one which exceeds 10.
 
@@ -209,7 +209,7 @@ SELECT `BID`, AVG(`Deposit`) AS `AVERAGEDEPOSIT` FROM Reserves
   ORDER BY `AVERAGEDEPOSIT`;
 ```
 
-![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/13.png)
+![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/13.png)
 
 ## 14. Get name & rating of sailors with rating exceeding 7 who made any reservation with 0 deposit.
 
@@ -219,7 +219,7 @@ SELECT `Sname`, `Rating` FROM Sailors
     AND `SID` IN(SELECT `SID` FROM Reserves WHERE `Deposit` = 0);
 ```
 
-![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/14.png)
+![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/14.png)
 
 ## 15. Get names of boats located in a place other than Hout Bay or Fish Hoek.
 
@@ -227,7 +227,7 @@ SELECT `Sname`, `Rating` FROM Sailors
 SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek');
 ```
 
-![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/15.png)
+![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/15.png)
 
 ## 16. Get names of boats having a fee larger than any boat located in Hout Bay.
 
@@ -236,7 +236,7 @@ SELECT DISTINCT `Bname` FROM Boats
   WHERE `Fee` > SOME(SELECT `Fee` FROM Boats WHERE `Location` = 'Hout Bay');
 ```
 
-![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/16.png)
+![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/16.png)
 
 ## 17. Get names that are in both the sailors and the captains relations.
 
@@ -245,16 +245,16 @@ SELECT `Sname` FROM Sailors
   WHERE EXISTS(SELECT * FROM Captains WHERE Captains.`CID` = Sailors.`SID`);
 ```
 
-![Screenschot for answer 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/17.png)
+![Screenschot for answer 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/17.png)
 
 ## 18. Get names of boats that have exactly 1 reservation.
 
 ```sql
-SELECT `Bname` FROM Boats AS B
-  WHERE EXISTS(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = B.`BID`);
+SELECT `Bname` FROM Boats AS b
+  WHERE EXISTS(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = b.`BID`);
 ```
 
-![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/18.png)
+![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/18.png)
 
 ## 19. Get sailor ID and total deposit paid for sailors who have booked more than 1 boat.
 
@@ -265,7 +265,7 @@ SELECT `SID`, `TotalDeposit`
   AS RESULT(`SID`, `NumBoats`, `TotalDeposit`) WHERE `NumBoats` > 1;
 ```
 
-![Screenschot for answer 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/19.png)
+![Screenschot for answer 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/19.png)
 
 ## 20. Get all reservation info including details of the boat booked.
 
@@ -273,7 +273,7 @@ SELECT `SID`, `TotalDeposit`
 SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for answer 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/20.png)
+![Screenschot for answer 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/20.png)
 
 ## 21. Get all information on every boat. If a boat has reservations, including all its reservations info.
 
@@ -281,7 +281,7 @@ SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/21.png)
+![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/21.png)
 
 ## 22. Create a new tuple for the boat named "Nino" which has fee 150, BID 110, and is in Fish Hoek.
 
@@ -289,7 +289,7 @@ SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 ```
 
-![Screenschot for answer 22.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/22.png)
+![Screenschot for answer 22.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/22.png)
 
 ### Added *Boats*
 
@@ -303,7 +303,7 @@ INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 ```
 
-![Screenschot for answer 23.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/23.png)
+![Screenschot for answer 23.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/23.png)
 
 ### Removed *Reserves*
 
@@ -319,7 +319,7 @@ DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 UPDATE Boats SET `Fee` = `Fee` * 1.12;
 ```
 
-![Screenschot for answer 24.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/24.png)
+![Screenschot for answer 24.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/24.png)
 
 ### Updated **Boats**
 
@@ -337,7 +337,7 @@ UPDATE Boats SET `Fee` = `Fee` * 1.12;
 CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
 ```
 
-![Screenschot for answer 25.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/25.png)
+![Screenschot for answer 25.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/25.png)
 
 #### Created *Bookings* view
 
@@ -364,7 +364,7 @@ CREATE TABLE Reserves(
 );
 ```
 
-![Screenschot for answer 26.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/26.png)
+![Screenschot for answer 26.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/26.png)
 
 ## 27. Add a new attribute `NEEDSREPAIR` to *Boats*, it is usually "N".
 
@@ -372,7 +372,7 @@ CREATE TABLE Reserves(
 ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 ```
 
-![Screenschot for answer 27.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/27.png)
+![Screenschot for answer 27.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/27.png)
 
 ### Updated *Boats*
 
@@ -390,7 +390,7 @@ ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 ALTER TABLE Sailors DROP `Age`;
 ```
 
-![Screenschot for answer 28.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/28.png)
+![Screenschot for answer 28.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/28.png)
 
 ### Updated *Sailors*
 
@@ -407,4 +407,4 @@ ALTER TABLE Sailors DROP `Age`;
 DROP TABLE Captains;
 ```
 
-![Screenschot for answer 29.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/SailingDB/screenshots/29.png)
+![Screenschot for answer 29.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing_db/29.png)

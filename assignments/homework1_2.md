@@ -1,4 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/homework-1.2.pdf)
+[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_2.pdf)
 / [homepage](https://github.com/hendraanggrian/IIT-CS425/)
 
 # CS425: Homework 1.2
@@ -9,7 +9,7 @@ database design and implementation.
 
 ## Schema
 
-> Database schema from [Homework 1.1](Homework%201.1.md) is being used.
+> Database schema from [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/blob/main/homework_1.1.md) is being used.
 
 A university database usually revolves around 3 main entities: **Students**,
 **Lecturers**, and **Classes**. But this would be overly simple and
