@@ -1,7 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_2.pdf)
-/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
-
-# CS425: Homework 1.2
+# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_2.pdf)
 
 Implement the database schema submitted as “Homework 1.1”. You are required to
 specify clearly, and completely all possible assumptions undertaken on your

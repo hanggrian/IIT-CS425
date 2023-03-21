@@ -1,7 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx)
-/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
-
-# CS425: Homework 1.1
+# [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx)
 
 Design a university database that stores the following information: student,
 professor, and course. You are required to show the database schema (schematic

@@ -1,7 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_4.pdf)
-/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
-
-# CS425: Homework 1.4
+# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_4.pdf)
 
 Create FOUR (4) relations called Coach, Person, Player, and Team, each
 containing the same column names as those found in the corresponding CSV data

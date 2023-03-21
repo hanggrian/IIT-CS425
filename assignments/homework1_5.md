@@ -1,7 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf)
-/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
-
-# CS425: Homework 1.5
+# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf)
 
 ## Schema
 
@@ -145,7 +142,7 @@ SELECT `row_num`, `DENSE_RANK`
 > `DENSE_RANK` returns the rank of $n$-th row, with a condition that the
   difference between each connecting rank is 1.
 
-There is 1 duplicate salary found before *Bruce (13). **Therefore the result is
+There is 1 duplicate salary found before *Bruce (13)*. **Therefore the result is
 $\bf 12$**.
 
 ```sql
@@ -210,15 +207,7 @@ SELECT `row_num`, `PERCENT_RANK`
 
 > `NTILE` returns division of range from current row to the next $n$-th row.
 
-**There are 4 sections, because $\bf ceil(15/4)=4$**.
-
-$$
-\begin{array}{rcl}
-  \textsf{number of sections} &=& ceil(\textsf{table length} / \textsf{range}) \\
-  &=& ceil(15/4) \\
-  &=& \bf 4
-\end{array}
-$$
+The table length is 15, **therefore the division are 4, 4, 4 and 3**.
 
 ```sql
 SELECT `row_num`, NTILE(4) OVER(ORDER BY `salary`) FROM Salaries;

@@ -1,7 +1,4 @@
-[View questions](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf)
-/ [homepage](https://github.com/hendraanggrian/IIT-CS425/)
-
-# CS425: Homework 1.6
+# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf)
 
 ## Schema
 
