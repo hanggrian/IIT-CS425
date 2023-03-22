@@ -1,4 +1,4 @@
-# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_4.pdf)
+# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_4.pdf): BasketballDB
 
 Create FOUR (4) relations called Coach, Person, Player, and Team, each
 containing the same column names as those found in the corresponding CSV data

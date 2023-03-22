@@ -1,4 +1,4 @@
-# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_2.pdf)
+# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_2.pdf): UniversityDB Explanation
 
 Implement the database schema submitted as “Homework 1.1”. You are required to
 specify clearly, and completely all possible assumptions undertaken on your
@@ -7,6 +7,8 @@ database design and implementation.
 ## Schema
 
 > Database schema from [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/blob/main/homework_1.1.md) is being used.
+
+![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university_db/schema.png)
 
 A university database usually revolves around 3 main entities: **Students**,
 **Lecturers**, and **Classes**. But this would be overly simple and

@@ -1,4 +1,4 @@
-# [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_3.docx)
+# [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_3.docx): SailingDB
 
 Implement the database schema (SailingDB) found in the attachment pdf below and
 insert the data as shown in each table. You are provided with the query

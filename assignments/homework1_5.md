@@ -1,4 +1,11 @@
-# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf)
+<!-- hotfix: KaTeX -->
+<!-- https://github.com/yzane/vscode-markdown-pdf/issues/21/ -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
+
+# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf): WorkplaceDB
+
+Give the answers (assume `ORDER BY` salary).
 
 ## Schema
 
@@ -250,8 +257,3 @@ SELECT `row_num`, `CUME_DIST_12`
 ```
 
 ![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/14.png)
-
-<!-- hotfix: KaTeX -->
-<!-- https://github.com/yzane/vscode-markdown-pdf/issues/21/ -->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>

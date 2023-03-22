@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS Students;
 -- Courses
 
 CREATE TABLE Courses(
-  `id` VARCHAR(10) NOT NULL PRIMARY KEY,
+  `id` VARCHAR(10) PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL
 );
 CREATE INDEX Courses_name ON Courses(`name`);

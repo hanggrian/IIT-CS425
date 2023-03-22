@@ -1,31 +1,23 @@
-# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf): UniversityERD
-
-![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/images/homework1_6.png)
-
-Translate the University ERD and represent fully as relational schemas.
-
-## Schema
-
-Several notes about this solution:
-
-- `grade` is flagged as **erroneous use of relationship attributes** according
-  to [lecture 6th](https://github.com/hendraanggrian/IIT-CS425/raw/assets/lecture6.pdf),
-  thus will be ignored.
-- The relationship names (`teaches`, `takes`, etc.) in the ER diagram above are
-  being used as foreign key contraint names in the SQL table.
-- Relationship's total cardinality will make the affected columns `NOT NULL`.
-- Weak entity tables will make the affected constraints `ON DELETE CASCADE`,
-  according to [this answer](https://stackoverflow.com/a/26448278/1567541/).
-
-```sql
 CREATE SCHEMA IF NOT EXISTS UniversityERD;
 USE UniversityERD;
+
+DROP TABLE IF EXISTS Sections;
+DROP TABLE IF EXISTS TimeSlots;
+DROP TABLE IF EXISTS Classrooms;
+DROP TABLE IF EXISTS Courses;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Instructors;
+DROP TABLE IF EXISTS Departments;
+
+-- Departments
 
 CREATE TABLE Departments(
   `dept_name` VARCHAR(50) PRIMARY KEY,
   `building` VARCHAR(50),
   `budget` DECIMAL(15, 2)
 );
+
+-- Instructors
 
 CREATE TABLE Instructors(
   `ID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,6 +27,8 @@ CREATE TABLE Instructors(
   `department_name` VARCHAR(50) NOT NULL,
   CONSTRAINT inst_dept FOREIGN KEY(`department_name`) REFERENCES Departments(`dept_name`)
 );
+
+-- Students
 
 CREATE TABLE Students(
   `ID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,6 +41,8 @@ CREATE TABLE Students(
   CONSTRAINT advisor FOREIGN KEY(`instructor_id`) REFERENCES Instructors(`ID`)
 );
 
+-- Courses
+
 CREATE TABLE Courses(
   `course_id` VARCHAR(10) PRIMARY KEY,
   `title` VARCHAR(50),
@@ -58,6 +54,8 @@ CREATE TABLE Courses(
   CONSTRAINT prereq FOREIGN KEY(`prereq_id`) REFERENCES Courses(`course_id`)
 );
 
+-- Classrooms
+
 CREATE TABLE Classrooms(
   `building` VARCHAR(50) NOT NULL,
   `room_number` VARCHAR(5) NOT NULL,
@@ -65,12 +63,16 @@ CREATE TABLE Classrooms(
   PRIMARY KEY(`building`, `room_number`)
 );
 
+-- TimeSlots
+
 CREATE TABLE TimeSlots(
   `time_slot_id` INT AUTO_INCREMENT PRIMARY KEY,
   `day` INT(1),
   `start_time` TIME,
   `end_time` TIME
 );
+
+-- Sections
 
 CREATE TABLE Sections(
   `sec_id` VARCHAR(5) PRIMARY KEY,
@@ -95,6 +97,3 @@ CREATE TABLE Sections(
   CONSTRAINT sec_class FOREIGN KEY(`time_slot_id`) REFERENCES TimeSlots(`time_slot_id`)
     ON DELETE CASCADE
 );
-```
-
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university_erd/initialize.sql)
