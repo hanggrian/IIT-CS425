@@ -1,4 +1,4 @@
-# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_7.pdf): LaunchpadERD
+# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_7.pdf): Launchpad ERD
 
 Launch Pad business rules:
 
@@ -32,9 +32,82 @@ Launch Pad business rules:
 
 ## Schema
 
+Several notes about this solution:
+
+- `Missions` is a bridge table for many-to-many relationship between `Crews`
+  and `Launches`.
+
+![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/launchpad-erd/erd.png)
+
 ```sql
 CREATE SCHEMA IF NOT EXISTS LaunchpadERD;
 USE LaunchpadERD;
+
+DROP TABLE IF EXISTS Missions;
+DROP TABLE IF EXISTS Crews;
+DROP TABLE IF EXISTS Launches;
+DROP TABLE IF EXISTS Rockets;
+DROP TABLE IF EXISTS Payloads;
+DROP TABLE IF EXISTS Manufacturers;
+DROP TABLE IF EXISTS Launchpads;
+
+CREATE TABLE Launchpads(
+  `name` VARCHAR(50) PRIMARY KEY,
+  `location` VARCHAR(50)
+);
+
+CREATE TABLE Manufacturers(
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(50),
+  `phone` VARCHAR(50),
+  `address` VARCHAR(50)
+);
+
+CREATE TABLE Payloads(
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `weight` INT,
+
+  `manufacturer_id` INT,
+  CONSTRAINT payload_manufacturer FOREIGN KEY(`manufacturer_id`) REFERENCES Manufacturers(`id`)
+);
+
+CREATE TABLE Rockets(
+  `serial_no` INT PRIMARY KEY,
+  `type` VARCHAR(10),
+  `name` VARCHAR(50),
+  `max_thrust` INT,
+  `is_reusable` BOOLEAN,
+
+  `manufacturer_id` INT,
+  CONSTRAINT rocket_manufacturer FOREIGN KEY(`manufacturer_id`) REFERENCES Manufacturers(`id`)
+);
+
+CREATE TABLE Launches(
+  `datetime` DATETIME PRIMARY KEY,
+  `name` VARCHAR(50),
+
+  `launchpad_name` VARCHAR(50),
+  `payload_id` INT,
+  `rocket_no` INT,
+  CONSTRAINT host FOREIGN KEY(`launchpad_name`) REFERENCES Launchpads(`name`),
+  CONSTRAINT carry FOREIGN KEY(`payload_id`) REFERENCES Payloads(`id`),
+  CONSTRAINT powered FOREIGN KEY(`rocket_no`) REFERENCES Rockets(`serial_no`)
+);
+
+CREATE TABLE Crews(
+  `name` VARCHAR(50) PRIMARY KEY,
+  `surname` VARCHAR(50),
+  `nationality` VARCHAR(50)
+);
+
+CREATE TABLE Missions(
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `crew_name` VARCHAR(50),
+  `launch_datetime` DATETIME,
+
+  CONSTRAINT registers FOREIGN KEY(`crew_name`) REFERENCES Crews(`name`),
+  CONSTRAINT registered FOREIGN KEY(`launch_datetime`) REFERENCES Launches(`datetime`)
+);
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad_erd/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-erd/initialize.sql)

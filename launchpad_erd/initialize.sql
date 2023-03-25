@@ -1,2 +1,0 @@
-CREATE SCHEMA IF NOT EXISTS LaunchpadERD;
-USE LaunchpadERD;

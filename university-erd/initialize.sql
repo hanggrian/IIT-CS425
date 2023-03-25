@@ -75,7 +75,7 @@ CREATE TABLE TimeSlots(
 -- Sections
 
 CREATE TABLE Sections(
-  `sec_id` VARCHAR(5) PRIMARY KEY,
+  `sec_id` VARCHAR(5),
   `semester` INT(1),
   `year` YEAR,
 

@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf): WorkplaceDB
+# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_5.pdf): Workplace DB
 
 Give the answers (assume `ORDER BY` salary).
 
@@ -39,7 +39,7 @@ CREATE TABLE Salaries(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/workplace_db/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/workplace-db/initialize.sql)
 
 ## 1. FIRST_VALUE() = [give row num as answer]
 
@@ -52,7 +52,7 @@ lower than current row. **Therefore the result is 2500**.
 SELECT `row_num`, FIRST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/1.png)
 
 ## 2. LAST_VALUE() = [give row num as answer]
 
@@ -65,7 +65,7 @@ higher than any previous row. **Therefore the result is salary of current row**.
 SELECT `row_num`, LAST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/2.png)
 
 ## 3. LEAD(2) for Guy = [give row num as answer]
 
@@ -80,7 +80,7 @@ SELECT `row_num`, `LEAD`
   WHERE `first_name` = 'Guy';
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/3.png)
 
 ## 4. LAG(4) for Pat = [give row num as answer]
 
@@ -95,7 +95,7 @@ SELECT `row_num`, `LAG`
   WHERE `first_name` = 'Pat';
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/4.png)
 
 ## 5. RANK() for Valli = [give value]
 
@@ -110,7 +110,7 @@ SELECT `row_num`, `RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/5.png)
 
 ## 6. RANK() for BRUCE = [give value]
 
@@ -125,7 +125,7 @@ SELECT `row_num`, `RANK`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/6.png)
 
 ## 7. DENSE_RANK() for Valli = [give value]
 
@@ -142,7 +142,7 @@ SELECT `row_num`, `DENSE_RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/7.png)
 
 ## 8. DENSE_RANK() for BRUCE = [give value]
 
@@ -159,7 +159,7 @@ SELECT `row_num`, `DENSE_RANK`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/8.png)
 
 ## 9. ROW_NUMBER() for Valli = [give value]
 
@@ -175,7 +175,7 @@ SELECT `row_num`, `ROW_NUMBER`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/9.png)
 
 ## 10. ROW_NUMBER() for Bruce = [give value]
 
@@ -191,7 +191,7 @@ SELECT `row_num`, `ROW_NUMBER`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/10.png)
 
 ## 11. PERCENT_RANK() for Valli = [give value]
 
@@ -208,7 +208,7 @@ SELECT `row_num`, `PERCENT_RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/11.png)
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/11.png)
 
 ## 12. NTILE(4) = [give ranges of row numbers]
 
@@ -220,7 +220,7 @@ The table length is 15, **therefore the division are 4, 4, 4 and 3**.
 SELECT `row_num`, NTILE(4) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/12.png)
+![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/12.png)
 
 ## 13. CUME_DIST() for row 3 = [give value]
 
@@ -238,7 +238,7 @@ SELECT `row_num`, `CUME_DIST_3`
   WHERE `row_num` = 3;
 ```
 
-![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/13.png)
+![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/13.png)
 
 ## 14. CUME_DIST() for row 12 = [give value]
 
@@ -256,4 +256,4 @@ SELECT `row_num`, `CUME_DIST_12`
   WHERE `row_num` = 12;
 ```
 
-![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace_db/14.png)
+![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/14.png)

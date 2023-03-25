@@ -1,4 +1,4 @@
-# [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx): UniversityDB
+# [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx): University DB
 
 Design a university database that stores the following information: student,
 professor, and course. You are required to show the database schema (schematic
@@ -9,7 +9,7 @@ database.
 
 ## Schema
 
-![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university_db/schema.png)
+![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS UniversityDB;
@@ -67,4 +67,4 @@ CREATE TABLE Schedules(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university_db/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/initialize.sql)

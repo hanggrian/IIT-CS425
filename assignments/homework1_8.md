@@ -27,4 +27,4 @@ CREATE TABLE Students(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale_community_college/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)

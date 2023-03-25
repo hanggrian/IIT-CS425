@@ -1,4 +1,4 @@
-# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf): UniversityERD
+# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf): University ERD
 
 ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/images/homework1_6.png)
 
@@ -73,7 +73,7 @@ CREATE TABLE TimeSlots(
 );
 
 CREATE TABLE Sections(
-  `sec_id` VARCHAR(5) PRIMARY KEY,
+  `sec_id` VARCHAR(5),
   `semester` INT(1),
   `year` YEAR,
 
@@ -97,4 +97,4 @@ CREATE TABLE Sections(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university_erd/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-erd/initialize.sql)

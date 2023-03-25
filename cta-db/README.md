@@ -1,6 +1,6 @@
 # UniversityDB
 
-![Main preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university_db/screenshots/main.png)
+![Main preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/screenshots/main.png)
 
 A desktop app that manages classes, which in turn, manages students, lecturers,
 courses, and schedules. Powered by JavaFX UI and Kotlin language, this
@@ -9,7 +9,7 @@ binds JVM properties to persistence data.
 
 ### Login
 
-![Login dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university_db/screenshots/login.png)
+![Login dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/screenshots/login.png)
 
 At the start of use, there is a MySQL login prompt. This dialog remembers user
 input by saving it to local preferences. Admittedly not the best choice to store
