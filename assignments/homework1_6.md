@@ -18,9 +18,6 @@ Several notes about this solution:
   according to [this answer](https://stackoverflow.com/a/26448278/1567541/).
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS UniversityERD;
-USE UniversityERD;
-
 CREATE TABLE Departments(
   `dept_name` VARCHAR(50) PRIMARY KEY,
   `building` VARCHAR(50),

@@ -28,9 +28,6 @@ Give the answers (assume `ORDER BY` salary).
 | 15 | Charles | Johnson | 6200 |
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS WorkplaceDB;
-USE WorkplaceDB;
-
 CREATE TABLE Salaries(
   `row_num` INT AUTO_INCREMENT PRIMARY KEY,
   `first_name` VARCHAR(20) NOT NULL,
@@ -41,9 +38,11 @@ CREATE TABLE Salaries(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/workplace-db/initialize.sql)
 
-## 1. FIRST_VALUE() = [give row num as answer]
+## Problem 1
 
-> `FIRST_VALUE` returns the lowest salary from $n$-th row.
+> `FIRST_VALUE()` = [give row num as answer]
+
+`FIRST_VALUE` returns the lowest salary from $n$-th row.
 
 Because the table is already sorted (by salary), the first row will always be
 lower than current row. **Therefore the result is 2500**.
@@ -54,9 +53,11 @@ SELECT `row_num`, FIRST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 
 ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/1.png)
 
-## 2. LAST_VALUE() = [give row num as answer]
+## Problem 2
 
-> `LAST_VALUE` returns the highest salary from $n$-th row.
+> `LAST_VALUE`() = [give row num as answer]
+
+`LAST_VALUE` returns the highest salary from $n$-th row.
 
 Because the table is already sorted (by salary), the current row will always be
 higher than any previous row. **Therefore the result is salary of current row**.
@@ -67,9 +68,11 @@ SELECT `row_num`, LAST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 
 ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/2.png)
 
-## 3. LEAD(2) for Guy = [give row num as answer]
+## Problem 3
 
-> `LEAD` returns the last $n$ row.
+> `LEAD(2)` for Guy = [give row num as answer]
+
+`LEAD` returns the last $n$ row.
 
 The last 2 row of *Guy (2)* is *Sigal (4)*. **The salary is $\bf 2800$**.
 
@@ -82,9 +85,11 @@ SELECT `row_num`, `LEAD`
 
 ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/3.png)
 
-## 4. LAG(4) for Pat = [give row num as answer]
+## Problem 4
 
-> `LAG` returns the last $n$ row.
+> `LAG(4)` for Pat = [give row num as answer]
+
+`LAG` returns the last $n$ row.
 
 The last 4 row of *Pat (14)* is *Jennifer (10)*. **The salary is $\bf 4400$**.
 
@@ -97,9 +102,11 @@ SELECT `row_num`, `LAG`
 
 ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/4.png)
 
-## 5. RANK() for Valli = [give value]
+## Problem 5
 
-> `RANK` returns the rank of $n$-th row.
+> `RANK()` for Valli = [give value]
+
+`RANK` returns the rank of $n$-th row.
 
 *Valli (12)* and *David (11)* have the same salary, therefore the same rank.
 **The rank is $\bf 11$, because $\bf 11 < 12$**.
@@ -112,9 +119,11 @@ SELECT `row_num`, `RANK`
 
 ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/5.png)
 
-## 6. RANK() for BRUCE = [give value]
+## Problem 6
 
-> `RANK` returns the rank of $n$-th row.
+> `RANK()` for BRUCE = [give value]
+
+`RANK` returns the rank of $n$-th row.
 
 *Bruce (13)* and *Pat (14)* have the same salary, therefore the same rank. **The
 rank is $\bf 13$, because $13 < 14$**.
@@ -127,10 +136,12 @@ SELECT `row_num`, `RANK`
 
 ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/6.png)
 
-## 7. DENSE_RANK() for Valli = [give value]
+## Problem 7
 
-> `DENSE_RANK` returns the rank of $n$-th row, with a condition that the
-  difference between each connecting rank is 1.
+> `DENSE_RANK()` for Valli = [give value]
+
+`DENSE_RANK` returns the rank of $n$-th row, with a condition that the
+difference between each connecting rank is 1.
 
 There is no duplicate salary found before *Valli (12)*. **Therefore the result
 is $\bf 11$, the same as `RANK`**.
@@ -144,13 +155,15 @@ SELECT `row_num`, `DENSE_RANK`
 
 ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/7.png)
 
-## 8. DENSE_RANK() for BRUCE = [give value]
+## Problem 8
 
-> `DENSE_RANK` returns the rank of $n$-th row, with a condition that the
-  difference between each connecting rank is 1.
+> `DENSE_RANK()` for BRUCE = [give value]
 
-There is 1 duplicate salary found before *Bruce (13)*. **Therefore the result is
-$\bf 12$**.
+`DENSE_RANK` returns the rank of $n$-th row, with a condition that the
+difference between each connecting rank is 1.
+
+There is 1 duplicate salary found before *Bruce (13)*. **Therefore the result
+is $\bf 12$**.
 
 ```sql
 SELECT `row_num`, `DENSE_RANK`
@@ -161,9 +174,11 @@ SELECT `row_num`, `DENSE_RANK`
 
 ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/8.png)
 
-## 9. ROW_NUMBER() for Valli = [give value]
+## Problem 9
 
-> `ROW_NUMBER` returns the number of $n$-th row.
+> `ROW_NUMBER()` for Valli = [give value]
+
+`ROW_NUMBER` returns the number of $n$-th row.
 
 Because there is already a column `row_num`, they represent the same value.
 __The result is *Valli (12)*__.
@@ -177,9 +192,11 @@ SELECT `row_num`, `ROW_NUMBER`
 
 ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/9.png)
 
-## 10. ROW_NUMBER() for Bruce = [give value]
+## Problem 10
 
-> `ROW_NUMBER` returns the number of $n$-th row.
+> `ROW_NUMBER()` for Bruce = [give value]
+
+`ROW_NUMBER` returns the number of $n$-th row.
 
 Because there is already a column `row_num`, they represent the same value.
 __The result is *Bruce (13)*__.
@@ -193,10 +210,12 @@ SELECT `row_num`, `ROW_NUMBER`
 
 ![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/10.png)
 
-## 11. PERCENT_RANK() for Valli = [give value]
+## Problem 11
 
-> `PERCENT_RANK` returns a percentage of rank, in form of double ranging
-  from $0$ to $1$.
+> `PERCENT_RANK()` for Valli = [give value]
+
+`PERCENT_RANK` returns a percentage of rank, in form of double ranging
+from $0$ to $1$.
 
 *Valli (12)* and *David (11)* has the same salary, therefore the same rank
 percentage. **Because $\bf 11 < 12$, the result is $\bf 11 / 15 = 0.7$**.
@@ -210,9 +229,11 @@ SELECT `row_num`, `PERCENT_RANK`
 
 ![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/11.png)
 
-## 12. NTILE(4) = [give ranges of row numbers]
+## Problem 12
 
-> `NTILE` returns division of range from current row to the next $n$-th row.
+> `NTILE(4)` = [give ranges of row numbers]
+
+`NTILE` returns division of range from current row to the next $n$-th row.
 
 The table length is 15, **therefore the division are 4, 4, 4 and 3**.
 
@@ -222,11 +243,13 @@ SELECT `row_num`, NTILE(4) OVER(ORDER BY `salary`) FROM Salaries;
 
 ![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/12.png)
 
-## 13. CUME_DIST() for row 3 = [give value]
+## Problem 13
 
-> `CUME_DIST` stands for **cumulative distribution**, which is number of rows
-  with values less than or equal to that row’s value divided by the total number
-  of rows.
+> `CUME_DIST()` for row 3 = [give value]
+
+`CUME_DIST` stands for **cumulative distribution**, which is number of rows with
+values less than or equal to that row’s value divided by the total number of
+rows.
 
 Because the table is already sorted, the current row will always have higher
 salary than the last one. **The result is $\bf 3/15 = 0,2$**.
@@ -240,11 +263,13 @@ SELECT `row_num`, `CUME_DIST_3`
 
 ![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-db/13.png)
 
-## 14. CUME_DIST() for row 12 = [give value]
+## Problem 14
 
-> `CUME_DIST` stands for **cumulative distribution**, which is number of rows
-  with values less than or equal to that row’s value divided by the total number
-  of rows.
+> `CUME_DIST()` for row 12 = [give value]
+
+`CUME_DIST` stands for **cumulative distribution**, which is number of rows with
+values less than or equal to that row’s value divided by the total number of
+rows.
 
 Because the table is already sorted, the current row will always have higher
 salary than the last one. **The result is $\bf 12/15 = 0,8$**.

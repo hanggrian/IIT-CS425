@@ -10,21 +10,37 @@ closely and completely as possible.
 ## Schema
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS GreendaleCommunityCollege;
-USE GreendaleCommunityCollege;
-
-CREATE TABLE Students(
-  `Name` VARCHAR(20) PRIMARY KEY,
-  `Qualify` CHAR(1) NOT NULL,
-  `Promotion Code` VARCHAR(3) NOT NULL,
-  `Year` YEAR NOT NULL,
-  `Course` VARCHAR(6) NOT NULL,
-  `Convenor` VARCHAR(20) NOT NULL,
-  `Pre-Requisutes` VARCHAR(20),
-  `Periods` VARCHAR(20) NOT NULL,
-  `Mark` INT(3),
-  `Symbol` VARCHAR(3)
-);
 ```
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)
+
+## Problem 1
+
+> Draw an ER (entity-relationship) diagram for the information in the
+  spreadsheet, using the notation employed in this course. If necessary, state
+  any assumptions you had to make when modelling this college data, and explain
+  any modelling decisions taken.
+
+![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/erd.png)
+
+## Problem 2
+
+> Represent your ERD as a logical design showing relation schemas of this data.
+  Choose 3 or 4 rows from the spreadsheet and show how that data would be stored
+  in your database. Briefly describe any design decisions taken and any
+  limitations of your schema.
+
+## Problem 3
+
+> Give any one functional dependency that holds for this information, and state
+  in simple words what your functional dependency tells us about the data.
+
+## Problem 4
+
+> Is your relation scheme in 1st normal form or not? Give a reason for your
+  answer.
+
+## Problem 5
+
+> Is your relation scheme in 3rd normal form or not? Give a reason for your
+  answer.

@@ -60,9 +60,6 @@ required to screenshot the resultant table for each SQL command.
 </table>
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS SailingDB;
-USE SailingDB;
-
 CREATE TABLE Sailors(
   `Sname` VARCHAR(20) NOT NULL,
   `SID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -99,7 +96,9 @@ CREATE TABLE Reserves(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/sailing-db/initialize.sql)
 
-## 1. Get everything in *Sailors*.
+## Problem 1
+
+> Get everything in *Sailors*.
 
 ```sql
 SELECT * FROM Sailors;
@@ -107,7 +106,10 @@ SELECT * FROM Sailors;
 
 ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/1.png)
 
-## 2. Get `SID`, `Rating` & `Age` of all sailors, ordered from highest to lowest rank. `Rating` is 10 times rating.
+## Problem 2
+
+> Get `SID`, `Rating` & `Age` of all sailors, ordered from highest to lowest
+  rank. `Rating` is 10 times rating.
 
 ```sql
 SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
@@ -115,7 +117,9 @@ SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 
 ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/2.png)
 
-## 3. Get alphabetical list of sailors with rating less than 10.
+## Problem 3
+
+> Get alphabetical list of sailors with rating less than 10.
 
 ```sql
 SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
@@ -123,7 +127,10 @@ SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 
 ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/3.png)
 
-## 4. Find how much deposit money there is in total and how many tuples are in *Reserves*.
+## Problem 4
+
+> Find how much deposit money there is in total and how many tuples are in
+  *Reserves*.
 
 ```sql
 SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
@@ -131,7 +138,9 @@ SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 
 ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/4.png)
 
-## 5. Get all info on boats in Fishhoek.
+## Problem 5
+
+> Get all info on boats in Fishhoek.
 
 ```sql
 SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
@@ -139,7 +148,9 @@ SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 
 ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/5.png)
 
-## 6. In what locations are boats kept?
+## Problem 6
+
+> In what locations are boats kept?
 
 ```sql
 SELECT DISTINCT `Location` FROM Boats;
@@ -147,7 +158,9 @@ SELECT DISTINCT `Location` FROM Boats;
 
 ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/6.png)
 
-## 7. Get the names of all boats that have a fee value recorded in the database.
+## Problem 7
+
+> Get the names of all boats that have a fee value recorded in the database.
 
 ```sql
 SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
@@ -155,7 +168,9 @@ SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 
 ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/7.png)
 
-## 8. Get ID of all boats that have not been reserved.
+## Problem 8
+
+> Get ID of all boats that have not been reserved.
 
 ```sql
 SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
@@ -163,7 +178,9 @@ SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 
 ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/8.png)
 
-## 9. Get all reservation info, including all details on the boats being reserved.
+## Problem 9
+
+> Get all reservation info, including all details on the boats being reserved.
 
 ```sql
 SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`;
@@ -171,7 +188,10 @@ SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`;
 
 ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/9.png)
 
-## 10. For all reservations, get the name of the sailor, along with the day and name of the boat booked.
+## Problem 10
+
+> For all reservations, get the name of the sailor, along with the day and name
+  of the boat booked.
 
 ```sql
 SELECT `Sname`, `Day`, `Bname`
@@ -181,7 +201,9 @@ SELECT `Sname`, `Day`, `Bname`
 
 ![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/10.png)
 
-## 11. Get the average deposit paid for each boat.
+## Problem 11
+
+> Get the average deposit paid for each boat.
 
 ```sql
 SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`;
@@ -189,7 +211,10 @@ SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`;
 
 ![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/11.png)
 
-## 12. Get the average deposit paid for each boat that has been booked by more than one person.
+## Problem 12
+
+> Get the average deposit paid for each boat that has been booked by more than
+  one person.
 
 ```sql
 SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
@@ -198,7 +223,11 @@ SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
 
 ![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/12.png)
 
-## 13. Get the average firm deposit paid for each boat that has been booked by more than one person, in increasing order of amount. A firm deposit is one which exceeds 10.
+## Problem 13
+
+> Get the average firm deposit paid for each boat that has been booked by more
+  than one person, in increasing order of amount. A firm deposit is one which
+  exceeds 10.
 
 ```sql
 SELECT `BID`, AVG(`Deposit`) AS `AVERAGEDEPOSIT` FROM Reserves
@@ -208,7 +237,10 @@ SELECT `BID`, AVG(`Deposit`) AS `AVERAGEDEPOSIT` FROM Reserves
 
 ![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/13.png)
 
-## 14. Get name & rating of sailors with rating exceeding 7 who made any reservation with 0 deposit.
+## Problem 14
+
+> Get name & rating of sailors with rating exceeding 7 who made any reservation
+  with 0 deposit.
 
 ```sql
 SELECT `Sname`, `Rating` FROM Sailors
@@ -218,7 +250,9 @@ SELECT `Sname`, `Rating` FROM Sailors
 
 ![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/14.png)
 
-## 15. Get names of boats located in a place other than Hout Bay or Fish Hoek.
+## Problem 15
+
+> Get names of boats located in a place other than Hout Bay or Fish Hoek.
 
 ```sql
 SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek');
@@ -226,7 +260,9 @@ SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek');
 
 ![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/15.png)
 
-## 16. Get names of boats having a fee larger than any boat located in Hout Bay.
+## Problem 16
+
+> Get names of boats having a fee larger than any boat located in Hout Bay.
 
 ```sql
 SELECT DISTINCT `Bname` FROM Boats
@@ -235,7 +271,9 @@ SELECT DISTINCT `Bname` FROM Boats
 
 ![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/16.png)
 
-## 17. Get names that are in both the sailors and the captains relations.
+## Problem 17
+
+> Get names that are in both the sailors and the captains relations.
 
 ```sql
 SELECT `Sname` FROM Sailors
@@ -244,7 +282,9 @@ SELECT `Sname` FROM Sailors
 
 ![Screenschot for answer 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/17.png)
 
-## 18. Get names of boats that have exactly 1 reservation.
+## Problem 18
+
+> Get names of boats that have exactly 1 reservation.
 
 ```sql
 SELECT `Bname` FROM Boats AS b
@@ -253,7 +293,10 @@ SELECT `Bname` FROM Boats AS b
 
 ![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/18.png)
 
-## 19. Get sailor ID and total deposit paid for sailors who have booked more than 1 boat.
+## Problem 19
+
+> Get sailor ID and total deposit paid for sailors who have booked more than 1
+  boat.
 
 ```sql
 SELECT `SID`, `TotalDeposit`
@@ -264,7 +307,9 @@ SELECT `SID`, `TotalDeposit`
 
 ![Screenschot for answer 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/19.png)
 
-## 20. Get all reservation info including details of the boat booked.
+## Problem 20
+
+> Get all reservation info including details of the boat booked.
 
 ```sql
 SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
@@ -272,7 +317,10 @@ SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 
 ![Screenschot for answer 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/20.png)
 
-## 21. Get all information on every boat. If a boat has reservations, including all its reservations info.
+## Problem 21
+
+> Get all information on every boat. If a boat has reservations, including all
+  its reservations info.
 
 ```sql
 SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
@@ -280,7 +328,10 @@ SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 
 ![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/21.png)
 
-## 22. Create a new tuple for the boat named "Nino" which has fee 150, BID 110, and is in Fish Hoek.
+## Problem 22
+
+> Create a new tuple for the boat named "Nino" which has fee 150, BID 110, and
+  is in Fish Hoek.
 
 ```sql
 INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
@@ -294,7 +345,9 @@ INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 | --- | ---: | ---: | --- |
 | Nino | 110 | 150 | Fish Hoek |
 
-## 23. Remove all bookings from *Reserves* where there is no deposit.
+## Problem 23
+
+> Remove all bookings from *Reserves* where there is no deposit.
 
 ```sql
 DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
@@ -310,7 +363,9 @@ DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 | 33 | 109 | 2014-09-04 | 0 |
 | 33 | 104 | 2014-09-11 | 0 |
 
-## 24. Increase the fee of every boat by 12%.
+## Problem 24
+
+> Increase the fee of every boat by 12%.
 
 ```sql
 UPDATE Boats SET `Fee` = `Fee` * 1.12;
@@ -328,7 +383,10 @@ UPDATE Boats SET `Fee` = `Fee` * 1.12;
 | Joy | 104 | **224** | Hout Bay |
 | Nino | 110 | **168** | Fish Hoek |
 
-## 25. Make a view called 'Bookings' which hides the `Deposit` value (i.e. only has the other 3 attributes).
+## Problem 25
+
+> Make a view called 'Bookings' which hides the `Deposit` value (i.e. only has
+  the other 3 attributes).
 
 ```sql
 CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
@@ -345,9 +403,12 @@ CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
 | 27 | 101 | 2014-08-09 |
 | 27 | 109 | 2014-08-15 |
 
-## 26. Create a table called *Reserves* with 3 integer attributes `BID`, `SID` & `Deposit`, and a date attribute `Day`. Allow only deposit to be omitted, and ensure `SID` and `BID` values exist in the database. When someone books a boat it is for the whole day.
+## Problem 26
 
-> There seem to be a `reserves_chk_1` error.
+> Create a table called *Reserves* with 3 integer attributes `BID`, `SID`
+  & `Deposit`, and a date attribute `Day`. Allow only deposit to be omitted, and
+  ensure `SID` and `BID` values exist in the database. When someone books a boat
+  it is for the whole day.
 
 ```sql
 CREATE TABLE Reserves(
@@ -363,7 +424,11 @@ CREATE TABLE Reserves(
 
 ![Screenschot for answer 26.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/26.png)
 
-## 27. Add a new attribute `NEEDSREPAIR` to *Boats*, it is usually "N".
+> There seem to be a `reserves_chk_1` error.
+
+## Problem 27
+
+> Add a new attribute `NEEDSREPAIR` to *Boats*, it is usually "N".
 
 ```sql
 ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
@@ -381,7 +446,9 @@ ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 | Joy | 104 | 224 | Hout Bay | **N** |
 | Nino | 110 | 158 | Fish Hoek | **N** |
 
-## 28. Remove the `Age` attribute.
+## Problem 28
+
+> Remove the `Age` attribute.
 
 ```sql
 ALTER TABLE Sailors DROP `Age`;
@@ -398,7 +465,10 @@ ALTER TABLE Sailors DROP `Age`;
 | Adams | 27 | 8 |
 | Carrey | 33 | 10 |
 
-## 29. Remove the *Captains* relation altogether so that nobody can try insert or use *Captains* in future.
+## Problem 29
+
+> Remove the *Captains* relation altogether so that nobody can try insert or use
+  *Captains* in future.
 
 ```sql
 DROP TABLE Captains;

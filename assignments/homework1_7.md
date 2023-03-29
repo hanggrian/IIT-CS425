@@ -40,17 +40,6 @@ Several notes about this solution:
 ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/launchpad-erd/erd.png)
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS LaunchpadERD;
-USE LaunchpadERD;
-
-DROP TABLE IF EXISTS Missions;
-DROP TABLE IF EXISTS Crews;
-DROP TABLE IF EXISTS Launches;
-DROP TABLE IF EXISTS Rockets;
-DROP TABLE IF EXISTS Payloads;
-DROP TABLE IF EXISTS Manufacturers;
-DROP TABLE IF EXISTS Launchpads;
-
 CREATE TABLE Launchpads(
   `name` VARCHAR(50) PRIMARY KEY,
   `location` VARCHAR(50)

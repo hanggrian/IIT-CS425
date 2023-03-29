@@ -8,7 +8,7 @@ database design and implementation.
 
 > Database schema from [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/blob/main/homework1_1.md) is being used.
 
-![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
+![The database schema.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
 
 A university database usually revolves around 3 main entities: **Students**,
 **Lecturers**, and **Classes**. But this would be overly simple and

@@ -9,12 +9,9 @@ database.
 
 ## Schema
 
-![Schema blueprint.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
+![The database schema.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS UniversityDB;
-USE UniversityDB;
-
 CREATE TABLE Courses(
   `id` VARCHAR(10) PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL

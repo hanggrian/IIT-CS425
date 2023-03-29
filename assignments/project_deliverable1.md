@@ -1,8 +1,10 @@
 # [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
 
-## Rules
+## ERD
 
-Here are the business rules for CTA:
+![The ER model stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/erd1.png)
+
+### Rules
 
 - A train need **one** locomotive (engine) to run, the locomotives can be used
   in **many** trains.
@@ -10,7 +12,7 @@ Here are the business rules for CTA:
   **many** trains.
 - A train is controlled by **one** conductor, the conductor control **many**
   trains.
-- A passenger enter **one** train, the train cen be boarded by **many**
+- A passenger enter **one** train, the train can be boarded by **many**
   passengers.
 - A track consist of **many** stations, a station can only be registered to
   **one** track.
@@ -19,23 +21,18 @@ Here are the business rules for CTA:
 
 ## Schema
 
-Several notes about this solution:
-
-- `WagonRegistrations` is a bridge table for many-to-many relationship
-  between `Wagons` and `Trains`.
-- New entry is added to `Passengers` whenever a train is boarded, transferring
+- **WagonRegistrations** is a bridge table for many-to-many relationship
+  between **Wagons** and **Trains**.
+- New entry is added to **Passengers** whenever a train is boarded, transferring
   between lines cause multiple entries.
-- Every entry of `Locomotives` and `Wagons` are tied to a real-world object.
-  While `Trains` only represent a combination of them, new combinations are
+- Every entry of **Locomotives** and **Wagons** are tied to a real-world object.
+  While **Trains** only represent a combination of them, new combinations are
   created every day.
-- Transferrable stations require multiple entries into `Stations`.
+- Transferrable stations require multiple entries into **Stations**.
 
-![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/erd.png)
+## SQL Commands
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS CTA;
-USE CTA;
-
 CREATE TABLE Tracks(
   `color` VARCHAR(10) PRIMARY KEY
 );
@@ -93,11 +90,9 @@ CREATE TABLE Passengers(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize.sql)
 
-> Example insertion entries are included in the full code.
+## What's next at Deliverable 2
 
-### What's next at Deliverable 2
-
-- Create full database diagram
+- Create full database diagram.
 - SQL commands improvement:
   - Add `CHECK` contraints to restrict bad input.
   - Add nullability check.
