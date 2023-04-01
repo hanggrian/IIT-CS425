@@ -1,52 +1,35 @@
 # [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_3.docx): Sailing DB
 
-Implement the database schema (SailingDB) found in the attachment pdf below and
-insert the data as shown in each table. You are provided with the query
-statements and the SQL commands labelled from no.1 to 29, respectively. You are
-required to screenshot the resultant table for each SQL command.
+> Implement the database schema (SailingDB) found in the attachment pdf below
+  and insert the data as shown in each table. You are provided with the query
+  statements and the SQL commands labelled from no.1 to 29, respectively. You
+  are required to screenshot the resultant table for each SQL command.
 
-## Schema
+**Note**: *Captains* are implied to be a carbon copy of *Sailors*, but I made
+slight changes in columns' name.
 
-> *Captains* are implied to be a carbon copy of *Sailors*, but I made slight
-  changes in columns' name.
-
-<table>
-<tr><th>Sailors</th><th>Captains</th></tr>
-<tr><td>
-
-| Sname | SID | Rating | Age |
+| <small>Sailors</small><br>Sname | <br>SID | <br>Rating | <br>Age |
 | --- | ---: | ---: | ---: |
 | Marx | 23 | 8 | 52 |
 | Martin | 25 | 9 | 51 |
 | Adams | 27 | 8 | 36 |
 | Carrey | 33 | 10 | 22 |
 
-</td><td>
-
-| Cname | CID | Rating | Age |
+| <small>Captains</small><br>Cname | <br>CID | <br>Rating | <br>Age |
 | --- | ---: | ---: | ---: |
 | Marx | 23 | 8 | 52 |
 | Martin | 25 | 9 | 51 |
 | Adams | 27 | 8 | 36 |
 | Carrey | 33 | 10 | 22 |
 
-</td></tr>
-</table>
-
-<table>
-<tr><th>Boats</th><th>Reserves</th></tr>
-<tr><td>
-
-| Bname | BID | Fee | Location |
+| <small>Boats</small><br>Bname | <br>BID | <br>Fee | <br>Location |
 | --- | ---: | ---: | --- |
 | Wayfarer | 109 | 120 | Hout Bay |
 | SeaPride | 108 | 500 | Fish Hoek |
 | Yupie | 101 | 400 | Hout Bay |
 | Joy | 104 | 200 | Hout Bay |
 
-</td><td>
-
-| SID | BID | Day | Deposit |
+| <small>Reserves</small><br>SID | <br>BID | <br>Day | <br>Deposit |
 | ---: | ---: | :---: | ---: |
 | 23 | 109 | 2014-08-01 | 120 |
 | 23 | 108 | 2014-08-08 | 120 |
@@ -56,8 +39,7 @@ required to screenshot the resultant table for each SQL command.
 | 33 | 109 | 2014-09-04 | 0 |
 | 33 | 104 | 2014-09-11 | 0 |
 
-</td></tr>
-</table>
+### SQL Commands
 
 ```sql
 CREATE TABLE Sailors(

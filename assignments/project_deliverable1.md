@@ -1,8 +1,18 @@
 # [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
 
-## ERD
+> Create a conceptual model consisting of the most essential information
+  required for the selected application. Explore the website of the selected
+  application to identify the relevant data, relationships, semantics,
+  constraints, users, and users’ needs, and interesting use cases.
 
-![The ER model stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/erd1.png)
+## Problem 1
+
+> Represent the conceptual model using the Entity relationship - Diagram (ERD)
+  showing the most important entities and relationships.
+
+![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png)
+
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 ### Rules
 
@@ -19,7 +29,9 @@
 - A track can be passed by **many** trains, a train is only registered to
   **one** track.
 
-## Schema
+## Extra
+
+### Notes
 
 - **WagonRegistrations** is a bridge table for many-to-many relationship
   between **Wagons** and **Trains**.
@@ -30,7 +42,7 @@
   created every day.
 - Transferrable stations require multiple entries into **Stations**.
 
-## SQL Commands
+### SQL Commands
 
 ```sql
 CREATE TABLE Tracks(
@@ -90,15 +102,58 @@ CREATE TABLE Passengers(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize.sql)
 
-## What's next at Deliverable 2
+### Dummy Data
 
-- Create full database diagram.
+```sql
+INSERT INTO Tracks VALUES
+  ('Blue'),
+  ('Green');
+
+INSERT INTO Stations VALUES
+  ('0.1', '0.1', 'Blue', 'Damen', 0),
+  ('0.1', '0.2', 'Blue', 'Clark-Lake', 1),
+  ('0.1', '0.2', 'Green', 'Clark-Lake', 1),
+  ('0.2', '0.2', 'Green', 'Roosevelt', 0);
+
+INSERT INTO Conductors VALUES
+  ('Jane', '1991-01-01'),
+  ('Michael', '1992-02-02');
+
+INSERT INTO Locomotives VALUES
+  ('X1', 1998),
+  ('A9', 1980);
+
+INSERT INTO Trains VALUES
+  (1, 'Blue', 'X1', 'Jane'),
+  (2, 'Green', 'A9', 'Michael');
+
+INSERT INTO Wagons VALUES
+  (1, 50),
+  (2, 50),
+  (3, 50),
+  (4, 50);
+
+INSERT INTO WagonRegistrations VALUES
+  (1, 1),
+  (1, 2),
+  (2, 3),
+  (2, 4);
+
+INSERT INTO Passengers VALUES
+  (NULL, 3.0, 1),
+  (NULL, 5.0, 2);
+```
+
+## Checklist
+
+- Main objectives:
+  - [ ] Create full database diagram.
 - SQL commands improvement:
-  - Add `CHECK` contraints to restrict bad input.
-  - Add nullability check.
-  - Add default values.
+  - [ ] Add `CHECK` contraints to restrict bad input.
+  - [ ] Add nullability check.
+  - [ ] Add default values.
 - Possible schema imporovement:
-  - Support membership with weekly and/or monthly payment, potentially adding
+  - [ ] Support membership with weekly and/or monthly payment, potentially adding
     2-3 more tables.
-  - Support traveling by bus, doesn't add many tables but massively change the
-    structure of existing tables.
+  - [ ] Support traveling by bus, doesn't add many tables but massively change
+    the structure of existing tables.

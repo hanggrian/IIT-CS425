@@ -1,15 +1,21 @@
 # [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_1.docx): University DB
 
-Design a university database that stores the following information: student,
-professor, and course. You are required to show the database schema (schematic
-view) and the data/table view of each entity.
+## Problem 1
 
-Remember to include the metadata to self-describe the data stored in the
-database.
+> Design a university database that stores the following information: student,
+  professor, and course. You are required to show the database schema (schematic
+  view) and the data/table view of each entity.
 
-## Schema
+![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.png)
 
-![The database schema.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/schema.png)
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/uml.drawio)
+
+## Problem 2
+
+> Remember to include the metadata to self-describe the data stored in the
+  database.
+
+### SQL Commands
 
 ```sql
 CREATE TABLE Courses(

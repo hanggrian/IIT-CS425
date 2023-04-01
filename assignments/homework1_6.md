@@ -1,10 +1,10 @@
-# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf): University ERD
+# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_6.pdf): University ER
 
-![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/images/homework1_6.png)
+> ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/images/homework1_6.png)
 
-Translate the University ERD and represent fully as relational schemas.
+## Problem 1
 
-## Schema
+> Translate the University ERD and represent fully as relational schemas.
 
 Several notes about this solution:
 
@@ -16,6 +16,8 @@ Several notes about this solution:
 - Relationship's total cardinality will make the affected columns `NOT NULL`.
 - Weak entity tables will make the affected constraints `ON DELETE CASCADE`,
   according to [this answer](https://stackoverflow.com/a/26448278/1567541/).
+
+### SQL Commands
 
 ```sql
 CREATE TABLE Departments(
@@ -94,4 +96,4 @@ CREATE TABLE Sections(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-erd/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-er/initialize.sql)

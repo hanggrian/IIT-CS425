@@ -18,22 +18,26 @@ DROP TABLE IF EXISTS Conductors;
 CREATE TABLE Conductors(
   `social_sec` VARCHAR(10) PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL,
-  `birth` DATE NOT NULL
+  `birth` DATE NOT NULL,
+  `age` INT NOT NULL,
+  `phones` VARCHAR(50),
+  CHECK(`age` >= 21)
 );
 
 INSERT INTO Conductors VALUES
-  ('1234567890', 'Jane', '1991-01-01'),
-  ('1122334455', 'John', '1992-02-02');
+  ('1234567890', 'Jane', '1991-01-01', 2023 - 1991, '123'),
+  ('1122334455', 'John', '1992-02-02', 2021 - 1992, '456,789');
 
 -- Alerts
 
 CREATE TABLE Alerts(
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `alert_id` INT AUTO_INCREMENT PRIMARY KEY,
   `message` VARCHAR(280) NOT NULL,
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
-  `conductor_soc` VARCHAR(50) NOT NULL,
-  FOREIGN KEY(`conductor_soc`) REFERENCES Conductors(`social_sec`)
+  `social_sec` VARCHAR(10) NOT NULL,
+  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`),
+  CHECK(`date_start` < `date_end`)
 );
 
 INSERT INTO Alerts VALUES
@@ -43,7 +47,7 @@ INSERT INTO Alerts VALUES
 -- Tracks
 
 CREATE TABLE Tracks(
-  `color` VARCHAR(10) PRIMARY KEY
+  `track_color` VARCHAR(10) PRIMARY KEY
 );
 
 INSERT INTO Tracks VALUES
@@ -53,85 +57,88 @@ INSERT INTO Tracks VALUES
 -- Stations
 
 CREATE TABLE Stations(
-  `lat` DECIMAL(8, 6),
-  `lng` DECIMAL(9, 6),
-  `track_color` VARCHAR(10),
+  `station_lat` DECIMAL(8, 6),
+  `station_lng` DECIMAL(9, 6),
+  `station_color` VARCHAR(10),
   `name` VARCHAR(50) NOT NULL,
   `zip` VARCHAR(5) NOT NULL,
+  `note` VARCHAR(280),
   `has_elevator` BOOLEAN NOT NULL DEFAULT 0,
   `has_parking` BOOLEAN NOT NULL DEFAULT 0,
-  PRIMARY KEY(`lat`, `lng`, `track_color`),
-  INDEX(`lat`),
-  INDEX(`lng`),
-  FOREIGN KEY(`track_color`) REFERENCES Tracks(`color`)
+  PRIMARY KEY(`station_lat`, `station_lng`, `station_color`),
+  INDEX(`station_lat`),
+  INDEX(`station_lng`),
+  FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
 );
 
 INSERT INTO Stations VALUES
-  (41.9100, 87.6780, 'Blue', 'Damen', '60622', DEFAULT, DEFAULT),
-  (41.8858, 87.6316, 'Blue', 'Clark-Lake', '60601', DEFAULT, DEFAULT),
-  (41.8858, 87.6316, 'Green', 'Clark-Lake', '60601', DEFAULT, DEFAULT),
-  (41.8674, 87.6266, 'Green', 'Roosevelt', '60605', DEFAULT, DEFAULT);
+  (41.9100, 87.6780, 'Blue', 'Damen', '60622', NULL, DEFAULT, DEFAULT),
+  (41.8858, 87.6316, 'Blue', 'Clark-Lake', '60601', 'Stations located at 3rd floor.', DEFAULT, DEFAULT),
+  (41.8858, 87.6316, 'Green', 'Clark-Lake', '60601', 'Stations located at basement.', DEFAULT, DEFAULT),
+  (41.8674, 87.6266, 'Green', 'Roosevelt', '60605', NULL, DEFAULT, DEFAULT);
 
 -- Locomotives
 
 CREATE TABLE Locomotives(
-  `serial_no` VARCHAR(20) PRIMARY KEY,
-  `since` YEAR NOT NULL
+  `serial_no` VARCHAR(4) PRIMARY KEY,
+  `since` YEAR NOT NULL,
+  CHECK(LENGTH(`serial_no`) = 4)
 );
 
 INSERT INTO Locomotives VALUES
-  ('X111', 1998),
-  ('A999', 1980);
+  ('0001', 1998),
+  ('0002', 1980);
 
 -- Wagons
 
 CREATE TABLE Wagons(
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `seats` INT NOT NULL
+  `wagon_id` VARCHAR(4) PRIMARY KEY,
+  `seats` INT NOT NULL,
+  CHECK(LENGTH(`serial_no`) = 4)
 );
 
 INSERT INTO Wagons VALUES
-  (1, 40),
-  (2, 50),
-  (3, 45),
-  (4, 55);
+  ('0001', 40),
+  ('0002', 50),
+  ('0003', 45),
+  ('0004', 55);
 
 -- Trains
 
 CREATE TABLE Trains(
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track_color` VARCHAR(10),
-  `locomotive_no` VARCHAR(20),
-  `conductor_sec` VARCHAR(10),
-  FOREIGN KEY(`track_color`) REFERENCES Tracks(`color`),
-  FOREIGN KEY(`locomotive_no`) REFERENCES Locomotives(`serial_no`),
-  FOREIGN KEY(`conductor_sec`) REFERENCES Conductors(`social_sec`)
+  `train_id` INT AUTO_INCREMENT PRIMARY KEY,
+  `track_color` VARCHAR(10) NOT NULL,
+  `serial_no` VARCHAR(4) NOT NULL,
+  `social_sec` VARCHAR(10) NOT NULL,
+  FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`),
+  FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`),
+  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`)
 );
 
 INSERT INTO Trains VALUES
-  (1, 'Blue', 'X111', '1234567890'),
-  (2, 'Green', 'A999', '1122334455');
+  (1, 'Blue', '0001', '1234567890'),
+  (2, 'Green', '0002', '1122334455');
 
 -- Railcars
 
 CREATE TABLE Railcars(
   `train_id` INT,
-  `wagon_id` INT,
+  `wagon_id` VARCHAR(4),
   PRIMARY KEY(`train_id`, `wagon_id`),
-  FOREIGN KEY(`train_id`) REFERENCES Trains(`id`),
-  FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`id`)
+  FOREIGN KEY(`train_id`) REFERENCES Trains(`train_id`),
+  FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`wagon_id`)
 );
 
 INSERT INTO Railcars VALUES
-  (1, 1),
-  (1, 2),
-  (2, 3),
-  (2, 4);
+  (1, '0001'),
+  (1, '0002'),
+  (2, '0003'),
+  (2, '0004');
 
 -- Passengers
 
 CREATE TABLE Passengers(
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `passenger_id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL
 );
 
@@ -142,11 +149,12 @@ INSERT INTO Passengers VALUES
 -- Passes
 
 CREATE TABLE Passes(
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `pass_id` INT AUTO_INCREMENT PRIMARY KEY,
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
   `passenger_id` INT NOT NULL,
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`id`)
+  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
+  CHECK(`date_start` < `date_end`)
 );
 
 INSERT INTO Passes VALUES
@@ -156,27 +164,27 @@ INSERT INTO Passes VALUES
 -- Trips
 
 CREATE TABLE Trips(
-  `passenger_id` INT NOT NULL,
+  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `passenger_id` INT,
   `fare` DECIMAL(13, 2),
   `pass_id` INT,
-  `station1_lat` DECIMAL(8, 6) NOT NULL,
-  `station1_lng` DECIMAL(9, 6) NOT NULL,
-  `station1_color` VARCHAR(10) NOT NULL,
-  `station2_lat` DECIMAL(8, 6),
-  `station2_lng` DECIMAL(9, 6),
-  `station2_color` VARCHAR(10),
-  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `station_lat1` DECIMAL(8, 6) NOT NULL,
+  `station_lng1` DECIMAL(9, 6) NOT NULL,
+  `station_color1` VARCHAR(10) NOT NULL,
+  `station_lat2` DECIMAL(8, 6),
+  `station_lng2` DECIMAL(9, 6),
+  `station_color2` VARCHAR(10),
   PRIMARY KEY(`timestamp`, `passenger_id`),
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`id`),
-  FOREIGN KEY(`pass_id`) REFERENCES Passes(`id`),
-  FOREIGN KEY(`station1_lat`) REFERENCES Stations(`lat`),
-  FOREIGN KEY(`station1_lng`) REFERENCES Stations(`lng`),
-  FOREIGN KEY(`station1_color`) REFERENCES Stations(`track_color`),
-  FOREIGN KEY(`station2_lat`) REFERENCES Stations(`lat`),
-  FOREIGN KEY(`station2_lng`) REFERENCES Stations(`lng`),
-  FOREIGN KEY(`station2_color`) REFERENCES Stations(`track_color`)
+  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
+  FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`),
+  FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`),
+  FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`),
+  FOREIGN KEY(`station_color1`) REFERENCES Stations(`station_color`),
+  FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`),
+  FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`),
+  FOREIGN KEY(`station_color2`) REFERENCES Stations(`station_color`)
 );
 
 INSERT INTO Trips VALUES
-  (1, 3.0, 1, 41.9100, 87.6780, 'Blue', 41.8858, 87.6316, 'Green', DEFAULT),
-  (2, 2.5, 2, 41.9100, 87.6780, 'Blue', 41.8674, 87.6266, 'Green', DEFAULT);
+  (DEFAULT, 1, 3.0, 1, 41.9100, 87.6780, 'Blue', 41.8858, 87.6316, 'Green'),
+  (DEFAULT, 2, 2.5, 2, 41.9100, 87.6780, 'Blue', 41.8674, 87.6266, 'Green');

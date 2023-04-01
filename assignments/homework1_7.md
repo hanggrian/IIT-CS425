@@ -1,43 +1,55 @@
-# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_7.pdf): Launchpad ERD
+# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_7.pdf): Launchpad ER
 
-Launch Pad business rules:
-
-1. A launchpad hosts multiple launches over time, and each launch is hosted by
+> Launch Pad business rules:
+>
+> 1. A launchpad hosts multiple launches over time, and each launch is hosted by
   exactly one launchpad. Therefore, Launchpads will be created in the database
   even before the first launch is hosted there.
-2. A launchpad is located in a country, and a country, in turn, is located on a
-  continent.
-3. Each launchpad has a name and a location.
-4. A launch requires a launchpad that hosts it, a launch vehicle (the rocket),
+> 2. A launchpad is located in a country, and a country, in turn, is located on
+  a continent.
+> 3. Each launchpad has a name and a location.
+> 4. A launch requires a launchpad that hosts it, a launch vehicle (the rocket),
   and the payload.
-5. For a launch, the date, time and name should be recorded as well as whether
+> 5. For a launch, the date, time and name should be recorded as well as whether
   it is a crewed launch or not.
-6. Each launch is performed by a launch vehicle. The serial number for the
+> 6. Each launch is performed by a launch vehicle. The serial number for the
   launch vehicle should be recorded. A launch vehicle can perform multiple
   launches over time.
-7. Each launch vehicle is of a specific launch vehicle type. The name, maximum
+> 7. Each launch vehicle is of a specific launch vehicle type. The name, maximum
   thrust and whether it is reusable need to be recorded for the launch vehicle
   type.
-8. A specific manufacturer makes each launch vehicle type, and a manufacturer
+> 8. A specific manufacturer makes each launch vehicle type, and a manufacturer
   can make many different launch vehicle types.
-9. Each launch carries one payload, and a payload is only carried by one launch.
-10. A manufacturer also makes each payload, and a manufacturer can make many
+> 9. Each launch carries one payload, and a payload is only carried by one
+  launch.
+> 10. A manufacturer also makes each payload, and a manufacturer can make many
   different payloads over time.
-11. Multiple crew members can be carried on a crewed launch, and each crew
+> 11. Multiple crew members can be carried on a crewed launch, and each crew
   member can be carried on multiple launches over time.
-12. Each crew member has a nationality (the country they come from), and their
+> 12. Each crew member has a nationality (the country they come from), and their
   name and surname also need to be recorded.
-13. Crew members can appear in the database before they launch for the first
+> 13. Crew members can appear in the database before they launch for the first
   time.
 
-## Schema
+## Problem 1
 
-Several notes about this solution:
+> Draw an ERD representing these business rules.
+
+![The ER diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/launchpad-er/er.png)
+
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-er/er.drawio)
+
+## Problem 2
+
+> You are required to show relation schemas that include surrogate primary key
+  and foreign key fields.
+
+### Notes
 
 - `Missions` is a bridge table for many-to-many relationship between `Crews`
   and `Launches`.
 
-![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/launchpad-erd/erd.png)
+### SQL Commands
 
 ```sql
 CREATE TABLE Launchpads(
@@ -99,4 +111,4 @@ CREATE TABLE Missions(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-erd/initialize.sql)
+[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-er/initialize.sql)

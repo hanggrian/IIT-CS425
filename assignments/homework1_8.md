@@ -1,13 +1,13 @@
 # [Homework 1.8](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/homework1_8.pdf): Greendale Community College
 
-A spreadsheet has been created that stores results of students at Greendale
-Community College. This includes annual promotion code REN (excluded), CON (can
-continue) or QUA (qualifies), along with information about the courses; their
-pre-requisites and lecture periods. You are required to design a relational
-database that can represent the information contained in the spreadsheet as
-closely and completely as possible.
+> A spreadsheet has been created that stores results of students at Greendale
+  Community College. This includes annual promotion code `REN` (excluded), `CON`
+  (can continue) or `QUA` (qualifies), along with information about the courses;
+  their pre-requisites and lecture periods. You are required to design a
+  relational database that can represent the information contained in the
+  spreadsheet as closely and completely as possible.
 
-## Schema
+### SQL Commands
 
 ```sql
 ```
@@ -21,7 +21,7 @@ closely and completely as possible.
   any assumptions you had to make when modelling this college data, and explain
   any modelling decisions taken.
 
-![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/erd.png)
+![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/er.png)
 
 ## Problem 2
 
