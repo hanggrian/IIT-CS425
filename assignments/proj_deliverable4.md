@@ -1,4 +1,4 @@
-# [Project Deliverable 4](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
+# [Project Deliverable 4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
 
 > The last deliverable requires to write a program in any programming language
   SQL supports and implement a variety of SQL commands.

@@ -1,4 +1,4 @@
-# [Project Deliverable 3](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
+# [Project Deliverable 3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
 
 > Implement the logical model using a suitable relational DBMS. Create the
   database in the database system using general Data-definition language (DDL)
@@ -10,7 +10,7 @@
 > Create the database in the database system using general Data-definition
   language (DDL) statements.
 
-### SQL Commands
+### SQL commands
 
 ```sql
 ```
@@ -22,14 +22,14 @@
 > Load mock data (using free online data generator tools) into the database to
   test a variety of SQL commands.
 
-### SQL Commands
+### SQL commands
 
 ```sql
 ```
 
 ## Extra
 
-## UML Diagram
+## UML diagram
 
 ![The UML diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
 

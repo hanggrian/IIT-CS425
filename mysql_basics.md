@@ -108,13 +108,13 @@ SELECT * FROM table1 AS t;
 SELECT * FROM table1 INNER|LEFT|RIGHT|CROSS JOIN table2 ON condition1;
 ```
 
-### Join Types
+### Join types
 
 | Inner | Left | Right | Cross |
 | --- | --- | --- | --- |
 | ![INNER JOIN image.](https://www.w3schools.com/MySQL/img_innerjoin.gif) | ![LEFT JOIN image.](https://www.w3schools.com/MySQL/img_leftjoin.gif) | ![RIGHT JOIN image.](https://www.w3schools.com/MySQL/img_rightjoin.gif) | ![CROSS JOIN image.](https://www.w3schools.com/MySQL/img_crossjoin.png) |
 
-### Self Join
+### Self join
 
 ```sql
 SELECT * FROM table1 T1, table1 T2 WHERE condition1;

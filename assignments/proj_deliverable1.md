@@ -1,4 +1,4 @@
-# [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
+# [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
 
 > Create a conceptual model consisting of the most essential information
   required for the selected application. Explore the website of the selected
@@ -42,7 +42,7 @@
   created every day.
 - Transferrable stations require multiple entries into **Stations**.
 
-### SQL Commands
+### SQL commands
 
 ```sql
 CREATE TABLE Tracks(
@@ -102,7 +102,7 @@ CREATE TABLE Passengers(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize.sql)
 
-### Dummy Data
+### Dummy data
 
 ```sql
 INSERT INTO Tracks VALUES

@@ -1,4 +1,4 @@
-# [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/project.pdf): CTA
+# [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
 
 > Develop a detailed ER-model for the application. Translate the conceptual
   model into a detailed logical model showing relational schema with appropriate
@@ -43,7 +43,7 @@
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
-### Conductors & Alerts
+### *Conductors* & *Alerts*
 
 A conductor is a CTA employee with 2 jobs: operating a train (mostly in
 locomotive) and announcing service alerts.
@@ -58,7 +58,7 @@ Alerts are to be displayed in every station.
 | --- | --- | --- | --- | --- |
 | **1** | Elevator maintenance at Damen. | 2023-03-28 | 2023-04-04 | *1234567890* |
 
-### Stations & Tracks
+### *Stations* & *Tracks*
 
 A station is a train stop, transferrable station requires multiple entries.
 
@@ -72,7 +72,7 @@ A track is a collection of stations.
 | --- | --- |
 | **Blue** | FALSE |
 
-### Locomotives, Wagons, Trains & Railcars
+### *Locomotives*, *Wagons*, *Trains* & *Railcars*
 
 Every entry into locomotives and wagons are tied into a real-world object. They
 are individual parts of a train line.
@@ -98,7 +98,7 @@ bridge table that represent that relationship.
 | **1** | **7501** |
 | **1** | **7502** |
 
-### Passengers, Trips & Passes
+### *Passengers*, *Trips* & *Passes*
 
 The last section of the scheme is related to customers and payments. An entry
 into passengers equalize a new *Ventra* account.
@@ -121,7 +121,7 @@ which is an equivalent of *Ventra UPass*.
 
 ## Extra
 
-### SQL Commands
+### SQL commands
 
 ```sql
 CREATE TABLE Conductors(
@@ -231,7 +231,7 @@ CREATE TABLE Trips(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize2.sql)
 
-### Dummy Data
+### Dummy data
 
 ```sql
 INSERT INTO Conductors VALUES
