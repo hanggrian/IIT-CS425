@@ -9,15 +9,11 @@ DROP TABLE IF EXISTS Students;
 DROP TABLE IF EXISTS Instructors;
 DROP TABLE IF EXISTS Departments;
 
--- Departments
-
 CREATE TABLE Departments(
   `dept_name` VARCHAR(50) PRIMARY KEY,
   `building` VARCHAR(50),
   `budget` DECIMAL(15, 2)
 );
-
--- Instructors
 
 CREATE TABLE Instructors(
   `ID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,8 +23,6 @@ CREATE TABLE Instructors(
   `department_name` VARCHAR(50) NOT NULL,
   CONSTRAINT inst_dept FOREIGN KEY(`department_name`) REFERENCES Departments(`dept_name`)
 );
-
--- Students
 
 CREATE TABLE Students(
   `ID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,8 +35,6 @@ CREATE TABLE Students(
   CONSTRAINT advisor FOREIGN KEY(`instructor_id`) REFERENCES Instructors(`ID`)
 );
 
--- Courses
-
 CREATE TABLE Courses(
   `course_id` VARCHAR(10) PRIMARY KEY,
   `title` VARCHAR(50),
@@ -54,8 +46,6 @@ CREATE TABLE Courses(
   CONSTRAINT prereq FOREIGN KEY(`prereq_id`) REFERENCES Courses(`course_id`)
 );
 
--- Classrooms
-
 CREATE TABLE Classrooms(
   `building` VARCHAR(50) NOT NULL,
   `room_number` VARCHAR(5) NOT NULL,
@@ -63,16 +53,12 @@ CREATE TABLE Classrooms(
   PRIMARY KEY(`building`, `room_number`)
 );
 
--- TimeSlots
-
 CREATE TABLE TimeSlots(
   `time_slot_id` INT AUTO_INCREMENT PRIMARY KEY,
   `day` INT(1),
   `start_time` TIME,
   `end_time` TIME
 );
-
--- Sections
 
 CREATE TABLE Sections(
   `sec_id` VARCHAR(5),

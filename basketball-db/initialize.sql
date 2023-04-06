@@ -6,8 +6,6 @@ DROP TABLE IF EXISTS Players;
 DROP TABLE IF EXISTS Persons;
 DROP TABLE IF EXISTS Teams;
 
--- Teams
-
 CREATE TABLE Teams(
   `TmID` VARCHAR(3) PRIMARY KEY,
   `ConfID` VARCHAR(2) NOT NULL,
@@ -19,8 +17,6 @@ CREATE TABLE Teams(
   `Games` INT NOT NULL
 );
 
--- Persons
-
 CREATE TABLE Persons(
   `BioID` VARCHAR(10) PRIMARY KEY,
   `FirstName` VARCHAR(20),
@@ -29,8 +25,6 @@ CREATE TABLE Persons(
   `BirthCity` VARCHAR(40),
   `BirthCountry` VARCHAR(20)
 );
-
--- Players
 
 CREATE TABLE Players(
   `BioID` VARCHAR(10) PRIMARY KEY,
@@ -46,8 +40,6 @@ CREATE TABLE Players(
   CONSTRAINT Players_TmID FOREIGN KEY(`TmID`) REFERENCES Teams(`TmID`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
-
--- Coaches
 
 CREATE TABLE Coaches(
   `BioID` VARCHAR(10) PRIMARY KEY,

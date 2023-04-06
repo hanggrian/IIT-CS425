@@ -8,6 +8,33 @@
 > The application can either be web or desktop application and must be
   demonstrated on the due date.
 
+![Main preview.](https://github.com/hendraanggrian/IIT-CS425/blob/assets/cta/preview.png)
+
+CTA app is a desktop app that manages train properties, employees & customers.
+Powered by JavaFX UI and Kotlin language, this submission also showcase basic
+implementation of DAO, a design pattern that binds JVM properties to persistence
+data.
+
+### Login
+
+![Login dialog preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/preview_login.png)
+
+At the start of use, there is a MySQL login prompt. This dialog remembers user
+input by saving it to local preferences. Admittedly not the best choice to store
+a password, but security has never been a strong focus of this assignment.
+
+### Installation
+
+- Run a *MySQL Server*.
+- Create a new user, or use `root`.
+- Create a new empty schema with any name.
+
+### Building
+
+- *MySQL Server*
+- *IntelliJ IDEA*
+- *JDK 11+*
+
 ## Problem 2
 
 > Extra points will be awarded to a group that tests a variety of challenging

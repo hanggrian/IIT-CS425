@@ -9,20 +9,11 @@ DROP TABLE IF EXISTS Schedules;
 DROP TABLE IF EXISTS Lecturers;
 DROP TABLE IF EXISTS Students;
 
--- Courses
-
 CREATE TABLE Courses(
   `id` VARCHAR(10) PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL
 );
 CREATE INDEX Courses_name ON Courses(`name`);
-
-INSERT INTO Courses VALUES
-  ('CS425', 'Database Organization'),
-  ('CS430', 'Introduction to Algorithms'),
-  ('CS554', 'Data-Intensive Computing');
-
--- Lecturers
 
 CREATE TABLE Lecturers(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,13 +22,6 @@ CREATE TABLE Lecturers(
 );
 CREATE INDEX Lecturers_name ON Lecturers(`name`);
 
-INSERT INTO Lecturers VALUES
-  (NULL, 'Raicu Ioan', '2023-01-22'),
-  (NULL, 'Balekaki Gerald', '2023-01-22'),
-  (NULL, 'Yao Lan', '2023-01-22');
-
--- Students
-
 CREATE TABLE Students(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL,
@@ -45,13 +29,6 @@ CREATE TABLE Students(
   `date_graduate` DATE
 );
 CREATE INDEX Students_name ON Students(`name`);
-
-INSERT INTO Students VALUES
-  (NULL, 'John', '2023-01-22', NULL),
-  (NULL, 'Adam', '2023-01-22', NULL),
-  (NULL, 'Mark', '2023-01-22', NULL);
-
--- Classes
 
 CREATE TABLE Classes(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -65,13 +42,6 @@ CREATE TABLE Classes(
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO Classes VALUES
-  (NULL, 'CS425', 2, '2023-01-09', '2023-05-06'),
-  (NULL, 'CS430', 3, '2023-01-09', '2023-05-06'),
-  (NULL, 'CS554', 1, '2023-01-09', '2023-05-06');
-
--- Registrations
-
 CREATE TABLE Registrations(
   `class_id` INT NOT NULL,
   `student_id` INT NOT NULL,
@@ -83,21 +53,6 @@ CREATE TABLE Registrations(
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO Registrations VALUES
-  (1, 1, NULL),
-  (1, 2, NULL),
-  (1, 3, NULL);
-INSERT INTO Registrations VALUES
-  (2, 1, NULL),
-  (2, 2, NULL),
-  (2, 3, NULL);
-INSERT INTO Registrations VALUES
-  (3, 1, NULL),
-  (3, 2, NULL),
-  (3, 3, NULL);
-
--- Schedules
-
 CREATE TABLE Schedules(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `class_id` INT NOT NULL,
@@ -107,13 +62,3 @@ CREATE TABLE Schedules(
   CONSTRAINT fk_Schedules_class_id__id FOREIGN KEY(`class_id`) REFERENCES Classes(`id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
-
-INSERT INTO Schedules VALUES
-  (NULL, 1, 1, '08:35:00', '09:50:00'),
-  (NULL, 1, 3, '08:35:00', '09:50:00');
-INSERT INTO Schedules VALUES
-  (NULL, 2, 2, '15:15:00', '16:30:00'),
-  (NULL, 2, 4, '15:15:00', '16:30:00');
-INSERT INTO Schedules VALUES
-  (NULL, 3, 2, '11:25:00', '12:40:00'),
-  (NULL, 3, 4, '11:25:00', '12:40:00');

@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS Alerts;
 DROP TABLE IF EXISTS Conductors;
 
 CREATE TABLE Conductors(
-  `social_sec` VARCHAR(10) PRIMARY KEY,
+  `username` VARCHAR(20) PRIMARY KEY,
+  `password` VARCHAR(20) PRIMARY KEY DEFAULT '1234',
   `name` VARCHAR(50) NOT NULL,
   `birth` DATE NOT NULL,
   `age` INT NOT NULL,
@@ -27,8 +28,9 @@ CREATE TABLE Alerts(
   `message` VARCHAR(280) NOT NULL,
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
-  `social_sec` VARCHAR(10) NOT NULL,
-  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`),
+  `username` VARCHAR(10) NOT NULL,
+  CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
   CHECK(`date_start` < `date_end`)
 );
 
@@ -48,7 +50,8 @@ CREATE TABLE Stations(
   PRIMARY KEY(`station_lat`, `station_lng`, `station_color`),
   INDEX(`station_lat`),
   INDEX(`station_lng`),
-  FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
+  CONSTRAINT Stations_station_color FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
 );
 
 CREATE TABLE Locomotives(
@@ -67,18 +70,23 @@ CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
   `track_color` VARCHAR(10) NOT NULL,
   `serial_no` VARCHAR(4) NOT NULL,
-  `social_sec` VARCHAR(10) NOT NULL,
-  FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`),
-  FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`),
-  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`)
+  `username` VARCHAR(10) NOT NULL,
+  CONSTRAINT Trains_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trains_serial_no FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trains_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Railcars(
   `train_id` INT,
   `wagon_id` VARCHAR(4),
   PRIMARY KEY(`train_id`, `wagon_id`),
-  FOREIGN KEY(`train_id`) REFERENCES Trains(`train_id`),
-  FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`wagon_id`)
+  CONSTRAINT Railcars_train_id FOREIGN KEY(`train_id`) REFERENCES Trains(`train_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Railcars_wagon_id FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`wagon_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Passengers(
@@ -91,7 +99,8 @@ CREATE TABLE Passes(
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
   `passenger_id` INT NOT NULL,
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
+  CONSTRAINT Passes_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
   CHECK(`date_start` < `date_end`)
 );
 
@@ -107,12 +116,20 @@ CREATE TABLE Trips(
   `station_lng2` DECIMAL(9, 6),
   `station_color2` VARCHAR(10),
   PRIMARY KEY(`timestamp`, `passenger_id`),
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
-  FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`),
-  FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`),
-  FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`),
-  FOREIGN KEY(`station_color1`) REFERENCES Stations(`station_color`),
-  FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`),
-  FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`),
-  FOREIGN KEY(`station_color2`) REFERENCES Stations(`station_color`)
+  CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_pass_id FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lat1 FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lng1 FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_color1 FOREIGN KEY(`station_color1`) REFERENCES Stations(`station_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lat2 FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lng2 FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_color2 FOREIGN KEY(`station_color2`) REFERENCES Stations(`station_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );

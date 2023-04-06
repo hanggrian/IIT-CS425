@@ -9,14 +9,10 @@ DROP TABLE IF EXISTS Payloads;
 DROP TABLE IF EXISTS Manufacturers;
 DROP TABLE IF EXISTS Launchpads;
 
--- Launchpads
-
 CREATE TABLE Launchpads(
   `name` VARCHAR(50) PRIMARY KEY,
   `location` VARCHAR(50)
 );
-
--- Manufacturers
 
 CREATE TABLE Manufacturers(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,8 +21,6 @@ CREATE TABLE Manufacturers(
   `address` VARCHAR(50)
 );
 
--- Payloads
-
 CREATE TABLE Payloads(
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `weight` INT,
@@ -34,8 +28,6 @@ CREATE TABLE Payloads(
   `manufacturer_id` INT,
   CONSTRAINT payload_manufacturer FOREIGN KEY(`manufacturer_id`) REFERENCES Manufacturers(`id`)
 );
-
--- Rockets
 
 CREATE TABLE Rockets(
   `serial_no` INT PRIMARY KEY,
@@ -47,8 +39,6 @@ CREATE TABLE Rockets(
   `manufacturer_id` INT,
   CONSTRAINT rocket_manufacturer FOREIGN KEY(`manufacturer_id`) REFERENCES Manufacturers(`id`)
 );
-
--- Launches
 
 CREATE TABLE Launches(
   `datetime` DATETIME PRIMARY KEY,
@@ -62,15 +52,11 @@ CREATE TABLE Launches(
   CONSTRAINT powered FOREIGN KEY(`rocket_no`) REFERENCES Rockets(`serial_no`)
 );
 
--- Crews
-
 CREATE TABLE Crews(
   `name` VARCHAR(50) PRIMARY KEY,
   `surname` VARCHAR(50),
   `nationality` VARCHAR(50)
 );
-
--- Missions
 
 CREATE TABLE Missions(
   `id` INT AUTO_INCREMENT PRIMARY KEY,

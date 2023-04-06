@@ -1,16 +1,13 @@
 # IIT CS425
 
-| | Description |
-| --- | --- |
-| Term | Summer 2023 |
-| Section | 01 |
-| Subject | Computer Science |
-| Title | Database Organization |
-| Instructor | Balekaki N. Gerald |
+**Database Organization** at
+*Illinois Institute of Technology* in
+Spring 2023.
 
-## Branches
-
-- **main**: assignments,
+- [Syllabus](https://github.com/hendraanggrian/IIT-CS425/blob/assets/syllabus.pdf)
+- [Content](https://github.com/hendraanggrian/IIT-CS425/tree/assets/)
+- [Assignments](assignments/)
+- [Schedule](.class.ics)
 
 ## Related repositories
 
