@@ -14,7 +14,8 @@
 
 ```sql
 CREATE TABLE Conductors(
-  `social_sec` VARCHAR(10) PRIMARY KEY,
+  `username` VARCHAR(20) PRIMARY KEY,
+  `password` VARCHAR(20) DEFAULT '1234',
   `name` VARCHAR(50) NOT NULL,
   `birth` DATE NOT NULL,
   `age` INT NOT NULL,
@@ -24,12 +25,13 @@ CREATE TABLE Conductors(
 
 CREATE TABLE Alerts(
   `alert_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `message` VARCHAR(280) NOT NULL,
+  `title` VARCHAR(250) NOT NULL,
+  `message` VARCHAR(500) NOT NULL,
   `date_start` DATE NOT NULL,
-  `date_end` DATE NOT NULL,
-  `social_sec` VARCHAR(10) NOT NULL,
-  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`),
-  CHECK(`date_start` < `date_end`)
+  `date_end` DATE,
+  `username` VARCHAR(10) NOT NULL,
+  CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Tracks(
@@ -41,14 +43,15 @@ CREATE TABLE Stations(
   `station_lng` DECIMAL(9, 6),
   `station_color` VARCHAR(10),
   `name` VARCHAR(50) NOT NULL,
+  `location` VARCHAR(250),
   `zip` VARCHAR(5) NOT NULL,
-  `note` VARCHAR(280),
   `has_elevator` BOOLEAN NOT NULL DEFAULT 0,
   `has_parking` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY(`station_lat`, `station_lng`, `station_color`),
   INDEX(`station_lat`),
   INDEX(`station_lng`),
-  FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
+  CONSTRAINT Stations_station_color FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Locomotives(
@@ -60,25 +63,30 @@ CREATE TABLE Locomotives(
 CREATE TABLE Wagons(
   `wagon_id` VARCHAR(4) PRIMARY KEY,
   `seats` INT NOT NULL,
-  CHECK(LENGTH(`serial_no`) = 4)
+  CHECK(LENGTH(`wagon_id`) = 4)
 );
 
 CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
   `track_color` VARCHAR(10) NOT NULL,
   `serial_no` VARCHAR(4) NOT NULL,
-  `social_sec` VARCHAR(10) NOT NULL,
-  FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`),
-  FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`),
-  FOREIGN KEY(`social_sec`) REFERENCES Conductors(`social_sec`)
+  `username` VARCHAR(10) NOT NULL,
+  CONSTRAINT Trains_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trains_serial_no FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trains_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Railcars(
   `train_id` INT,
   `wagon_id` VARCHAR(4),
   PRIMARY KEY(`train_id`, `wagon_id`),
-  FOREIGN KEY(`train_id`) REFERENCES Trains(`train_id`),
-  FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`wagon_id`)
+  CONSTRAINT Railcars_train_id FOREIGN KEY(`train_id`) REFERENCES Trains(`train_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Railcars_wagon_id FOREIGN KEY(`wagon_id`) REFERENCES Wagons(`wagon_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Passengers(
@@ -91,8 +99,8 @@ CREATE TABLE Passes(
   `date_start` DATE NOT NULL,
   `date_end` DATE NOT NULL,
   `passenger_id` INT NOT NULL,
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
-  CHECK(`date_start` < `date_end`)
+  CONSTRAINT Passes_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Trips(
@@ -100,21 +108,26 @@ CREATE TABLE Trips(
   `passenger_id` INT,
   `fare` DECIMAL(13, 2),
   `pass_id` INT,
+  `station_color` VARCHAR(10) NOT NULL,
   `station_lat1` DECIMAL(8, 6) NOT NULL,
   `station_lng1` DECIMAL(9, 6) NOT NULL,
-  `station_color1` VARCHAR(10) NOT NULL,
   `station_lat2` DECIMAL(8, 6),
   `station_lng2` DECIMAL(9, 6),
-  `station_color2` VARCHAR(10),
   PRIMARY KEY(`timestamp`, `passenger_id`),
-  FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`),
-  FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`),
-  FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`),
-  FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`),
-  FOREIGN KEY(`station_color1`) REFERENCES Stations(`station_color`),
-  FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`),
-  FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`),
-  FOREIGN KEY(`station_color2`) REFERENCES Stations(`station_color`)
+  CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_pass_id FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_color FOREIGN KEY(`station_color`) REFERENCES Stations(`station_color`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lat1 FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lng1 FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lat2 FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trips_station_lng2 FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 ```
 
@@ -130,54 +143,90 @@ CREATE TABLE Trips(
 
 ```sql
 INSERT INTO Conductors VALUES
-  ('jane', DEFAULT, 'Jane Doe', '1991-01-01', 2023 - 1991, '123'),
-  ('john', DEFAULT, 'John Doe', '1992-02-02', 2021 - 1992, '456,789');
+  ('stan', DEFAULT, 'Stan Marsh', '1988-10-19', 2023 - 1988, '202-555-0148'),
+  ('kyle', DEFAULT, 'Kyle Broflovski', '1988-05-26', 2023 - 1988, '202-555-0104,202-555-0168'),
+  ('eric', DEFAULT, 'Eric Cartman', '1988-04-13', 2023 - 1988, '202-555-0171'),
+  ('kenny', DEFAULT, 'Kenny McCormick', '1988-04-22', 2023 - 1988, '202-555-0174,202-555-0103');
 
 INSERT INTO Alerts VALUES
-  (NULL, 'Elevator maintenance at Damen.', '2023-03-27', '2023-04-27', 'jane'),
-  (NULL, 'Closed today because of tornado.', '2023-03-28', '2023-03-28', 'john');
+  (NULL, 'New Schedules in Effect', 'Beginning Sun, March 26, updated schedules went into effect for all L lines. See transitchicago.com/schedules or schedules posted in stations.',
+    '2023-03-26', NULL, 'eric'),
+  (NULL, 'Berwyn Station Temporary Closure', 'Berwyn station is temporarily closed. Please use the adjacent stations at Bryn Mawr or Argyle. 92 Foster bus rerouted to Bryn Mawr station.',
+    '2023-03-16', NULL, 'eric'),
+  (NULL, 'Boarding Change at Belmont', 'At Belmont station, Kimball-bound Brown Line trains resume stopping on outer track; Linden-bound Purple Line Exp trains continue to board/exit on inner track.',
+    '2023-02-19', '2023-02-28', 'eric'),
+  (NULL, 'Service for 2023 Cubs Weekday Night Games and Wrigley Field Concerts', 'Loop-bound Purple Line Express trains will stop at Sheridan for all weekday Cubs night games and Wrigley Field concerts.',
+    '2023-01-17', '2023-01-20', 'eric');
 
 INSERT INTO Tracks VALUES
+  ('Red'),
   ('Blue'),
-  ('Green');
+  ('Brown'),
+  ('Green'),
+  ('Orange'),
+  ('Pink'),
+  ('Purple'),
+  ('Yellow');
 
 INSERT INTO Stations VALUES
-  (41.9100, 87.6780, 'Blue', 'Damen', '60622', NULL, DEFAULT, DEFAULT),
-  (41.8858, 87.6316, 'Blue', 'Clark-Lake', '60601', 'Stations located at 3rd floor.', DEFAULT, DEFAULT),
-  (41.8858, 87.6316, 'Green', 'Clark-Lake', '60601', 'Stations located at basement.', DEFAULT, DEFAULT),
-  (41.8674, 87.6266, 'Green', 'Roosevelt', '60605', NULL, DEFAULT, DEFAULT);
+  (42.0737, 87.6905, 'Purple', 'Linden', '349 Linden Avenue', '60091', 1, 1),
+  (42.0188, 87.6725, 'Purple', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
+  (42.0403, 87.7523, 'Yellow', 'Dempster-Skokie', '5005 Dempster Street', '60077', 1, 1),
+  (42.0188, 87.6725, 'Yellow', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
+  (41.9676, 87.7129, 'Brown', 'Kimball', '4755 North Kimball Avenue', '60625', 1, 1),
+  (41.9395, 87.6533, 'Brown', 'Belmont', '945 West Belmont Avenue', '60657', 1, 0),
+  (42.0188, 87.6725, 'Red', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
+  (41.9395, 87.6533, 'Red', 'Belmont', '945 West Belmont Avenue', '60657', 1, 0),
+  (41.7866, 87.7378, 'Orange', 'Midway', '4612 West 59th Street', '60629', 1, 1),
+  (41.8674, 87.6266, 'Orange', 'Roosevelt', '1167 South State Street', '60605', 1, 0),
+  (41.8857, 87.6308, 'Green', 'Clark-Lake', '100-124 West Lake Street', '60601', 1, 0),
+  (41.8674, 87.6266, 'Green', 'Roosevelt', '1167 South State Street', '60605', 1, 0),
+  (41.8857, 87.6308, 'Blue', 'Clark-Lake', '100-124 West Lake Street', '60601', 1, 0),
+  (41.8755, 87.6317, 'Blue', 'LaSalle', '150 West Ida B. Wells Drive', '60605', 0, 0),
+  (41.8755, 87.6317, 'Pink', 'LaSalle', '150 West Ida B. Wells Drive', '60605', 0, 0),
+  (41.7997, 87.7244, 'Pink', 'Pulaski', '5106 South Pulaski Road', '60632', 1, 0);
 
 INSERT INTO Locomotives VALUES
-  ('0001', 1998),
-  ('0002', 1980);
+  ('1000', 2004),
+  ('2000', 1986),
+  ('3000', 1998),
+  ('4000', 1999);
 
 INSERT INTO Wagons VALUES
-  ('0001', 40),
-  ('0002', 50),
-  ('0003', 45),
-  ('0004', 55);
+  ('0001', 1988), ('0002', 1992), ('0003', 2008),
+  ('0004', 1984), ('0005', 1989),
+  ('0006', 2004), ('0007', 1992), ('0008', 1982),
+  ('0009', 2002), ('0010', 1990);
 
 INSERT INTO Trains VALUES
-  (1, 'Blue', '0001', 'jane'),
-  (2, 'Green', '0002', 'john');
+  (1, 'Purple', '1000', 'stan'),
+  (2, 'Yellow', '2000', 'kyle'),
+  (3, 'Brown', '3000', 'eric'),
+  (4, 'Red', '4000', 'kenny');
 
 INSERT INTO Railcars VALUES
-  (1, '0001'),
-  (1, '0002'),
-  (2, '0003'),
-  (2, '0004');
+  (1, '0001', '0002', '0003'),
+  (2, '0004', '0005'),
+  (3, '0006', '0007', '0008'),
+  (4, '0009', '0010');
 
 INSERT INTO Passengers VALUES
-  (1, 'Michael'),
-  (2, 'Mike');
+  (1, 'Randy Marsh'),
+  (2, 'Gerald Broflovski'),
+  (3, 'Liane Cartman'),
+  (4, 'Stuart McCormick');
 
 INSERT INTO Passes VALUES
-  (1, '2023-03-01', '2023-04-01', 1),
-  (2, '2023-03-01', '2023-04-01', 2);
+  (1, '2023-01-01', '2024-01-01', 1),
+  (2, '2023-02-03', '2023-03-03', 2),
+  (3, '2023-03-02', '2023-03-09', 3),
+  (4, '2023-02-01', '2023-04-01', 4);
 
 INSERT INTO Trips VALUES
-  (DEFAULT, 1, 3.0, 1, 41.9100, 87.6780, 'Blue', 41.8858, 87.6316, 'Green'),
-  (DEFAULT, 2, 2.5, 2, 41.9100, 87.6780, 'Blue', 41.8674, 87.6266, 'Green');
+  (DEFAULT, 1, NULL, 1, 'Purple', 42.0737, 87.6905, 42.0188, 87.6725),
+  (DEFAULT, 2, 3.0, NULL, 'Yellow', 42.0403, 87.7523, 42.0188, 87.6725),
+  (DEFAULT, 3, 4.0, NULL, 'Brown', 41.9676, 87.7129, 41.9395, 87.6533),
+  (DEFAULT, 4, 5.0, NULL, 'Red', 42.0188, 87.6725, 41.9395, 87.6533);
 ```
 
 ## Extra

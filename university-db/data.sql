@@ -1,3 +1,11 @@
+DELETE FROM Registrations;
+DELETE FROM Schedules;
+DELETE FROM Classes;
+DELETE FROM Courses;
+DELETE FROM Schedules;
+DELETE FROM Lecturers;
+DELETE FROM Students;
+
 INSERT INTO Courses VALUES
   ('CS425', 'Database Organization'),
   ('CS430', 'Introduction to Algorithms'),

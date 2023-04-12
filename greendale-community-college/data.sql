@@ -1,3 +1,10 @@
+DELETE FROM TimeSlots;
+DELETE FROM Registrations;
+DELETE FROM Courses;
+DELETE FROM Students;
+DELETE FROM Departments;
+DELETE FROM Convenors;
+
 INSERT INTO Convenors VALUES
   (1, 'Marx'),
   (2, 'Bush'),

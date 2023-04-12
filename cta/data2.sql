@@ -1,6 +1,18 @@
+DELETE FROM Trips;
+DELETE FROM Passes;
+DELETE FROM Passengers;
+DELETE FROM Railcars;
+DELETE FROM Trains;
+DELETE FROM Wagons;
+DELETE FROM Locomotives;
+DELETE FROM Stations;
+DELETE FROM Tracks;
+DELETE FROM Alerts;
+DELETE FROM Conductors;
+
 INSERT INTO Conductors VALUES
   ('1234567890', 'Jane', '1991-01-01', 2023 - 1991, '123'),
-  ('1122334455', 'John', '1992-02-02', 2021 - 1992, '456,789');
+  ('1122334455', 'John', '1992-02-02', 2023 - 1992, '456,789');
 
 INSERT INTO Alerts VALUES
   (NULL, 'Elevator maintenance at Damen.', '2023-03-27', '2023-04-27', '1234567890'),

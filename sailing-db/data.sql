@@ -1,3 +1,8 @@
+DELETE FROM Reserves;
+DELETE FROM Sailors;
+DELETE FROM Captains;
+DELETE FROM Boats;
+
 INSERT INTO Sailors VALUES
   ('Marx', 23, 8, 52),
   ('Martin', 25, 9, 51),

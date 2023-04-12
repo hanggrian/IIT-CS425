@@ -1,3 +1,12 @@
+DELETE FROM Passengers;
+DELETE FROM WagonRegistrations;
+DELETE FROM Wagons;
+DELETE FROM Trains;
+DELETE FROM Locomotives;
+DELETE FROM Conductors;
+DELETE FROM Stations;
+DELETE FROM Tracks;
+
 INSERT INTO Tracks VALUES
   ('Blue'),
   ('Green');
