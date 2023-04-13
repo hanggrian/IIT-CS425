@@ -10,7 +10,7 @@
 > Represent the conceptual model using the Entity relationship - Diagram (ERD)
   showing the most important entities and relationships.
 
-### ER diagram
+### ER diagram 1
 
 ![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png)
 

@@ -8,7 +8,7 @@
 
 > You are required to present a detailed ERD.
 
-### ER diagram
+### ER diagram 2
 
 ![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png)
 
@@ -41,7 +41,7 @@
 
 > You are required to present a logical structure/schema of the database.
 
-### UML diagram
+### UML diagram 1
 
 ![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml1.png)
 

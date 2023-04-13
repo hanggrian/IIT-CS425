@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS SailingDB;
+USE SailingDB;
+
 DELETE FROM Reserves;
 DELETE FROM Sailors;
 DELETE FROM Captains;

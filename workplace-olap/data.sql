@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS WorkplaceDB;
+USE WorkplaceDB;
+
 INSERT INTO Salaries VALUES
   (NULL, 'Karen', 'Colmenares', 2500.00),
   (NULL, 'Guy', 'Himuro', 2600.00),

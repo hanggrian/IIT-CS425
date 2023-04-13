@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS UniversityDB;
+USE UniversityDB;
+
 DELETE FROM Registrations;
 DELETE FROM Schedules;
 DELETE FROM Classes;

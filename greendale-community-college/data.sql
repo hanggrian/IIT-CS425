@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS GreendaleCommunityCollege;
+USE GreendaleCommunityCollege;
+
 DELETE FROM TimeSlots;
 DELETE FROM Registrations;
 DELETE FROM Courses;

@@ -5,6 +5,18 @@
   statements. Load mock data (using free online data generator tools) into the
   database to test a variety of SQL commands.
 
+### ER diagram 3
+
+![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.png)
+
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
+
+### UML diagram 2
+
+![The UML diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
+
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
+
 ## Problem 1
 
 > Create the database in the database system using general Data-definition
@@ -13,6 +25,26 @@
 ### SQL commands
 
 ```sql
+CREATE TABLE Tracks(
+  `track` VARCHAR(10) PRIMARY KEY,
+  `is_24h` BOOLEAN DEFAULT 0
+);
+
+CREATE TABLE Stations(
+  `track` VARCHAR(10),
+  `station` VARCHAR(50) NOT NULL,
+  `lat` DECIMAL(8, 6),
+  `lng` DECIMAL(9, 6),
+  `location` VARCHAR(200),
+  `zip` VARCHAR(5) NOT NULL,
+  `has_elevator` BOOLEAN NOT NULL DEFAULT 0,
+  `has_parking` BOOLEAN NOT NULL DEFAULT 0,
+  PRIMARY KEY(`track`, `station`),
+  INDEX(`station`),
+  CONSTRAINT Stations_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
 CREATE TABLE Conductors(
   `username` VARCHAR(20) PRIMARY KEY,
   `password` VARCHAR(20) DEFAULT '1234',
@@ -25,38 +57,21 @@ CREATE TABLE Conductors(
 
 CREATE TABLE Alerts(
   `alert_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `title` VARCHAR(250) NOT NULL,
-  `message` VARCHAR(500) NOT NULL,
+  `title` VARCHAR(400) NOT NULL,
+  `message` VARCHAR(400),
   `date_start` DATE NOT NULL,
   `date_end` DATE,
-  `username` VARCHAR(10) NOT NULL,
+  `track` VARCHAR(10),
+  `username` VARCHAR(20) NOT NULL,
+  CONSTRAINT Alerts_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT
-);
-
-CREATE TABLE Tracks(
-  `track_color` VARCHAR(10) PRIMARY KEY
-);
-
-CREATE TABLE Stations(
-  `station_lat` DECIMAL(8, 6),
-  `station_lng` DECIMAL(9, 6),
-  `station_color` VARCHAR(10),
-  `name` VARCHAR(50) NOT NULL,
-  `location` VARCHAR(250),
-  `zip` VARCHAR(5) NOT NULL,
-  `has_elevator` BOOLEAN NOT NULL DEFAULT 0,
-  `has_parking` BOOLEAN NOT NULL DEFAULT 0,
-  PRIMARY KEY(`station_lat`, `station_lng`, `station_color`),
-  INDEX(`station_lat`),
-  INDEX(`station_lng`),
-  CONSTRAINT Stations_station_color FOREIGN KEY(`station_color`) REFERENCES Tracks(`track_color`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Locomotives(
   `serial_no` VARCHAR(4) PRIMARY KEY,
-  `since` YEAR NOT NULL,
+  `since` YEAR(4) NOT NULL,
   CHECK(LENGTH(`serial_no`) = 4)
 );
 
@@ -68,10 +83,10 @@ CREATE TABLE Wagons(
 
 CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track_color` VARCHAR(10) NOT NULL,
+  `track` VARCHAR(10) NOT NULL,
   `serial_no` VARCHAR(4) NOT NULL,
-  `username` VARCHAR(10) NOT NULL,
-  CONSTRAINT Trains_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
+  `username` VARCHAR(20) NOT NULL,
+  CONSTRAINT Trains_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Trains_serial_no FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -100,7 +115,8 @@ CREATE TABLE Passes(
   `date_end` DATE NOT NULL,
   `passenger_id` INT NOT NULL,
   CONSTRAINT Passes_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CHECK(`date_start` < `date_end`)
 );
 
 CREATE TABLE Trips(
@@ -108,25 +124,19 @@ CREATE TABLE Trips(
   `passenger_id` INT,
   `fare` DECIMAL(13, 2),
   `pass_id` INT,
-  `station_color` VARCHAR(10) NOT NULL,
-  `station_lat1` DECIMAL(8, 6) NOT NULL,
-  `station_lng1` DECIMAL(9, 6) NOT NULL,
-  `station_lat2` DECIMAL(8, 6),
-  `station_lng2` DECIMAL(9, 6),
+  `track` VARCHAR(10) NOT NULL,
+  `station1` VARCHAR(50) NOT NULL,
+  `station2` VARCHAR(50) NOT NULL,
   PRIMARY KEY(`timestamp`, `passenger_id`),
   CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Trips_pass_id FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_color FOREIGN KEY(`station_color`) REFERENCES Stations(`station_color`)
+  CONSTRAINT Trips_track FOREIGN KEY(`track`) REFERENCES Stations(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_lat1 FOREIGN KEY(`station_lat1`) REFERENCES Stations(`station_lat`)
+  CONSTRAINT Trips_station1 FOREIGN KEY(`station1`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_lng1 FOREIGN KEY(`station_lng1`) REFERENCES Stations(`station_lng`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_lat2 FOREIGN KEY(`station_lat2`) REFERENCES Stations(`station_lat`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_lng2 FOREIGN KEY(`station_lng2`) REFERENCES Stations(`station_lng`)
+  CONSTRAINT Trips_station2 FOREIGN KEY(`station2`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 ```
@@ -139,103 +149,382 @@ CREATE TABLE Trips(
 > Load mock data (using free online data generator tools) into the database to
   test a variety of SQL commands.
 
-### SQL commands
+### Subproblem 1
+
+Tracks are based on actual tracks.
+
+```sql
+INSERT INTO Tracks VALUES
+  ('Red', 0),
+  ('Blue', 1),
+  ('Brown', 0),
+  ('Green', 0),
+  ('Orange', 0),
+  ('Pink', 0),
+  ('Purple', 0),
+  ('Yellow', 0);
+```
+
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data1.png)
+
+### Subproblem 2
+
+Stations are based on [L map](https://www.transitchicago.com/assets/1/6/ctamap_Lsystem.png).
+
+```sql
+INSERT INTO Stations VALUES
+  ('Purple', 'Linden', 42.0737, 87.6905, '349 Linden Avenue', '60091', 1, 1),
+  ('Purple', 'Foster', 42.0541, 87.6836, '900 Foster Street', '60201', 0, 0),
+  ('Purple', 'Howard', 42.0188, 87.6725, '7519 North Paulina Street', '60626', 1, 1),
+  ('Yellow', 'Dempster-Skokie', 42.0403, 87.7523, '5005 Dempster Street', '60077', 1, 1),
+  ('Yellow', 'Howard', 42.0188, 87.6725, '7519 North Paulina Street', '60626', 1, 1),
+  ('Brown', 'Kimball', 41.9676, 87.7129, '4755 North Kimball Avenue', '60625', 1, 1),
+  ('Brown', 'Paulina', 41.9437, 87.6708, '3410 North Lincoln Avenue', '60657', 1, 0),
+  ('Brown', 'Belmont', 41.9395, 87.6533, '945 West Belmont Avenue', '60657', 1, 0),
+  ('Red', 'Howard', 42.0188, 87.6725, '7519 North Paulina Street', '60626', 1, 1),
+  ('Red', 'Sheridan', 41.9538, 87.6552, '3940 North Sheridan Road', '60613', 0, 0),
+  ('Red', 'Belmont', 41.9395, 87.6533, '945 West Belmont Avenue', '60657', 1, 0),
+  ('Red', 'Garfield', 41.7954, 87.6311, '220 West Garfield Boulevard', '60609', 1, 0),
+  ('Orange', 'Midway', 41.7866, 87.7378, '4612 West 59th Street', '60629', 1, 1),
+  ('Orange', 'Halsted', 41.8467, 87.6480, '2520 South Archer Avenue', '60608', 1, 1),
+  ('Orange', 'Roosevelt', 41.8674, 87.6266, '1167 South State Street', '60605', 1, 0),
+  ('Green', 'Clark-Lake', 41.8857, 87.6308, '100-124 West Lake Street', '60601', 1, 0),
+  ('Green', 'Roosevelt', 41.8674, 87.6266, '1167 South State Street', '60605', 1, 0),
+  ('Green', 'Ashland/63rd', 41.7794, 87.6639, '1167 South State Street', '60636', 1, 1),
+  ('Blue', "O'Hare", 41.9811, 87.9008, "1000 O'Hare Drive", '60666', 1, 1),
+  ('Blue', 'Irving Park', 41.9529, 87.7292, '	4131 West Irving Park Road', '60641', 0, 0),
+  ('Blue', 'Clark-Lake', 41.8857, 87.6308, '100-124 West Lake Street', '60601', 1, 0),
+  ('Blue', 'LaSalle', 41.8755, 87.6317, '150 West Ida B. Wells Drive', '60605', 0, 0),
+  ('Pink', 'LaSalle', 41.8755, 87.6317, '150 West Ida B. Wells Drive', '60605', 0, 0),
+  ('Pink', 'Polk', 41.8715, 87.6695, '1713 West Polk Street', '60612', 1, 0),
+  ('Pink', 'Pulaski', 41.7997, 87.7244, '5106 South Pulaski Road', '60632', 1, 0);
+```
+
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data2.png)
+
+### Subproblem 3
 
 ```sql
 INSERT INTO Conductors VALUES
-  ('stan', DEFAULT, 'Stan Marsh', '1988-10-19', 2023 - 1988, '202-555-0148'),
-  ('kyle', DEFAULT, 'Kyle Broflovski', '1988-05-26', 2023 - 1988, '202-555-0104,202-555-0168'),
-  ('eric', DEFAULT, 'Eric Cartman', '1988-04-13', 2023 - 1988, '202-555-0171'),
-  ('kenny', DEFAULT, 'Kenny McCormick', '1988-04-22', 2023 - 1988, '202-555-0174,202-555-0103');
-
-INSERT INTO Alerts VALUES
-  (NULL, 'New Schedules in Effect', 'Beginning Sun, March 26, updated schedules went into effect for all L lines. See transitchicago.com/schedules or schedules posted in stations.',
-    '2023-03-26', NULL, 'eric'),
-  (NULL, 'Berwyn Station Temporary Closure', 'Berwyn station is temporarily closed. Please use the adjacent stations at Bryn Mawr or Argyle. 92 Foster bus rerouted to Bryn Mawr station.',
-    '2023-03-16', NULL, 'eric'),
-  (NULL, 'Boarding Change at Belmont', 'At Belmont station, Kimball-bound Brown Line trains resume stopping on outer track; Linden-bound Purple Line Exp trains continue to board/exit on inner track.',
-    '2023-02-19', '2023-02-28', 'eric'),
-  (NULL, 'Service for 2023 Cubs Weekday Night Games and Wrigley Field Concerts', 'Loop-bound Purple Line Express trains will stop at Sheridan for all weekday Cubs night games and Wrigley Field concerts.',
-    '2023-01-17', '2023-01-20', 'eric');
-
-INSERT INTO Tracks VALUES
-  ('Red'),
-  ('Blue'),
-  ('Brown'),
-  ('Green'),
-  ('Orange'),
-  ('Pink'),
-  ('Purple'),
-  ('Yellow');
-
-INSERT INTO Stations VALUES
-  (42.0737, 87.6905, 'Purple', 'Linden', '349 Linden Avenue', '60091', 1, 1),
-  (42.0188, 87.6725, 'Purple', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
-  (42.0403, 87.7523, 'Yellow', 'Dempster-Skokie', '5005 Dempster Street', '60077', 1, 1),
-  (42.0188, 87.6725, 'Yellow', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
-  (41.9676, 87.7129, 'Brown', 'Kimball', '4755 North Kimball Avenue', '60625', 1, 1),
-  (41.9395, 87.6533, 'Brown', 'Belmont', '945 West Belmont Avenue', '60657', 1, 0),
-  (42.0188, 87.6725, 'Red', 'Howard', '7519 North Paulina Street', '60626', 1, 1),
-  (41.9395, 87.6533, 'Red', 'Belmont', '945 West Belmont Avenue', '60657', 1, 0),
-  (41.7866, 87.7378, 'Orange', 'Midway', '4612 West 59th Street', '60629', 1, 1),
-  (41.8674, 87.6266, 'Orange', 'Roosevelt', '1167 South State Street', '60605', 1, 0),
-  (41.8857, 87.6308, 'Green', 'Clark-Lake', '100-124 West Lake Street', '60601', 1, 0),
-  (41.8674, 87.6266, 'Green', 'Roosevelt', '1167 South State Street', '60605', 1, 0),
-  (41.8857, 87.6308, 'Blue', 'Clark-Lake', '100-124 West Lake Street', '60601', 1, 0),
-  (41.8755, 87.6317, 'Blue', 'LaSalle', '150 West Ida B. Wells Drive', '60605', 0, 0),
-  (41.8755, 87.6317, 'Pink', 'LaSalle', '150 West Ida B. Wells Drive', '60605', 0, 0),
-  (41.7997, 87.7244, 'Pink', 'Pulaski', '5106 South Pulaski Road', '60632', 1, 0);
-
-INSERT INTO Locomotives VALUES
-  ('1000', 2004),
-  ('2000', 1986),
-  ('3000', 1998),
-  ('4000', 1999);
-
-INSERT INTO Wagons VALUES
-  ('0001', 1988), ('0002', 1992), ('0003', 2008),
-  ('0004', 1984), ('0005', 1989),
-  ('0006', 2004), ('0007', 1992), ('0008', 1982),
-  ('0009', 2002), ('0010', 1990);
-
-INSERT INTO Trains VALUES
-  (1, 'Purple', '1000', 'stan'),
-  (2, 'Yellow', '2000', 'kyle'),
-  (3, 'Brown', '3000', 'eric'),
-  (4, 'Red', '4000', 'kenny');
-
-INSERT INTO Railcars VALUES
-  (1, '0001', '0002', '0003'),
-  (2, '0004', '0005'),
-  (3, '0006', '0007', '0008'),
-  (4, '0009', '0010');
-
-INSERT INTO Passengers VALUES
-  (1, 'Randy Marsh'),
-  (2, 'Gerald Broflovski'),
-  (3, 'Liane Cartman'),
-  (4, 'Stuart McCormick');
-
-INSERT INTO Passes VALUES
-  (1, '2023-01-01', '2024-01-01', 1),
-  (2, '2023-02-03', '2023-03-03', 2),
-  (3, '2023-03-02', '2023-03-09', 3),
-  (4, '2023-02-01', '2023-04-01', 4);
-
-INSERT INTO Trips VALUES
-  (DEFAULT, 1, NULL, 1, 'Purple', 42.0737, 87.6905, 42.0188, 87.6725),
-  (DEFAULT, 2, 3.0, NULL, 'Yellow', 42.0403, 87.7523, 42.0188, 87.6725),
-  (DEFAULT, 3, 4.0, NULL, 'Brown', 41.9676, 87.7129, 41.9395, 87.6533),
-  (DEFAULT, 4, 5.0, NULL, 'Red', 42.0188, 87.6725, 41.9395, 87.6533);
+  ('marsh1', DEFAULT, 'Stan Marsh', '1992-10-19', 2023 - 1992, '202-555-0148'),
+  ('broflovski1', DEFAULT, 'Kyle Broflovski', '1992-05-26', 2023 - 1992, '202-555-0104,202-555-0168'),
+  ('cartman1', DEFAULT, 'Eric Cartman', '1992-04-13', 2023 - 1992, '202-555-0171'),
+  ('mccormick1', DEFAULT, 'Kenny McCormick', '1992-04-22', 2023 - 1992, '202-555-0174,202-555-0103'),
+  ('stotch1', DEFAULT, 'Butters Stotch', '1997-08-13', 2023 - 1997, '202-555-0178'),
+  ('marsh2', DEFAULT, 'Randy Marsh', '1997-01-01', 2023 - 1997, '202-555-0199,202-555-0166'),
+  ('garrison1', DEFAULT, 'Herbert Garrison', '1997-01-01', 2023 - 1997, '202-555-0178'),
+  ('mackey1', DEFAULT, 'Mr. Mackey', '1997-01-01', 2023 - 1997, '202-555-0166'),
+  ('broflovski2', DEFAULT, 'Gerald Broflovski', '1997-01-01', 2023 - 1997, '202-555-0148'),
+  ('broflovski3', DEFAULT, 'Sheila Broflovski', '1997-01-01', 2023 - 1997, '202-555-0185'),
+  ('cartman2', DEFAULT, 'Liane Cartman', '1997-01-01', 2023 - 1997, '202-555-0178,202-555-0166'),
+  ('valmer1', DEFAULT, 'Jimmy Valmer', '2001-01-01', 2023 - 2001, '202-555-0166'),
+  ('black1', DEFAULT, 'Tolkien Black', '1997-01-01', 2023 - 1997, '202-555-0199'),
+  ('testaburger1', DEFAULT, 'Wendy Testaburger', '1995-01-01', 2023 - 1995, '202-555-0166'),
+  ('donovan1', DEFAULT, 'Clyde Donovan', '1997-01-01', 2023 - 1997, '202-555-0185,202-555-0178'),
+  ('tucker1', DEFAULT, 'Craig Tucker', '1997-01-01', 2023 - 1997, '202-555-0114'),
+  ('stevens1', DEFAULT, 'Bebe Stevens', '1994-01-01', 2023 - 1994, '202-555-0163'),
+  ('turner1', DEFAULT, 'Heidi Turner', '1994-01-01', 2023 - 1994, '202-555-0178'),
+  ('malkinson1', DEFAULT, 'Scott Malkinson', '1994-01-01', 2023 - 1994, '202-555-0161'),
+  ('burch1', DEFAULT, 'Timmy Burch', '1994-01-01', 2023 - 1994, '202-555-0192'),
+  ('tweak1', DEFAULT, 'Tweek Tweak', '1994-01-01', 2023 - 1994, '202-555-0199'),
+  ('principal1', DEFAULT, 'PC Principal', '1994-01-01', 2023 - 1994, ''),
+  ('woman1', DEFAULT, 'Strong Woman', '1994-01-01', 2023 - 1994, '202-555-0185'),
+  ('marsh3', DEFAULT, 'Sharon Marsh', '1994-01-01', 2023 - 1994, '202-555-0114'),
+  ('marsh4', DEFAULT, 'Shelley Marsh', '1994-01-01', 2023 - 1994, '202-555-0166');
 ```
 
-## Extra
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3.png)
 
-## UML diagram 2
+### Subproblem 4
 
-![The UML diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
+Alerts are based on [rail status](https://www.transitchicago.com/travel-information/railstatus/) & [elevator alerts](https://www.transitchicago.com/alerts/elevators/).
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
+```sql
+INSERT INTO Alerts VALUES
+  (NULL, 'Berwyn Station Temporary Closure', 'Berwyn station is temporarily closed. Please use the adjacent stations at Bryn Mawr or Argyle. 92 Foster bus rerouted to Bryn Mawr station.',
+    '2021-05-16', NULL, 'Red', 'marsh1'),
+  (NULL, 'Lawrence Station Temporary Closure', 'Lawrence station is temporarily closed. Please use the adjacent stations at Argyle or Wilson. 81 Lawrence bus rerouted to connect to Wilson station.',
+    '2021-05-16', NULL, 'Red', 'broflovski1'),
+  (NULL, 'Red and Purple Line Trains Share Track between Thorndale and Belmont (Updated)', 'Red and Purple line trains share tracks btwn Thorndale and Belmont. Purple Line Express trains continue to make only express stops between Howard and Belmont.',
+    '2021-05-16', NULL, 'Red', 'cartman1'),
+  (NULL, 'Argyle Temporary Station and Entrance Opens', 'The current Argyle station entrance is closed. The new, temporary Argyle station entrance is next to the closed one, 50 feet west.',
+    '2021-05-16', NULL, 'Red', 'mccormick1'),
+  (NULL, 'Bryn Mawr Temporary Station Opens', "New, temporary Bryn Mawr station is open. Separate entry for each direction: Howard-bnd enter thru old entrance; 95th-bnd enter on B'way north of Bryn Mawr.",
+    '2021-05-16', NULL, 'Red', 'stotch1'),
+  (NULL, 'Boarding Change at Belmont', 'At Belmont station, Kimball-bound Brown Line trains resume stopping on outer track; Linden-bound Purple Line Exp trains continue to board/exit on inner track.',
+    '2021-11-19', NULL, 'Brown', 'marsh2'),
+  (NULL, 'Service for 2023 Cubs Weekday Night Games and Wrigley Field Concerts', 'Loop-bound Purple Line Express trains will stop at Sheridan for all weekday Cubs night games and Wrigley Field concerts.',
+    '2023-04-10', '2023-09-21', 'Purple', 'garrison1'),
+  (NULL, 'Boarding Change at Belmont', 'Board/exit Loop-bound Purple Line Express trains on the Red Line side of the 95th- and Loop-bound platform at the Belmont station.',
+    '2022-01-17', NULL, 'Purple', 'mackey1'),
+  (NULL, 'Boarding Change at Belmont', 'At Belmont station, Kimball-bound Brown Line trains resume stopping on outer track; Linden-bound Purple Line Exp trains continue to board/exit on inner track.',
+    '2021-11-19', NULL, 'Purple', 'broflovski2'),
+  (NULL, 'Red and Purple Line Trains Share Track between Thorndale and Belmont (Updated)', 'Red and Purple line trains share tracks btwn Thorndale and Belmont. Purple Line Express trains continue to make only express stops between Howard and Belmont.',
+    '2021-05-16', NULL, 'Purple', 'broflovski3'),
+  (NULL, 'Service for 2023 Cubs Night Games and Wrigley Field Concerts', 'Later Yellow Line service from Howard runs for Cubs night games/Wrigley Field concerts. Skokie-bound trains run will until 12am on game and concert nights.',
+    '2023-04-10', '2023-09-21', 'Yellow', 'cartman2'),
+  (NULL, 'Service for 2023 Cubs Weekday Night Games and Wrigley Field Concerts', 'Loop-bound Purple Line Express trains will stop at Sheridan for all weekday Cubs night games and Wrigley Field concerts.',
+    '2023-04-10', '2023-09-21', 'Purple', 'valmer1'),
+  (NULL, 'Boarding Change at Belmont', 'Board/exit Loop-bound Purple Line Express trains on the Red Line side of the 95th- and Loop-bound platform at the Belmont station.',
+    '2022-01-17', NULL, 'Purple', 'black1'),
+  (NULL, 'Boarding Change at Belmont', 'At Belmont station, Kimball-bound Brown Line trains resume stopping on outer track; Linden-bound Purple Line Exp trains continue to board/exit on inner track.',
+    '2022-11-19', NULL, 'Purple', 'testaburger1'),
+  (NULL, 'Red and Purple Line Trains Share Track between Thorndale and Belmont (Updated)', 'Red and Purple line trains share tracks btwn Thorndale and Belmont. Purple Line Express trains continue to make only express stops between Howard and Belmont.',
+    '2022-05-16', NULL, 'Purple', 'donovan1'),
+  (NULL, 'Roosevelt Station Pedway-to-Street Elevator Temporarily Out of Service', 'Pedway-to-street elevator in the Roosevelt stn transfer tunnel between the Green/Orange elevated lines and the Red Line subway is temporarily out of service.',
+    '2023-01-12', NULL, 'Red', 'tucker1'),
+  (NULL, 'Elevator at 63rd (Red Line) Temporarily Out-of-Service', 'The elevator at 63rd (Red Line) is temporarily out-of-service due to an electrical problem.',
+    '2023-04-10', NULL, 'Red', 'stevens1'),
+  (NULL, 'Elevator at 95th/Dan Ryan Temporarily Out-of-Service', 'The North Terminal elevator to/from platform at 95th/Dan Ryan (Red Line) is temporarily out-of-service because of vandalism or abuse of the elevator.',
+    '2023-07-23', NULL, 'Red', 'turner1'),
+  (NULL, 'Elevator at Paulina Back in Service', 'The Loop-bound platform elevator at Paulina (Brown Line) is back in service.',
+    '2023-04-11', NULL, 'Brown', 'malkinson1'),
+  (NULL, 'Elevator at Irving Park Temporarily Out-of-Service', 'The Loop-bound platform elevator at Irving Park (Brown Line) is temporarily out-of-service.',
+    '2023-04-11', NULL, 'Brown', 'burch1'),
+  (NULL, 'Roosevelt Station Pedway-to-Street Elevator Temporarily Out of Service', 'Pedway-to-street elevator in the Roosevelt stn transfer tunnel between the Green/Orange elevated lines and the Red Line subway is temporarily out of service.',
+    '2023-01-12', NULL, 'Green', 'tweak1'),
+  (NULL, 'Elevator at Pulaski Temporarily Out-of-Service', 'The 63rd-bound platform elevator at Pulaski (Green Line) is temporarily out-of-service due to its doors needing repair & vandalism.',
+    '2023-04-09', NULL, 'Green', 'principal1'),
+  (NULL, 'Elevator at Conservatory-Central Park Drive Temporarily Out-of-Service', 'The Harlem-bound platform elevator at Conservatory (Green Line) is temporarily out-of-service.',
+    '2023-04-11', NULL, 'Green', 'woman1'),
+  (NULL, 'Elevator at California Temporarily Out-of-Service', 'The elevator to/from street at California (Green Line) is temporarily out-of-service due to an electrical problem.',
+    '2023-04-13', '2023-04-15', 'Green', 'marsh3'),
+  (NULL, 'Roosevelt Station Pedway-to-Street Elevator Temporarily Out of Service', 'Pedway-to-street elevator in the Roosevelt stn transfer tunnel between the Green/Orange elevated lines and the Red Line subway is temporarily out of service.',
+    '2023-01-12', NULL, 'Orange', 'marsh4');
+```
+
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data4.png)
+
+### Subproblem 5
+
+```sql
+INSERT INTO Locomotives VALUES
+  ('0100', 1982),
+  ('0200', 2001),
+  ('0300', 1992),
+  ('0400', 1964),
+  ('0500', 1996),
+  ('0600', 2000),
+  ('0700', 1998),
+  ('0800', 1993),
+  ('0900', 1982),
+  ('1000', 2001),
+  ('1100', 1992),
+  ('1200', 1964),
+  ('1300', 1996),
+  ('1400', 2000),
+  ('1500', 1998),
+  ('1600', 2004),
+  ('1700', 1964),
+  ('1800', 1973),
+  ('1900', 1982),
+  ('2000', 1979),
+  ('2100', 1966),
+  ('2200', 1946),
+  ('2300', 1972),
+  ('2400', 1903),
+  ('2500', 2003);
+```
+
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data5.png)
+
+### Subproblem 6
+
+```sql
+INSERT INTO Wagons VALUES
+  ('0101', 50), ('0102', 50),
+  ('0201', 60),
+  ('0301', 65), ('0302', 50),
+  ('0401', 45), ('0402', 60), ('0403', 40),
+  ('0501', 45), ('0502', 40),
+  ('0601', 30), ('0602', 35), ('0603', 35),
+  ('0701', 50), ('0702', 45),
+  ('0801', 30), ('0802', 45),
+  ('0901', 45), ('0902', 30), ('0903', 35),
+  ('1001', 45), ('1002', 50), ('1003', 65),
+  ('1101', 35), ('1102', 60),
+  ('1201', 45), ('1202', 45), ('1203', 55),
+  ('1301', 50), ('1302', 50),
+  ('1401', 35), ('1402', 50),
+  ('1501', 40),
+  ('1601', 50), ('1602', 60),
+  ('1701', 35), ('1702', 50), ('1703', 50),
+  ('1801', 45), ('1802', 40),
+  ('1901', 50), ('1902', 60),
+  ('2001', 55),
+  ('2101', 35),
+  ('2201', 50), ('2202', 45),
+  ('2301', 35), ('2302', 50),
+  ('2401', 65), ('2402', 40), ('2403', 40),
+  ('2501', 40), ('2502', 50);
+```
+
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data6.png)
+
+### Subproblem 7
+
+```sql
+INSERT INTO Trains VALUES
+  (1, 'Red', '0100', 'marsh1'),
+  (2, 'Red', '0200', 'broflovski1'),
+  (3, 'Red', '0300', 'cartman1'),
+  (4, 'Red', '0400', 'mccormick1'),
+  (5, 'Blue', '0500', 'stotch1'),
+  (6, 'Blue', '0600', 'marsh2'),
+  (7, 'Blue', '0700', 'garrison1'),
+  (8, 'Blue', '0800', 'mackey1'),
+  (9, 'Brown', '0900', 'broflovski2'),
+  (10, 'Brown', '1000', 'broflovski3'),
+  (11, 'Brown', '1100', 'cartman2'),
+  (12, 'Green', '1200', 'valmer1'),
+  (13, 'Green', '1300', 'black1'),
+  (14, 'Green', '1400', 'testaburger1'),
+  (15, 'Orange', '1500', 'donovan1'),
+  (16, 'Orange', '1600', 'tucker1'),
+  (17, 'Orange', '1700', 'stevens1'),
+  (18, 'Pink', '1800', 'turner1'),
+  (19, 'Pink', '1900', 'malkinson1'),
+  (20, 'Pink', '2000', 'burch1'),
+  (21, 'Purple', '2100', 'tweak1'),
+  (22, 'Purple', '2200', 'principal1'),
+  (23, 'Purple', '2300', 'woman1'),
+  (24, 'Yellow', '2400', 'marsh3'),
+  (25, 'Yellow', '2500', 'marsh4');
+```
+
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data7.png)
+
+### Subproblem 8
+
+```sql
+INSERT INTO Railcars VALUES
+  (1, '0101'), (1, '0102'),
+  (2, '0201'),
+  (3, '0301'), (3, '0302'),
+  (4, '0401'), (4, '0402'), (4, '0403'),
+  (5, '0501'), (5, '0502'),
+  (6, '0601'), (6, '0602'), (6, '0603'),
+  (7, '0701'), (7, '0702'),
+  (8, '0801'), (8, '0802'),
+  (9, '0901'), (9, '0902'), (9, '0903'),
+  (10, '1001'), (10, '1002'), (10, '1003'),
+  (11, '1101'), (11, '1102'),
+  (12, '1201'), (12, '1202'), (12, '1203'),
+  (13, '1301'), (13, '1302'),
+  (14, '1401'), (14, '1402'),
+  (15, '1501'),
+  (16, '1601'), (16, '1602'),
+  (17, '1701'), (17, '1702'), (17, '1703'),
+  (18, '1801'), (18, '1802'),
+  (19, '1901'), (19, '1902'),
+  (20, '2001'),
+  (21, '2101'),
+  (22, '2201'), (22, '2202'),
+  (23, '2301'), (23, '2302'),
+  (24, '2401'), (24, '2402'), (24, '2403'),
+  (25, '2501'), (25, '2502');
+```
+
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data8.png)
+
+### Subproblem 9
+
+```sql
+INSERT INTO Passengers VALUES
+  (1, 'Philip J. Fry'),
+  (2, 'Turanga Leela'),
+  (3, 'Bender Bending Rodriguez'),
+  (4, 'Hubert J. Farnsworth'),
+  (5, 'John Zoidberg'),
+  (6, 'Amy Wong'),
+  (7, 'Hermes Conrad'),
+  (8, 'Nibbler'),
+  (9, 'Zapp Brannigan'),
+  (10, 'Kif Kroker'),
+  (11, 'Mom'),
+  (12, 'Headless Body of Agnew'),
+  (13, 'Boxy'),
+  (14, 'Brain Slugs'),
+  (15, 'Brain Spawn'),
+  (16, 'Calculon'),
+  (17, 'Antonio Calculon'),
+  (18, 'The Crushinator'),
+  (19, 'Father Changstein-El-Gamal'),
+  (20, 'Chanukah Zombie'),
+  (21, 'Clamps'),
+  (22, 'Dwight Conrad'),
+  (23, 'LaBarbara Conrad'),
+  (24, 'Donbot'),
+  (25, 'Abner Doubledeal');
+```
+
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data9.png)
+
+### Subproblem 10
+
+```sql
+INSERT INTO Passes VALUES
+  (1, '2023-01-03', '2023-06-03', 1),
+  (2, '2023-01-06', '2023-09-06', 2),
+  (3, '2023-01-10', '2023-05-10', 3),
+  (4, '2023-02-28', '2023-05-28', 4),
+  (5, '2023-03-09', '2023-06-09', 5),
+  (6, '2023-03-13', '2023-07-13', 6),
+  (7, '2023-04-25', '2023-06-25', 7),
+  (8, '2023-05-10', '2023-07-10', 8),
+  (9, '2023-05-23', '2023-06-23', 9),
+  (10, '2023-06-29', '2023-08-29', 10),
+  (11, '2023-07-06', '2023-08-06', 11),
+  (12, '2023-07-14', '2023-09-14', 12),
+  (13, '2023-07-31', '2023-10-31', 13),
+  (14, '2023-08-25', '2023-09-25', 14),
+  (15, '2023-09-05', '2023-10-05', 15),
+  (16, '2023-09-21', '2023-11-21', 16),
+  (17, '2023-10-09', '2023-11-09', 17),
+  (18, '2023-10-11', '2023-12-11', 18),
+  (19, '2023-10-24', '2023-11-24', 19),
+  (20, '2023-11-03', '2023-12-03', 20),
+  (21, '2023-11-16', '2024-01-16', 21),
+  (22, '2023-11-29', '2024-02-29', 22),
+  (23, '2023-12-13', '2024-01-13', 23),
+  (24, '2023-12-21', '2024-02-21', 24),
+  (25, '2023-12-27', '2024-03-27', 25);
+```
+
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data10.png)
+
+### Subproblem 11
+
+```sql
+INSERT INTO Trips VALUES
+  (DEFAULT, 1, NULL, 1, 'Red', 'Howard', 'Belmont'),
+  (DEFAULT, 2, NULL, 2, 'Brown', 'Belmont', 'Paulina'),
+  (DEFAULT, 3, 3, NULL, 'Purple', 'Linden', 'Foster'),
+  (DEFAULT, 4, NULL, 4, 'Brown', 'Kimball', 'Belmont'),
+  (DEFAULT, 5, NULL, 5, 'Blue', "O'Hare", 'Irving Park'),
+  (DEFAULT, 6, 2, NULL, 'Blue', 'LaSalle', 'Clark-Lake'),
+  (DEFAULT, 7, NULL, 7, 'Blue', 'LaSalle', 'Irving Park'),
+  (DEFAULT, 8, NULL, 8, 'Green', 'Clark-Lake', 'Roosevelt'),
+  (DEFAULT, 9, NULL, 9, 'Green', 'Ashland/63rd', 'Roosevelt'),
+  (DEFAULT, 10, NULL, 10, 'Orange', 'Midway', 'Halsted'),
+  (DEFAULT, 11, 3, NULL, 'Orange', 'Roosevelt', 'Halsted'),
+  (DEFAULT, 12, NULL, 12, 'Red', 'Belmont', 'Garfield'),
+  (DEFAULT, 13, NULL, 13, 'Pink', 'Polk', 'Pulaski'),
+  (DEFAULT, 14, NULL, 14, 'Pink', 'LaSalle', 'Pulaski'),
+  (DEFAULT, 15, 2, NULL, 'Pink', 'Pulaski', 'Polk'),
+  (DEFAULT, 16, NULL, 16, 'Yellow', 'Dempster-Skokie', 'Howard'),
+  (DEFAULT, 17, NULL, 17, 'Yellow', 'Howard', 'Dempster-Skokie'),
+  (DEFAULT, 18, NULL, 18, 'Brown', 'Paulina', 'Kimball'),
+  (DEFAULT, 19, NULL, 19, 'Red', 'Sheridan', 'Garfield'),
+  (DEFAULT, 20, 2, NULL, 'Green', 'Roosevelt', 'Clark-Lake'),
+  (DEFAULT, 21, 2, NULL, 'Blue', "O'Hare", 'Clark-Lake'),
+  (DEFAULT, 22, NULL, 22, 'Blue', 'Irving Park', 'Clark-Lake'),
+  (DEFAULT, 23, NULL, 23, 'Green', 'Roosevelt', 'Ashland/63rd'),
+  (DEFAULT, 24, 3, NULL, 'Purple', 'Linden', 'Howard'),
+  (DEFAULT, 25, NULL, 25, 'Purple', 'Howard', 'Foster');
+```
+
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data11.png)
 
 ## Checklist
 
