@@ -10,7 +10,7 @@
 > Represent the conceptual model using the Entity relationship - Diagram (ERD)
   showing the most important entities and relationships.
 
-### ER diagram 1
+### ER diagram
 
 ![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png)
 
@@ -44,9 +44,21 @@
   created every day.
 - Transferrable stations require multiple entries into **Stations**.
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS CTA;
+USE CTA;
+
+DROP TABLE IF EXISTS Passengers;
+DROP TABLE IF EXISTS WagonRegistrations;
+DROP TABLE IF EXISTS Wagons;
+DROP TABLE IF EXISTS Trains;
+DROP TABLE IF EXISTS Locomotives;
+DROP TABLE IF EXISTS Conductors;
+DROP TABLE IF EXISTS Stations;
+DROP TABLE IF EXISTS Tracks;
+
 CREATE TABLE Tracks(
   `color` VARCHAR(10) PRIMARY KEY
 );

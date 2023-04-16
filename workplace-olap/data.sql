@@ -1,5 +1,5 @@
-CREATE SCHEMA IF NOT EXISTS WorkplaceDB;
-USE WorkplaceDB;
+CREATE SCHEMA IF NOT EXISTS WorkplaceOLAP;
+USE WorkplaceOLAP;
 
 INSERT INTO Salaries VALUES
   (NULL, 'Karen', 'Colmenares', 2500.00),

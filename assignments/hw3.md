@@ -1,4 +1,4 @@
-# [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_3.docx): Sailing DB
+# [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw3.docx): Sailing DB
 
 > Implement the database schema (SailingDB) found in the attachment pdf below
   and insert the data as shown in each table. You are provided with the query
@@ -39,9 +39,17 @@ slight changes in columns' name.
 | 33 | 109 | 2014-09-04 | 0 |
 | 33 | 104 | 2014-09-11 | 0 |
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS SailingDB;
+USE SailingDB;
+
+DROP TABLE IF EXISTS Reserves;
+DROP TABLE IF EXISTS Sailors;
+DROP TABLE IF EXISTS Captains;
+DROP TABLE IF EXISTS Boats;
+
 CREATE TABLE Sailors(
   `Sname` VARCHAR(20) NOT NULL,
   `SID` INT AUTO_INCREMENT PRIMARY KEY,

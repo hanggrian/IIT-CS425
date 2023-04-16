@@ -1,4 +1,4 @@
-# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_2.pdf): University DB Explanation
+# [Homework 1.2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw2.pdf): University DB Explanation
 
 > Implement the database schema submitted as “Homework 1.1”.
 

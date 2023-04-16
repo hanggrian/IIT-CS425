@@ -5,15 +5,23 @@
   statements. Load mock data (using free online data generator tools) into the
   database to test a variety of SQL commands.
 
-### ER diagram 3
+> #### Old ER diagram
+>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png"/>
+
+### New ER diagram
 
 ![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.png)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
-### UML diagram 2
+> #### Old UML diagram
+>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png"/>
 
-![The UML diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
+### New UML diagram
+
+![The UML diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.png)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
@@ -22,16 +30,31 @@
 > Create the database in the database system using general Data-definition
   language (DDL) statements.
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS CTA;
+USE CTA;
+
+DROP TABLE IF EXISTS Trips;
+DROP TABLE IF EXISTS Passes;
+DROP TABLE IF EXISTS Passengers;
+DROP TABLE IF EXISTS Railcars;
+DROP TABLE IF EXISTS Trains;
+DROP TABLE IF EXISTS Wagons;
+DROP TABLE IF EXISTS Locomotives;
+DROP TABLE IF EXISTS Alerts;
+DROP TABLE IF EXISTS Conductors;
+DROP TABLE IF EXISTS Stations;
+DROP TABLE IF EXISTS Tracks;
+
 CREATE TABLE Tracks(
-  `track` VARCHAR(10) PRIMARY KEY,
+  `track` VARCHAR(20) PRIMARY KEY,
   `is_24h` BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE Stations(
-  `track` VARCHAR(10),
+  `track` VARCHAR(20),
   `station` VARCHAR(50) NOT NULL,
   `lat` DECIMAL(8, 6),
   `lng` DECIMAL(9, 6),
@@ -48,10 +71,11 @@ CREATE TABLE Stations(
 CREATE TABLE Conductors(
   `username` VARCHAR(20) PRIMARY KEY,
   `password` VARCHAR(20) DEFAULT '1234',
-  `name` VARCHAR(50) NOT NULL,
+  `fullname` VARCHAR(50) NOT NULL,
   `birth` DATE NOT NULL,
   `age` INT NOT NULL,
   `phones` VARCHAR(50),
+  INDEX(`fullname`)
   CHECK(`age` >= 21)
 );
 
@@ -61,8 +85,9 @@ CREATE TABLE Alerts(
   `message` VARCHAR(400),
   `date_start` DATE NOT NULL,
   `date_end` DATE,
-  `track` VARCHAR(10),
+  `track` VARCHAR(20),
   `username` VARCHAR(20) NOT NULL,
+  INDEX(`title`)
   CONSTRAINT Alerts_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
@@ -83,7 +108,7 @@ CREATE TABLE Wagons(
 
 CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track` VARCHAR(10) NOT NULL,
+  `track` VARCHAR(20) NOT NULL,
   `serial_no` VARCHAR(4) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
   CONSTRAINT Trains_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
@@ -106,7 +131,8 @@ CREATE TABLE Railcars(
 
 CREATE TABLE Passengers(
   `passenger_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(50) NOT NULL
+  `fullname` VARCHAR(50) NOT NULL,
+  INDEX(`fullname`)
 );
 
 CREATE TABLE Passes(
@@ -124,9 +150,9 @@ CREATE TABLE Trips(
   `passenger_id` INT,
   `fare` DECIMAL(13, 2),
   `pass_id` INT,
-  `track` VARCHAR(10) NOT NULL,
-  `station1` VARCHAR(50) NOT NULL,
-  `station2` VARCHAR(50) NOT NULL,
+  `track` VARCHAR(20) NOT NULL,
+  `station_in` VARCHAR(50) NOT NULL,
+  `station_out` VARCHAR(50) NOT NULL,
   PRIMARY KEY(`timestamp`, `passenger_id`),
   CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -134,9 +160,9 @@ CREATE TABLE Trips(
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Trips_track FOREIGN KEY(`track`) REFERENCES Stations(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station1 FOREIGN KEY(`station1`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_in FOREIGN KEY(`station_in`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station2 FOREIGN KEY(`station2`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_out FOREIGN KEY(`station_out`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 ```
@@ -149,7 +175,7 @@ CREATE TABLE Trips(
 > Load mock data (using free online data generator tools) into the database to
   test a variety of SQL commands.
 
-### Subproblem 1
+### Subproblem 2A
 
 Tracks are based on actual tracks.
 
@@ -162,12 +188,29 @@ INSERT INTO Tracks VALUES
   ('Orange', 0),
   ('Pink', 0),
   ('Purple', 0),
-  ('Yellow', 0);
+  ('Yellow', 0),
+  ('Garnet', 0),
+  ('Amethyst', 0),
+  ('Bloodstone', 0),
+  ('Sapphire', 0),
+  ('Agate', 0),
+  ('Emerald', 0),
+  ('Onyx', 0),
+  ('Carnelian', 0),
+  ('Peridot', 0),
+  ('Beryl', 0),
+  ('Topaz', 0),
+  ('Ruby', 0),
+  ('Opal', 0),
+  ('Aquamarine', 0),
+  ('Jade', 0),
+  ('Obsidian', 0),
+  ('Amber', 0);
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_1.png)
 
-### Subproblem 2
+### Subproblem 2B
 
 Stations are based on [L map](https://www.transitchicago.com/assets/1/6/ctamap_Lsystem.png).
 
@@ -200,9 +243,9 @@ INSERT INTO Stations VALUES
   ('Pink', 'Pulaski', 41.7997, 87.7244, '5106 South Pulaski Road', '60632', 1, 0);
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_2.png)
 
-### Subproblem 3
+### Subproblem 2C
 
 ```sql
 INSERT INTO Conductors VALUES
@@ -233,9 +276,9 @@ INSERT INTO Conductors VALUES
   ('marsh4', DEFAULT, 'Shelley Marsh', '1994-01-01', 2023 - 1994, '202-555-0166');
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_3.png)
 
-### Subproblem 4
+### Subproblem 2D
 
 Alerts are based on [rail status](https://www.transitchicago.com/travel-information/railstatus/) & [elevator alerts](https://www.transitchicago.com/alerts/elevators/).
 
@@ -293,9 +336,9 @@ INSERT INTO Alerts VALUES
     '2023-01-12', NULL, 'Orange', 'marsh4');
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_4.png)
 
-### Subproblem 5
+### Subproblem 2E
 
 ```sql
 INSERT INTO Locomotives VALUES
@@ -326,9 +369,9 @@ INSERT INTO Locomotives VALUES
   ('2500', 2003);
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_5.png)
 
-### Subproblem 6
+### Subproblem 2F
 
 ```sql
 INSERT INTO Wagons VALUES
@@ -340,7 +383,7 @@ INSERT INTO Wagons VALUES
   ('0601', 30), ('0602', 35), ('0603', 35),
   ('0701', 50), ('0702', 45),
   ('0801', 30), ('0802', 45),
-  ('0901', 45), ('0902', 30), ('0903', 35),
+  ('0901', 25), ('0902', 20), ('0903', 35), ('0904', 25),
   ('1001', 45), ('1002', 50), ('1003', 65),
   ('1101', 35), ('1102', 60),
   ('1201', 45), ('1202', 45), ('1203', 55),
@@ -359,9 +402,9 @@ INSERT INTO Wagons VALUES
   ('2501', 40), ('2502', 50);
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_6.png)
 
-### Subproblem 7
+### Subproblem 2G
 
 ```sql
 INSERT INTO Trains VALUES
@@ -392,9 +435,9 @@ INSERT INTO Trains VALUES
   (25, 'Yellow', '2500', 'marsh4');
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_7.png)
 
-### Subproblem 8
+### Subproblem 2H
 
 ```sql
 INSERT INTO Railcars VALUES
@@ -406,7 +449,7 @@ INSERT INTO Railcars VALUES
   (6, '0601'), (6, '0602'), (6, '0603'),
   (7, '0701'), (7, '0702'),
   (8, '0801'), (8, '0802'),
-  (9, '0901'), (9, '0902'), (9, '0903'),
+  (9, '0901'), (9, '0902'), (9, '0903'), (9, '0904'),
   (10, '1001'), (10, '1002'), (10, '1003'),
   (11, '1101'), (11, '1102'),
   (12, '1201'), (12, '1202'), (12, '1203'),
@@ -425,9 +468,9 @@ INSERT INTO Railcars VALUES
   (25, '2501'), (25, '2502');
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_8.png)
 
-### Subproblem 9
+### Subproblem 2I
 
 ```sql
 INSERT INTO Passengers VALUES
@@ -458,32 +501,32 @@ INSERT INTO Passengers VALUES
   (25, 'Abner Doubledeal');
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_9.png)
 
-### Subproblem 10
+### Subproblem 2J
 
 ```sql
 INSERT INTO Passes VALUES
-  (1, '2023-01-03', '2023-06-03', 1),
-  (2, '2023-01-06', '2023-09-06', 2),
-  (3, '2023-01-10', '2023-05-10', 3),
-  (4, '2023-02-28', '2023-05-28', 4),
-  (5, '2023-03-09', '2023-06-09', 5),
-  (6, '2023-03-13', '2023-07-13', 6),
-  (7, '2023-04-25', '2023-06-25', 7),
-  (8, '2023-05-10', '2023-07-10', 8),
-  (9, '2023-05-23', '2023-06-23', 9),
-  (10, '2023-06-29', '2023-08-29', 10),
-  (11, '2023-07-06', '2023-08-06', 11),
-  (12, '2023-07-14', '2023-09-14', 12),
-  (13, '2023-07-31', '2023-10-31', 13),
-  (14, '2023-08-25', '2023-09-25', 14),
-  (15, '2023-09-05', '2023-10-05', 15),
-  (16, '2023-09-21', '2023-11-21', 16),
-  (17, '2023-10-09', '2023-11-09', 17),
-  (18, '2023-10-11', '2023-12-11', 18),
-  (19, '2023-10-24', '2023-11-24', 19),
-  (20, '2023-11-03', '2023-12-03', 20),
+  (1, '2020-01-03', '2020-06-03', 1),
+  (2, '2020-01-06', '2020-09-06', 2),
+  (3, '2020-01-10', '2020-05-10', 3),
+  (4, '2020-02-28', '2020-05-28', 4),
+  (5, '2020-03-09', '2021-06-09', 5),
+  (6, '2021-03-13', '2021-07-13', 6),
+  (7, '2021-04-25', '2021-06-25', 7),
+  (8, '2021-05-10', '2021-07-10', 8),
+  (9, '2021-05-23', '2021-06-23', 9),
+  (10, '2021-06-29', '2021-08-29', 10),
+  (11, '2021-07-06', '2022-08-06', 11),
+  (12, '2022-07-14', '2022-09-14', 12),
+  (13, '2022-07-31', '2022-10-31', 13),
+  (14, '2022-08-25', '2022-09-25', 14),
+  (15, '2022-09-05', '2022-10-05', 15),
+  (16, '2022-09-21', '2022-11-21', 16),
+  (17, '2022-10-09', '2022-11-09', 17),
+  (18, '2022-10-11', '2022-12-11', 18),
+  (19, '2022-10-24', '2022-11-24', 19),
+  (20, '2022-11-03', '2023-12-03', 20),
   (21, '2023-11-16', '2024-01-16', 21),
   (22, '2023-11-29', '2024-02-29', 22),
   (23, '2023-12-13', '2024-01-13', 23),
@@ -491,32 +534,32 @@ INSERT INTO Passes VALUES
   (25, '2023-12-27', '2024-03-27', 25);
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_10.png)
 
-### Subproblem 11
+### Subproblem 2K
 
 ```sql
 INSERT INTO Trips VALUES
-  (DEFAULT, 1, NULL, 1, 'Red', 'Howard', 'Belmont'),
-  (DEFAULT, 2, NULL, 2, 'Brown', 'Belmont', 'Paulina'),
-  (DEFAULT, 3, 3, NULL, 'Purple', 'Linden', 'Foster'),
-  (DEFAULT, 4, NULL, 4, 'Brown', 'Kimball', 'Belmont'),
-  (DEFAULT, 5, NULL, 5, 'Blue', "O'Hare", 'Irving Park'),
-  (DEFAULT, 6, 2, NULL, 'Blue', 'LaSalle', 'Clark-Lake'),
-  (DEFAULT, 7, NULL, 7, 'Blue', 'LaSalle', 'Irving Park'),
-  (DEFAULT, 8, NULL, 8, 'Green', 'Clark-Lake', 'Roosevelt'),
-  (DEFAULT, 9, NULL, 9, 'Green', 'Ashland/63rd', 'Roosevelt'),
-  (DEFAULT, 10, NULL, 10, 'Orange', 'Midway', 'Halsted'),
-  (DEFAULT, 11, 3, NULL, 'Orange', 'Roosevelt', 'Halsted'),
-  (DEFAULT, 12, NULL, 12, 'Red', 'Belmont', 'Garfield'),
-  (DEFAULT, 13, NULL, 13, 'Pink', 'Polk', 'Pulaski'),
-  (DEFAULT, 14, NULL, 14, 'Pink', 'LaSalle', 'Pulaski'),
-  (DEFAULT, 15, 2, NULL, 'Pink', 'Pulaski', 'Polk'),
-  (DEFAULT, 16, NULL, 16, 'Yellow', 'Dempster-Skokie', 'Howard'),
-  (DEFAULT, 17, NULL, 17, 'Yellow', 'Howard', 'Dempster-Skokie'),
-  (DEFAULT, 18, NULL, 18, 'Brown', 'Paulina', 'Kimball'),
-  (DEFAULT, 19, NULL, 19, 'Red', 'Sheridan', 'Garfield'),
-  (DEFAULT, 20, 2, NULL, 'Green', 'Roosevelt', 'Clark-Lake'),
+  ('2020-01-04', 1, NULL, 1, 'Red', 'Howard', 'Belmont'),
+  ('2020-02-12', 2, NULL, 2, 'Brown', 'Belmont', 'Paulina'),
+  ('2021-01-23', 3, 3, NULL, 'Purple', 'Linden', 'Foster'),
+  ('2021-02-12', 4, NULL, 4, 'Brown', 'Kimball', 'Belmont'),
+  ('2021-04-17', 5, NULL, 5, 'Blue', "O'Hare", 'Irving Park'),
+  ('2021-04-29', 6, 2, NULL, 'Blue', 'LaSalle', 'Clark-Lake'),
+  ('2021-06-27', 7, NULL, 7, 'Blue', 'LaSalle', 'Irving Park'),
+  ('2021-08-27', 8, NULL, 8, 'Green', 'Clark-Lake', 'Roosevelt'),
+  ('2021-09-21', 9, NULL, 9, 'Green', 'Ashland/63rd', 'Roosevelt'),
+  ('2021-11-28', 10, NULL, 10, 'Orange', 'Midway', 'Halsted'),
+  ('2021-11-02', 11, 3, NULL, 'Orange', 'Roosevelt', 'Halsted'),
+  ('2022-02-06', 12, NULL, 12, 'Red', 'Belmont', 'Garfield'),
+  ('2022-04-27', 13, NULL, 13, 'Pink', 'Polk', 'Pulaski'),
+  ('2022-05-08', 14, NULL, 14, 'Pink', 'LaSalle', 'Pulaski'),
+  ('2022-05-19', 15, 2, NULL, 'Pink', 'Pulaski', 'Polk'),
+  ('2022-06-21', 16, NULL, 16, 'Yellow', 'Dempster-Skokie', 'Howard'),
+  ('2022-09-05', 17, NULL, 17, 'Yellow', 'Howard', 'Dempster-Skokie'),
+  ('2022-10-01', 18, NULL, 18, 'Brown', 'Paulina', 'Kimball'),
+  ('2022-10-23', 19, NULL, 19, 'Red', 'Sheridan', 'Garfield'),
+  ('2022-12-11', 20, 2, NULL, 'Green', 'Roosevelt', 'Clark-Lake'),
   (DEFAULT, 21, 2, NULL, 'Blue', "O'Hare", 'Clark-Lake'),
   (DEFAULT, 22, NULL, 22, 'Blue', 'Irving Park', 'Clark-Lake'),
   (DEFAULT, 23, NULL, 23, 'Green', 'Roosevelt', 'Ashland/63rd'),
@@ -524,7 +567,137 @@ INSERT INTO Trips VALUES
   (DEFAULT, 25, NULL, 25, 'Purple', 'Howard', 'Foster');
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data11.png)
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_11.png)
+
+## Problem 3
+
+> Provide 10 SQL statements and English description.
+
+### Subproblem 3A
+
+**Operable tracks**: List how many tracks are actively in use.
+
+```sql
+SELECT CONCAT(`track`, IF(`is_24h`, ' (24h)', '')) AS `Active stations`
+ FROM Tracks WHERE `track` IN(SELECT `track` FROM Stations);
+```
+
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_1.png)
+
+### Subproblem 3B
+
+**Station's route**: Blue line is the most used track of CTA, list its route and
+intersections with other lines.
+
+```sql
+SELECT `track`, `station`, `location`, `zip` FROM Stations
+  WHERE `station` IN(SELECT `station` FROM Stations WHERE `track` = 'Blue');
+```
+
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_2.png)
+
+### Subproblem 3C
+
+**Station's infrastructure**: CTA strives for building quality, here's a
+statistics of how many infrastructure are in place.
+
+```sql
+SELECT CONCAT('Elevator ', AVG(`has_elevator`) * 100, '%')
+  AS `Infrastructure rating` FROM Stations UNION
+SELECT CONCAT('Parking ', AVG(`has_parking`) * 100, '%')
+  AS `Infrastructure rating` FROM Stations;
+```
+
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_3.png)
+
+### Subproblem 3D
+
+**Old alerts**: Service alerts can have indefinite running time. List really old
+alerts.
+
+```sql
+SELECT `track`, `title`, `date_start` FROM Alerts
+  WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL;
+```
+
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_4.png)
+
+### Subproblem 3E
+
+**Punish lazy conductors**: Maintaining service alert is the responsibility of
+the employee who create it. Notify those employees.
+
+```sql
+SELECT CONCAT(`name`, ' (', `username`, ')') AS `Lazy employees` FROM Conductors
+  WHERE `username` IN(SELECT `username` FROM Alerts
+    WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL);
+```
+
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_5.png)
+
+### Subproblem 3F
+
+**Old trains**: Old trains are prone to accidents and need to be decommisioned.
+
+```sql
+SELECT * FROM Trains AS T LEFT JOIN Locomotives AS L
+  ON T.`serial_no` = L.`serial_no`
+  WHERE `since` < 1980;
+```
+
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_6.png)
+
+### Subproblem 3G
+
+**Train status**: Common attributes of a train: track, conductor, and how many
+wagons it carries.
+
+```sql
+SELECT R.`train_id`, `track`, `username`, COUNT(R.`train_id`) AS `Wagon count`
+  FROM Railcars AS R LEFT JOIN Trains AS T
+  ON R.`train_id` = T.`train_id` GROUP BY `train_id`;
+```
+
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_7.png)
+
+### Subproblem 3H
+
+**Heaviest trains**: Each wagon contain different number of seats, calculate the
+total.
+
+```sql
+SELECT R.`train_id`, SUM(W.`seats`) AS `Seat capacity`
+  FROM Railcars AS R LEFT JOIN Wagons AS W
+  ON R.`wagon_id` = W.`wagon_id` GROUP BY `train_id`;
+```
+
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_8.png)
+
+### Subproblem 3I
+
+**Pass popularity**: Discover how many of CTA users have ongoing passes.
+
+```sql
+SELECT `pass_id`, `date_start`, P1.`passenger_id`, `name` FROM Passes AS P1
+  LEFT JOIN Passengers AS P2
+  ON P1.`passenger_id` = P2.`passenger_id`
+  WHERE `date_end` >= '2023-01-01';
+```
+
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_9.png)
+
+### Subproblem 3J
+
+**Passenger engagement**: Discover how many CTA customers have used the service
+within this year.
+
+```sql
+SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
+  FROM Passengers WHERE `passenger_id`
+    IN(SELECT `passenger_id` FROM Trips WHERE `timestamp` >= '2023-01-01');
+```
+
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_10.png)
 
 ## Checklist
 

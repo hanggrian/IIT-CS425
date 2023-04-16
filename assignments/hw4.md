@@ -1,13 +1,21 @@
-# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_4.pdf): Basketball DB
+# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw4.pdf): Basketball DB
 
 > Create FOUR (4) relations called Coach, Person, Player, and Team, each
   containing the same column names as those found in the corresponding CSV data
   files (see attachment on BB). Load the data into the MySQL database using the
   CSV files (Hint: Import the data using import wizard).
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS BasketballDB;
+USE BasketballDB;
+
+DROP TABLE IF EXISTS Coaches;
+DROP TABLE IF EXISTS Players;
+DROP TABLE IF EXISTS Persons;
+DROP TABLE IF EXISTS Teams;
+
 CREATE TABLE Teams(
   `TmID` VARCHAR(3) PRIMARY KEY,
   `ConfID` VARCHAR(2) NOT NULL,
@@ -156,7 +164,7 @@ SELECT p.`Points` AS `PlayerPoints`, t.`TmID` AS `TeamName`,
 
 > Show the `BoID` of players whose `BirthCountry` is in the data, but
   their `BirthCity` is not in the data.
- 
+
 ```sql
 SELECT pe.`BioID` FROM Persons AS pe, Players AS pl
   WHERE pe.`BioID` = pl.`BioID`

@@ -14,12 +14,12 @@ DROP TABLE IF EXISTS Stations;
 DROP TABLE IF EXISTS Tracks;
 
 CREATE TABLE Tracks(
-  `track` VARCHAR(10) PRIMARY KEY,
+  `track` VARCHAR(20) PRIMARY KEY,
   `is_24h` BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE Stations(
-  `track` VARCHAR(10),
+  `track` VARCHAR(20),
   `station` VARCHAR(50) NOT NULL,
   `lat` DECIMAL(8, 6),
   `lng` DECIMAL(9, 6),
@@ -36,10 +36,11 @@ CREATE TABLE Stations(
 CREATE TABLE Conductors(
   `username` VARCHAR(20) PRIMARY KEY,
   `password` VARCHAR(20) DEFAULT '1234',
-  `name` VARCHAR(50) NOT NULL,
+  `fullname` VARCHAR(50) NOT NULL,
   `birth` DATE NOT NULL,
   `age` INT NOT NULL,
   `phones` VARCHAR(50),
+  INDEX(`fullname`)
   CHECK(`age` >= 21)
 );
 
@@ -49,8 +50,9 @@ CREATE TABLE Alerts(
   `message` VARCHAR(400),
   `date_start` DATE NOT NULL,
   `date_end` DATE,
-  `track` VARCHAR(10),
+  `track` VARCHAR(20),
   `username` VARCHAR(20) NOT NULL,
+  INDEX(`title`)
   CONSTRAINT Alerts_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
@@ -71,7 +73,7 @@ CREATE TABLE Wagons(
 
 CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track` VARCHAR(10) NOT NULL,
+  `track` VARCHAR(20) NOT NULL,
   `serial_no` VARCHAR(4) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
   CONSTRAINT Trains_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
@@ -94,7 +96,8 @@ CREATE TABLE Railcars(
 
 CREATE TABLE Passengers(
   `passenger_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(50) NOT NULL
+  `fullname` VARCHAR(50) NOT NULL,
+  INDEX(`fullname`)
 );
 
 CREATE TABLE Passes(
@@ -112,9 +115,9 @@ CREATE TABLE Trips(
   `passenger_id` INT,
   `fare` DECIMAL(13, 2),
   `pass_id` INT,
-  `track` VARCHAR(10) NOT NULL,
-  `station1` VARCHAR(50) NOT NULL,
-  `station2` VARCHAR(50) NOT NULL,
+  `track` VARCHAR(20) NOT NULL,
+  `station_in` VARCHAR(50) NOT NULL,
+  `station_out` VARCHAR(50) NOT NULL,
   PRIMARY KEY(`timestamp`, `passenger_id`),
   CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -122,8 +125,8 @@ CREATE TABLE Trips(
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Trips_track FOREIGN KEY(`track`) REFERENCES Stations(`track`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station1 FOREIGN KEY(`station1`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_in FOREIGN KEY(`station_in`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station2 FOREIGN KEY(`station2`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_out FOREIGN KEY(`station_out`) REFERENCES Stations(`station`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );

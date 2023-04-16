@@ -1,4 +1,4 @@
-# [Homework 1.8](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_8.pdf): Greendale Community College
+# [Homework 1.8](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw8.pdf): Greendale Community College
 
 > A spreadsheet has been created that stores results of students at Greendale
   Community College. This includes annual promotion code `REN` (excluded), `CON`
@@ -28,9 +28,19 @@
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/uml.drawio)
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS GreendaleCommunityCollege;
+USE GreendaleCommunityCollege;
+
+DROP TABLE IF EXISTS TimeSlots;
+DROP TABLE IF EXISTS Registrations;
+DROP TABLE IF EXISTS Courses;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Departments;
+DROP TABLE IF EXISTS Convenors;
+
 CREATE TABLE Convenors(
   `conv_id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL
@@ -48,7 +58,7 @@ CREATE TABLE Students(
 );
 
 CREATE TABLE Courses(
-  `course_id` VARCHAR(50) PRIMARY KEY,
+  `course_id` VARCHAR(10) PRIMARY KEY,
   `year` YEAR NOT NULL,
   `passing_mark` INT NOT NULL,
   `prereq` VARCHAR(100),
@@ -69,9 +79,9 @@ CREATE TABLE Registrations(
 CREATE TABLE TimeSlots(
   `timeslot_id` INT AUTO_INCREMENT PRIMARY KEY,
   `day` INT NOT NULL,
-  `time_start` TIME NOT NULL,
-  `time_end` TIME NOT NULL,
-  `course_id` VARCHAR(5) NOT NULL,
+  `time_start` TIME NOT NULL DEFAULT '9:00:00',
+  `time_end` TIME NOT NULL DEFAULT '11:00:00',
+  `course_id` VARCHAR(10) NOT NULL,
   FOREIGN KEY(`course_id`) REFERENCES Courses(`course_id`)
 );
 ```
@@ -96,7 +106,7 @@ table `Courses`.
 | Hassan | N | CON | 2019 | CSC117 | Carrey | | 4th or 5th Daily | 60 | 2- |
 | Inggs | N | CON | 2019 | ZOO203 | Lee | BOT104 or ZOO103 | 5th Daily	66 | 2- |
 
-### SQL commands
+### SQL data
 
 ```sql
 INSERT INTO Convenors VALUES

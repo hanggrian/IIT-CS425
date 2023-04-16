@@ -1,4 +1,4 @@
-# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_6.pdf): University ER
+# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw6.pdf): University ER
 
 > ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/hw1_6_fig1.png)
 
@@ -17,9 +17,20 @@ Several notes about this solution:
 - Weak entity tables will make the affected constraints `ON DELETE CASCADE`,
   according to [this answer](https://stackoverflow.com/a/26448278/1567541/).
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS UniversityER;
+USE UniversityER;
+
+DROP TABLE IF EXISTS Sections;
+DROP TABLE IF EXISTS TimeSlots;
+DROP TABLE IF EXISTS Classrooms;
+DROP TABLE IF EXISTS Courses;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Instructors;
+DROP TABLE IF EXISTS Departments;
+
 CREATE TABLE Departments(
   `dept_name` VARCHAR(50) PRIMARY KEY,
   `building` VARCHAR(50),

@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.9](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_9.pdf): Functional Dependencies
+# [Homework 1.9](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw9.pdf): Functional Dependencies
 
 > You are given the below functional dependencies for the
   relation $R(A\ B\ C\ D\ E\ F)$,

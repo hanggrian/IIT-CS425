@@ -1,4 +1,4 @@
-# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_7.pdf): Launchpad ER
+# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw7.pdf): Launchpad ER
 
 > Launch Pad business rules:
 >
@@ -51,9 +51,20 @@
 - `Missions` is a bridge table for many-to-many relationship between `Crews`
   and `Launches`.
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS LaunchpadER;
+USE LaunchpadER;
+
+DROP TABLE IF EXISTS Missions;
+DROP TABLE IF EXISTS Crews;
+DROP TABLE IF EXISTS Launches;
+DROP TABLE IF EXISTS Rockets;
+DROP TABLE IF EXISTS Payloads;
+DROP TABLE IF EXISTS Manufacturers;
+DROP TABLE IF EXISTS Launchpads;
+
 CREATE TABLE Launchpads(
   `name` VARCHAR(50) PRIMARY KEY,
   `location` VARCHAR(50)

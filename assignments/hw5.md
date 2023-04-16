@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1_5.pdf): Workplace OLAP
+# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw5.pdf): Workplace OLAP
 
 > Give the answers (assume `ORDER BY` salary).
 >
@@ -25,9 +25,14 @@
 > | 14 | Pat | Fay | 6000 |
 > | 15 | Charles | Johnson | 6200 |
 
-### SQL commands
+### SQL initialization
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS WorkplaceOLAP;
+USE WorkplaceOLAP;
+
+DROP TABLE IF EXISTS Salaries;
+
 CREATE TABLE Salaries(
   `row_num` INT AUTO_INCREMENT PRIMARY KEY,
   `first_name` VARCHAR(20) NOT NULL,

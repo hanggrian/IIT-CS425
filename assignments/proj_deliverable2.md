@@ -8,7 +8,11 @@
 
 > You are required to present a detailed ERD.
 
-### ER diagram 2
+> #### Old ER diagram
+>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png"/>
+
+### New ER diagram
 
 ![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png)
 
@@ -41,7 +45,7 @@
 
 > You are required to present a logical structure/schema of the database.
 
-### UML diagram 1
+### UML diagram
 
 ![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml1.png)
 
@@ -125,7 +129,7 @@ which is an equivalent of *Ventra UPass*.
 
 ## Extra
 
-### SQL commands
+### SQL initialization
 
 ```sql
 CREATE TABLE Conductors(
