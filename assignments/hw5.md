@@ -255,7 +255,7 @@ SELECT `row_num`, NTILE(4) OVER(ORDER BY `salary`) FROM Salaries;
 > `CUME_DIST()` for row 3 = [give value]
 
 > **Definition**: `CUME_DIST` stands for **cumulative distribution**, which is
-  number of rows with values less than or equal to that row’s value divided by
+  number of rows with values less than or equal to that row's value divided by
   the total number of rows.
 
 Because the table is already sorted, the current row will always have higher
@@ -275,7 +275,7 @@ SELECT `row_num`, `CUME_DIST_3`
 > `CUME_DIST()` for row 12 = [give value]
 
 > **Definition**: `CUME_DIST` stands for **cumulative distribution**, which is
-  number of rows with values less than or equal to that row’s value divided by
+  number of rows with values less than or equal to that row's value divided by
   the total number of rows.
 
 Because the table is already sorted, the current row will always have higher

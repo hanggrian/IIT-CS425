@@ -7,7 +7,7 @@ dependencyResolutionManagement.repositories {
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
-rootProject.name = "cta_db"
+rootProject.name = "cta"
 
 include("app")
 include("website")

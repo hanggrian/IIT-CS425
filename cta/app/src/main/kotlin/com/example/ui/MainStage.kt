@@ -1,79 +1,66 @@
 package com.example.ui
 
 import com.example.App
-import com.example.dao.Class
-import com.example.dao.Classes
-import com.example.dao.Registration
-import com.example.dao.Schedule
-import com.example.internals.stringCell
-import com.example.ui.class2.AddScheduleDialog
-import com.example.ui.class2.ClassEntryDialog
-import com.example.ui.class2.StudentPickerDialog
-import com.example.ui.course.CourseSchemaDialog
-import com.example.ui.lecturer.LecturerSchemaDialog
-import com.example.ui.student.StudentSchemaDialog
+import com.example.dao.Alert
+import com.example.dao.Station
+import com.example.dao.Trip
+import com.example.dao.alerts
+import com.example.dao.stations
+import com.example.dao.trips
+import com.example.string
+import com.example.to
+import com.example.ui.alert.AddAlertDialog
+import com.example.ui.alert.ViewAlertDialog
+import com.example.ui.conductor.ConductorsDialog
+import com.example.ui.passenger.PassengersDialog
+import com.example.until
 import javafx.application.Platform
 import javafx.geometry.Orientation.VERTICAL
-import javafx.scene.control.ButtonType.CLOSE
-import javafx.scene.control.ButtonType.NO
-import javafx.scene.control.ButtonType.YES
-import javafx.scene.control.Menu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.TableView
-import javafx.scene.input.KeyCode.A
-import javafx.scene.input.KeyCode.DIGIT1
 import javafx.scene.input.KeyCode.DIGIT2
 import javafx.scene.input.KeyCode.DIGIT3
 import javafx.scene.input.KeyCode.M
 import javafx.scene.input.KeyCode.Q
+import javafx.scene.input.KeyCode.R
 import javafx.scene.input.KeyCombination.SHORTCUT_DOWN
 import javafx.stage.Stage
-import ktfx.bindings.bindingOf
-import ktfx.bindings.booleanBindingOf
-import ktfx.collections.emptyObservableList
-import ktfx.collections.replaceAll
-import ktfx.collections.toMutableObservableList
+import ktfx.collections.mutableObservableListOf
 import ktfx.controls.columns
 import ktfx.controls.constrained
-import ktfx.controls.isNotSelected
 import ktfx.coroutines.onAction
-import ktfx.dialogs.confirmAlert
-import ktfx.dialogs.errorAlert
+import ktfx.dialogs.infoAlert
+import ktfx.inputs.isDoubleClick
 import ktfx.inputs.plus
 import ktfx.layouts.contextMenu
-import ktfx.layouts.menu
 import ktfx.layouts.menuBar
-import ktfx.layouts.menuItem
 import ktfx.layouts.scene
 import ktfx.layouts.separatorMenuItem
 import ktfx.layouts.splitPane
 import ktfx.layouts.tableView
 import ktfx.layouts.vbox
+import ktfx.listeners.onMouseClicked
 import ktfx.runLater
 import ktfx.windows.minSize
 import ktfx.windows.size2
 import org.apache.commons.lang3.SystemUtils.IS_OS_MAC_OSX
-import org.jetbrains.exposed.sql.deleteAll
-import org.jetbrains.exposed.sql.transactions.transaction
-import java.time.DayOfWeek
+import org.ktorm.database.Database
+import org.ktorm.entity.toCollection
 import java.util.prefs.Preferences
 
-class MainStage : Stage() {
+class MainStage(db: Database) : Stage() {
     private companion object {
-        val MIN_SIZE_STAGE = 800.0 to 600.0
+        val MIN_SIZE_STAGE = 1000.0 to 500.0
     }
 
-    lateinit var classTable: TableView<Class>
-    lateinit var classAddMenu: MenuItem
-
-    lateinit var classRegistrationTable: TableView<Registration>
-    lateinit var classRegistrationAddMenu: MenuItem
-
-    lateinit var classScheduleTable: TableView<Schedule>
-    lateinit var classScheduleAddMenu: MenuItem
+    lateinit var tripTable: TableView<Trip>
+    lateinit var alertTable: TableView<Alert>
+    lateinit var alertAddMenu: MenuItem
+    lateinit var stationTable: TableView<Station>
+    lateinit var stationAddMenu: MenuItem
 
     init {
-        title = "University Database"
+        title = "Chicago Transit Authority (CTA)"
         minSize = MIN_SIZE_STAGE
         size2 = MIN_SIZE_STAGE
         scene {
@@ -81,6 +68,16 @@ class MainStage : Stage() {
                 menuBar {
                     isUseSystemMenuBar = IS_OS_MAC_OSX
                     "File" {
+                        "Refresh" {
+                            accelerator = SHORTCUT_DOWN + R
+                            onAction {
+                                tripTable.items = db.trips.toCollection(mutableObservableListOf())
+                                alertTable.items = db.alerts.toCollection(mutableObservableListOf())
+                                stationTable.items =
+                                    db.stations.toCollection(mutableObservableListOf())
+                            }
+                        }
+                        separatorMenuItem()
                         "Logout" {
                             onAction {
                                 Preferences.userNodeForPackage(App::class.java).run {
@@ -97,39 +94,27 @@ class MainStage : Stage() {
                         }
                     }
                     "Edit" {
-                        "Add Class" {
-                            accelerator = SHORTCUT_DOWN + A
+                        "Add Alert" {
                             runLater {
-                                onActionProperty().bind(classAddMenu.onActionProperty())
+                                disableProperty().bind(alertAddMenu.disableProperty())
+                                onActionProperty().bind(alertAddMenu.onActionProperty())
                             }
                         }
-                        separatorMenuItem()
-                        "Add Student to Class" {
+                        "Add Station" {
                             runLater {
-                                disableProperty().bind(classRegistrationAddMenu.disableProperty())
-                                onActionProperty().bind(classRegistrationAddMenu.onActionProperty())
-                            }
-                        }
-                        "Add Schedule to Class" {
-                            runLater {
-                                disableProperty().bind(classScheduleAddMenu.disableProperty())
-                                onActionProperty().bind(classScheduleAddMenu.onActionProperty())
+                                disableProperty().bind(stationAddMenu.disableProperty())
+                                onActionProperty().bind(stationAddMenu.onActionProperty())
                             }
                         }
                     }
                     "View" {
-                        "Courses" {
-                            accelerator = SHORTCUT_DOWN + DIGIT1
-                            onAction { CourseSchemaDialog().showAndWait() }
-                        }
-                        separatorMenuItem()
-                        "Lecturers" {
+                        "Conductors" {
                             accelerator = SHORTCUT_DOWN + DIGIT2
-                            onAction { LecturerSchemaDialog().showAndWait() }
+                            onAction { ConductorsDialog(db).showAndWait() }
                         }
-                        "Students" {
+                        "Passengers" {
                             accelerator = SHORTCUT_DOWN + DIGIT3
-                            onAction { StudentSchemaDialog().showAndWait() }
+                            onAction { PassengersDialog(db).showAndWait() }
                         }
                     }
                     "Window" {
@@ -148,213 +133,101 @@ class MainStage : Stage() {
                     }
                 }
                 splitPane {
-                    classTable = tableView(
-                        transaction {
-                            Class.all().toMutableObservableList()
-                        }
-                    ) {
+                    tripTable = tableView(db.trips.toCollection(mutableObservableListOf())) {
                         constrained()
                         columns {
-                            append<String>("Class").stringCell { toString() }
-                            append<String>("Lecturer").stringCell {
-                                transaction { lecturer }.toString()
+                            append<String>("Trip").string {
+                                "$tripTimestamp - ${passenger.fullname} " +
+                                    "(${passenger.passengerId})"
                             }
-                            append<String>("Initial date").stringCell { dateInitial.toString() }
-                            append<String>("Final date").stringCell { dateFinal.toString() }
-                        }
-                        contextMenu {
-                            classAddMenu = "Add" {
-                                onAction {
-                                    ClassEntryDialog().showAndWait().ifPresent {
-                                        this@tableView.items += it
+                            append<String>("Fare").string {
+                                buildString {
+                                    append(fare)
+                                    if (pass != null) {
+                                        append(" (Pass)")
                                     }
                                 }
                             }
-                            "Edit" {
-                                disableProperty().bind(
-                                    this@tableView.selectionModel.selectedItemProperty().isNull
-                                )
-                                onAction {
-                                    val oldVal = this@tableView.selectionModel.selectedItem
-                                    ClassEntryDialog(oldVal).showAndWait()
-                                        .ifPresent { this@tableView.items.replaceAll(oldVal, it) }
-                                }
-                            }
-                            separatorMenuItem()
-                            "Delete" {
-                                disableProperty().bind(
-                                    this@tableView.selectionModel.selectedItemProperty().isNull
-                                )
-                                onAction {
-                                    transaction {
-                                        this@tableView.selectionModel.selectedItem.delete()
-                                        this@tableView.items -=
-                                            this@tableView.selectionModel.selectedItem
-                                    }
-                                }
-                            }
-                            "Clear" {
-                                disableProperty().bind(
-                                    booleanBindingOf(this@tableView.items) {
-                                        this@tableView.items.isEmpty()
-                                    }
-                                )
-                                onAction {
-                                    confirmAlert("Remove all classes?", NO, YES).ifPresent {
-                                        if (it == YES) {
-                                            transaction { Classes.deleteAll() }
-                                            this@tableView.items.clear()
-                                        }
-                                    }
-                                }
-                            }
+                            append<String>("Track").string { track.trackColor }
+                            append<String>("Station").string { stationNameIn to stationNameOut }
                         }
                     }
                     splitPane {
                         orientation = VERTICAL
-                        classRegistrationTable = tableView {
-                            itemsProperty().bind(
-                                bindingOf(
-                                    classTable.selectionModel.selectedItemProperty()
-                                ) {
-                                    if (classTable.selectionModel.isNotSelected()) {
-                                        emptyObservableList()
-                                    } else {
-                                        transaction {
-                                            classTable.selectionModel.selectedItem.classStudents
-                                                .toMutableObservableList()
-                                        }
-                                    }
-                                }
-                            )
+                        alertTable = tableView(db.alerts.toCollection(mutableObservableListOf())) {
                             constrained()
                             columns {
-                                append<String>("Student").stringCell {
-                                    transaction { student }.toString()
+                                append<String>("Alert").string { title }
+                                append<String>("Date")
+                                    .string { dateStart.toString() until dateEnd?.toString() }
+                            }
+                            onMouseClicked { event ->
+                                if (event.isDoubleClick()) {
+                                    alertTable.selectionModel.selectedItem
+                                        ?.let { ViewAlertDialog(it).showAndWait() }
                                 }
-                                append<String>("Grade").stringCell { grade }
                             }
                             contextMenu {
-                                classRegistrationAddMenu = "Add" {
-                                    disableProperty().bind(
-                                        classTable.selectionModel.selectedItemProperty().isNull
-                                    )
+                                alertAddMenu = "Add" {
                                     onAction {
-                                        StudentPickerDialog().showAndWait().ifPresent { s ->
-                                            if (classRegistrationTable.items
-                                                    .any { transaction { it.student.id } == s.id }
-                                            ) {
-                                                errorAlert(
-                                                    "The student is already in this class.",
-                                                    CLOSE
-                                                )
-                                            } else {
-                                                classRegistrationTable.items += transaction {
-                                                    Registration.new {
-                                                        `class` =
-                                                            classTable.selectionModel.selectedItem
-                                                        student = s
-                                                    }
-                                                }
+                                        AddAlertDialog(db).showAndWait()
+                                            .ifPresent {
+                                                alertTable.items += it
+                                                infoAlert("Alert added.")
                                             }
-                                        }
                                     }
                                 }
-                                menu("Set Grade") {
+                                separatorMenuItem()
+                                "Delete" {
                                     disableProperty().bind(
                                         this@tableView.selectionModel.selectedItemProperty().isNull
                                     )
-                                    addSetGradeMenu("A")
-                                    addSetGradeMenu("B")
-                                    addSetGradeMenu("C")
-                                    addSetGradeMenu("D")
-                                    addSetGradeMenu("E")
-                                    addSetGradeMenu("F")
+                                    onAction {
+                                        // transaction {
+                                        //     this@tableView.selectionModel.selectedItem.delete()
+                                        //     this@tableView.items -=
+                                        //         this@tableView.selectionModel.selectedItem
+                                        // }
+                                    }
+                                }
+                            }
+                        }
+                        stationTable =
+                            tableView(db.stations.toCollection(mutableObservableListOf())) {
+                                constrained()
+                                columns {
+                                    append<String>("Station")
+                                        .string { "$stationName (${track.trackColor})" }
+                                    append<String>("Address").string { "$location, $zip" }
+                                    append<String>("Features").string {
+                                        buildString {
+                                            if (hasElevator) append("Elevator, ")
+                                            if (hasParking) append("Parking, ")
+                                        }.substringBeforeLast(',')
+                                    }
+                                }
+                                contextMenu {
+                                    stationAddMenu = "Add" {
+                                        disableProperty().bind(
+                                            tripTable.selectionModel.selectedItemProperty().isNull
+                                        )
+                                        onAction {
+                                        }
+                                    }
                                     separatorMenuItem()
-                                    addSetGradeMenu("Unset", null)
-                                }
-                                separatorMenuItem()
-                                "Delete" {
-                                    disableProperty().bind(
-                                        this@tableView.selectionModel.selectedItemProperty().isNull
-                                    )
-                                    onAction {
-                                        transaction {
-                                            this@tableView.selectionModel.selectedItem.delete()
-                                            this@tableView.items -=
-                                                this@tableView.selectionModel.selectedItem
+                                    "Delete" {
+                                        disableProperty().bind(
+                                            this@tableView.selectionModel
+                                                .selectedItemProperty().isNull
+                                        )
+                                        onAction {
                                         }
                                     }
                                 }
                             }
-                        }
-                        classScheduleTable = tableView {
-                            itemsProperty().bind(
-                                bindingOf(
-                                    classTable.selectionModel.selectedItemProperty()
-                                ) {
-                                    if (classTable.selectionModel.isNotSelected()) {
-                                        emptyObservableList()
-                                    } else {
-                                        transaction {
-                                            classTable.selectionModel.selectedItem.schedules
-                                                .toMutableObservableList()
-                                        }
-                                    }
-                                }
-                            )
-                            constrained()
-                            columns {
-                                append<String>("Schedule").stringCell {
-                                    DayOfWeek.of(day).toString()
-                                }
-                                append<String>("Start time").stringCell { timeStart.toString() }
-                                append<String>("End time").stringCell { timeEnd.toString() }
-                            }
-                            contextMenu {
-                                classScheduleAddMenu = "Add" {
-                                    disableProperty().bind(
-                                        classTable.selectionModel.selectedItemProperty().isNull
-                                    )
-                                    onAction {
-                                        AddScheduleDialog(classTable.selectionModel.selectedItem)
-                                            .showAndWait().ifPresent {
-                                                this@tableView.items += it
-                                            }
-                                    }
-                                }
-                                separatorMenuItem()
-                                "Delete" {
-                                    disableProperty().bind(
-                                        this@tableView.selectionModel.selectedItemProperty().isNull
-                                    )
-                                    onAction {
-                                        transaction {
-                                            this@tableView.selectionModel.selectedItem.delete()
-                                            this@tableView.items -=
-                                                this@tableView.selectionModel.selectedItem
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }.vgrow()
             }
         }
-    }
-
-    private fun Menu.addSetGradeMenu(menuText: String, gradeValue: String? = menuText) {
-        items.add(
-            menuItem(menuText) {
-                onAction {
-                    val registration = classRegistrationTable.selectionModel.selectedItem
-                    classRegistrationTable.items.replaceAll(
-                        registration,
-                        transaction { registration.apply { grade = gradeValue } }
-                    )
-                }
-            }
-        )
     }
 }

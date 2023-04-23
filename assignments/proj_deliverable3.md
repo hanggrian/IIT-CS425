@@ -1,4 +1,4 @@
-# [Project Deliverable 3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
+# [Project Deliverable 3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > Implement the logical model using a suitable relational DBMS. Create the
   database in the database system using general Data-definition language (DDL)
@@ -208,7 +208,7 @@ INSERT INTO Tracks VALUES
   ('Amber', 0);
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data1.png)
 
 ### Subproblem 2B
 
@@ -243,7 +243,7 @@ INSERT INTO Stations VALUES
   ('Pink', 'Pulaski', 41.7997, 87.7244, '5106 South Pulaski Road', '60632', 1, 0);
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data2.png)
 
 ### Subproblem 2C
 
@@ -276,7 +276,7 @@ INSERT INTO Conductors VALUES
   ('marsh4', DEFAULT, 'Shelley Marsh', '1994-01-01', 2023 - 1994, '202-555-0166');
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3.png)
 
 ### Subproblem 2D
 
@@ -336,7 +336,7 @@ INSERT INTO Alerts VALUES
     '2023-01-12', NULL, 'Orange', 'marsh4');
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data4.png)
 
 ### Subproblem 2E
 
@@ -369,7 +369,7 @@ INSERT INTO Locomotives VALUES
   ('2500', 2003);
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data5.png)
 
 ### Subproblem 2F
 
@@ -402,7 +402,7 @@ INSERT INTO Wagons VALUES
   ('2501', 40), ('2502', 50);
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data6.png)
 
 ### Subproblem 2G
 
@@ -435,7 +435,7 @@ INSERT INTO Trains VALUES
   (25, 'Yellow', '2500', 'marsh4');
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data7.png)
 
 ### Subproblem 2H
 
@@ -468,7 +468,7 @@ INSERT INTO Railcars VALUES
   (25, '2501'), (25, '2502');
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data8.png)
 
 ### Subproblem 2I
 
@@ -501,7 +501,7 @@ INSERT INTO Passengers VALUES
   (25, 'Abner Doubledeal');
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data9.png)
 
 ### Subproblem 2J
 
@@ -534,7 +534,7 @@ INSERT INTO Passes VALUES
   (25, '2023-12-27', '2024-03-27', 25);
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data10.png)
 
 ### Subproblem 2K
 
@@ -567,7 +567,7 @@ INSERT INTO Trips VALUES
   (DEFAULT, 25, NULL, 25, 'Purple', 'Howard', 'Foster');
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3_11.png)
+![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data11.png)
 
 ## Problem 3
 
@@ -582,7 +582,7 @@ SELECT CONCAT(`track`, IF(`is_24h`, ' (24h)', '')) AS `Active stations`
  FROM Tracks WHERE `track` IN(SELECT `track` FROM Stations);
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_1.png)
+![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement1.png)
 
 ### Subproblem 3B
 
@@ -594,7 +594,7 @@ SELECT `track`, `station`, `location`, `zip` FROM Stations
   WHERE `station` IN(SELECT `station` FROM Stations WHERE `track` = 'Blue');
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_2.png)
+![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement2.png)
 
 ### Subproblem 3C
 
@@ -608,7 +608,7 @@ SELECT CONCAT('Parking ', AVG(`has_parking`) * 100, '%')
   AS `Infrastructure rating` FROM Stations;
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_3.png)
+![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3.png)
 
 ### Subproblem 3D
 
@@ -620,7 +620,7 @@ SELECT `track`, `title`, `date_start` FROM Alerts
   WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL;
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_4.png)
+![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement4.png)
 
 ### Subproblem 3E
 
@@ -633,7 +633,7 @@ SELECT CONCAT(`name`, ' (', `username`, ')') AS `Lazy employees` FROM Conductors
     WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL);
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_5.png)
+![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement5.png)
 
 ### Subproblem 3F
 
@@ -645,7 +645,7 @@ SELECT * FROM Trains AS T LEFT JOIN Locomotives AS L
   WHERE `since` < 1980;
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_6.png)
+![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement6.png)
 
 ### Subproblem 3G
 
@@ -658,7 +658,7 @@ SELECT R.`train_id`, `track`, `username`, COUNT(R.`train_id`) AS `Wagon count`
   ON R.`train_id` = T.`train_id` GROUP BY `train_id`;
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_7.png)
+![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement7.png)
 
 ### Subproblem 3H
 
@@ -671,7 +671,7 @@ SELECT R.`train_id`, SUM(W.`seats`) AS `Seat capacity`
   ON R.`wagon_id` = W.`wagon_id` GROUP BY `train_id`;
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_8.png)
+![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement8.png)
 
 ### Subproblem 3I
 
@@ -684,7 +684,7 @@ SELECT `pass_id`, `date_start`, P1.`passenger_id`, `name` FROM Passes AS P1
   WHERE `date_end` >= '2023-01-01';
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_9.png)
+![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement9.png)
 
 ### Subproblem 3J
 
@@ -697,7 +697,7 @@ SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
     IN(SELECT `passenger_id` FROM Trips WHERE `timestamp` >= '2023-01-01');
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3_10.png)
+![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement10.png)
 
 ## Checklist
 
@@ -712,5 +712,5 @@ SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
 - Possible schema imporovement:
   - [ ] Support traveling by bus, doesn't add many tables but massively change
     the structure of existing tables.
-  - [x] Support membership with weekly and/or monthly payment, potentially adding
-    2-3 more tables.
+  - [x] Support membership with weekly and/or monthly payment, potentially
+    adding 2-3 more tables.

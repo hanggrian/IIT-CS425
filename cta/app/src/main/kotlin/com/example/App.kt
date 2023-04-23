@@ -1,11 +1,5 @@
 package com.example
 
-import com.example.dao.Classes
-import com.example.dao.Courses
-import com.example.dao.Lecturers
-import com.example.dao.Registrations
-import com.example.dao.Schedules
-import com.example.dao.Students
 import com.example.ui.AboutDialog
 import com.example.ui.MainStage
 import javafx.application.Application
@@ -13,7 +7,6 @@ import javafx.application.Platform
 import javafx.geometry.HPos
 import javafx.scene.control.ButtonType.CLOSE
 import javafx.scene.control.CheckBox
-import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.scene.input.KeyCode.Q
 import javafx.scene.input.KeyCombination.SHORTCUT_DOWN
@@ -32,20 +25,18 @@ import ktfx.layouts.menuBar
 import ktfx.layouts.menuItem
 import ktfx.layouts.passwordField
 import ktfx.layouts.scene
+import ktfx.layouts.textArea
 import ktfx.layouts.textField
 import ktfx.layouts.vbox
 import ktfx.runLater
 import org.apache.commons.lang3.SystemUtils.IS_OS_MAC_OSX
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.Slf4jSqlDebugLogger
-import org.jetbrains.exposed.sql.addLogger
-import org.jetbrains.exposed.sql.transactions.transaction
+import org.ktorm.database.Database
+import org.ktorm.logging.Slf4jLoggerAdapter
 import java.util.prefs.Preferences
 
 class App : Application() {
-    private lateinit var database: Database
-    private lateinit var preferences: Preferences
+    private lateinit var db: Database
+    private lateinit var prefs: Preferences
 
     lateinit var stage: Stage
     lateinit var hostIpField: TextField
@@ -64,7 +55,7 @@ class App : Application() {
     }
 
     override fun init() {
-        preferences = Preferences.userNodeForPackage(App::class.java)
+        prefs = Preferences.userNodeForPackage(App::class.java)
     }
 
     override fun start(stage: Stage) {
@@ -94,30 +85,30 @@ class App : Application() {
                     hgap = 10.0
                     vgap = 10.0
                     label("Host").grid(0, 0)
-                    hostIpField = textField(preferences.get("host_ip", "")) {
+                    hostIpField = textField(prefs.get("host_ip", "127.0.0.1")) {
                         runLater { requestFocus() }
                         prefWidth = WIDTH_LONG
                         promptText = "IP Address"
                     }.grid(0, 1)
-                    hostPortField = textField(preferences.get("host_port", "")) {
+                    hostPortField = textField(prefs.get("host_port", "3306")) {
                         prefWidth = WIDTH_SHORT
                         promptText = "Port"
                     }.grid(0, 2)
                     label("Schema").grid(1, 0)
-                    schemaField = textField(preferences.get("schema", "")) {
+                    schemaField = textField(prefs.get("schema", "cta")) {
                         promptText = "Schema"
                     }.grid(1, 1 to 2)
                     label("User").grid(2, 0)
-                    userField = textField(preferences.get("user", "")) {
+                    userField = textField(prefs.get("user", "root")) {
                         promptText = "User"
                     }.grid(2, 1 to 2)
                     label("Password").grid(3, 0)
                     passwordField = passwordField {
-                        text = preferences.get("password", "")
+                        text = prefs.get("password", "")
                         promptText = "Password"
                     }.grid(3, 1 to 2)
                     keepSignCheck = checkBox("Keep me signed-in") {
-                        isSelected = preferences.getBoolean("keep_sign", false)
+                        isSelected = prefs.getBoolean("keep_sign", false)
                     }.grid(4, 0 to 3).halign(HPos.RIGHT)
                     buttonBar {
                         button("Quit") {
@@ -146,32 +137,30 @@ class App : Application() {
         val user = userField.text
         val password = passwordField.text
 
-        preferences.put("host_ip", hostIp)
-        preferences.put("host_port", hostPort)
-        preferences.put("schema", schema)
-        preferences.put("user", user)
-        preferences.put("password", password)
-        preferences.putBoolean("keep_sign", keepSignCheck.isSelected)
-        preferences.sync()
-        preferences.flush()
-
-        database = Database.connect(
-            "jdbc:mysql://$hostIp:$hostPort/$schema",
-            driver = "com.mysql.cj.jdbc.Driver",
-            user = user,
-            password = password
-        )
+        prefs.put("host_ip", hostIp)
+        prefs.put("host_port", hostPort)
+        prefs.put("schema", schema)
+        prefs.put("user", user)
+        prefs.put("password", password)
+        prefs.putBoolean("keep_sign", keepSignCheck.isSelected)
+        prefs.sync()
+        prefs.flush()
 
         try {
-            transaction {
-                addLogger(Slf4jSqlDebugLogger)
-                SchemaUtils.create(Classes, Registrations, Courses, Lecturers, Schedules, Students)
-            }
-            MainStage().show()
+            val db = Database.connect(
+                "jdbc:mysql://$hostIp:$hostPort/$schema",
+                driver = "com.mysql.cj.jdbc.Driver",
+                user = user,
+                password = password,
+                logger = Slf4jLoggerAdapter("CTA")
+            )
+            MainStage(db).show()
             stage.close()
         } catch (e: Exception) {
             errorAlert("Connect Failed", null, "Expand dialog to show error details.", CLOSE) {
-                dialogPane.expandableContent = TextArea(e.message)
+                dialogPane.expandableContent = textArea(e.message!!) {
+                    isEditable = false
+                }
             }
         }
     }

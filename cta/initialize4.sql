@@ -14,29 +14,30 @@ DROP TABLE IF EXISTS Stations;
 DROP TABLE IF EXISTS Tracks;
 
 CREATE TABLE Tracks(
-  `track` VARCHAR(20) PRIMARY KEY,
+  `track_color` VARCHAR(20) PRIMARY KEY,
   `is_24h` BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE Stations(
-  `track` VARCHAR(20),
-  `station` VARCHAR(50) NOT NULL,
-  `lat` DECIMAL(8, 6),
-  `lng` DECIMAL(9, 6),
+  `track_color` VARCHAR(20),
+  `station_name` VARCHAR(50) NOT NULL,
+  `lat` DOUBLE(8, 6),
+  `lng` DOUBLE(9, 6),
   `location` VARCHAR(200),
   `zip` VARCHAR(5) NOT NULL,
   `has_elevator` BOOLEAN NOT NULL DEFAULT 0,
   `has_parking` BOOLEAN NOT NULL DEFAULT 0,
-  PRIMARY KEY(`track`, `station`),
-  INDEX(`station`),
-  CONSTRAINT Stations_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
+  PRIMARY KEY(`track_color`, `station_name`),
+  INDEX(`station_name`),
+  CONSTRAINT Stations_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Conductors(
-  `username` VARCHAR(20) PRIMARY KEY,
-  `password` VARCHAR(20) DEFAULT '1234',
+  `conductor_username` VARCHAR(20) PRIMARY KEY,
+  `password` VARCHAR(64) DEFAULT '',
   `fullname` VARCHAR(50) NOT NULL,
+  `joined` DATE NOT NULL,
   `birth` DATE NOT NULL,
   `age` INT NOT NULL,
   `phones` VARCHAR(50),
@@ -50,19 +51,19 @@ CREATE TABLE Alerts(
   `message` VARCHAR(400),
   `date_start` DATE NOT NULL,
   `date_end` DATE,
-  `track` VARCHAR(20),
-  `username` VARCHAR(20) NOT NULL,
-  INDEX(`title`)
-  CONSTRAINT Alerts_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
+  `track_color` VARCHAR(20),
+  `conductor_username` VARCHAR(20) NOT NULL,
+  INDEX(`title`),
+  CONSTRAINT Alerts_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Alerts_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT Alerts_username FOREIGN KEY(`conductor_username`)
+    REFERENCES Conductors(`conductor_username`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Locomotives(
-  `serial_no` VARCHAR(4) PRIMARY KEY,
+  `locomotive_serial` VARCHAR(4) PRIMARY KEY,
   `since` YEAR(4) NOT NULL,
-  CHECK(LENGTH(`serial_no`) = 4)
+  CHECK(LENGTH(`locomotive_serial`) = 4)
 );
 
 CREATE TABLE Wagons(
@@ -73,15 +74,15 @@ CREATE TABLE Wagons(
 
 CREATE TABLE Trains(
   `train_id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track` VARCHAR(20) NOT NULL,
-  `serial_no` VARCHAR(4) NOT NULL,
-  `username` VARCHAR(20) NOT NULL,
-  CONSTRAINT Trains_track FOREIGN KEY(`track`) REFERENCES Tracks(`track`)
+  `track_color` VARCHAR(20) NOT NULL,
+  `locomotive_serial` VARCHAR(4) NOT NULL,
+  `conductor_username` VARCHAR(20) NOT NULL,
+  CONSTRAINT Trains_track_color FOREIGN KEY(`track_color`) REFERENCES Tracks(`track_color`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trains_serial_no FOREIGN KEY(`serial_no`) REFERENCES Locomotives(`serial_no`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trains_username FOREIGN KEY(`username`) REFERENCES Conductors(`username`)
-    ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT Trains_locomotive_serial FOREIGN KEY(`locomotive_serial`)
+    REFERENCES Locomotives(`locomotive_serial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT Trains_username FOREIGN KEY(`conductor_username`)
+    REFERENCES Conductors(`conductor_username`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Railcars(
@@ -97,6 +98,7 @@ CREATE TABLE Railcars(
 CREATE TABLE Passengers(
   `passenger_id` INT AUTO_INCREMENT PRIMARY KEY,
   `fullname` VARCHAR(50) NOT NULL,
+  `joined` DATE NOT NULL,
   INDEX(`fullname`)
 );
 
@@ -111,22 +113,22 @@ CREATE TABLE Passes(
 );
 
 CREATE TABLE Trips(
-  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `trip_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `passenger_id` INT,
-  `fare` DECIMAL(13, 2),
+  `fare` DECIMAL(13, 2) NOT NULL,
   `pass_id` INT,
-  `track` VARCHAR(20) NOT NULL,
-  `station_in` VARCHAR(50) NOT NULL,
-  `station_out` VARCHAR(50) NOT NULL,
-  PRIMARY KEY(`timestamp`, `passenger_id`),
+  `track_color` VARCHAR(20) NOT NULL,
+  `station_name_in` VARCHAR(50) NOT NULL,
+  `station_name_out` VARCHAR(50),
+  PRIMARY KEY(`trip_timestamp`, `passenger_id`),
   CONSTRAINT Trips_passenger_id FOREIGN KEY(`passenger_id`) REFERENCES Passengers(`passenger_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT Trips_pass_id FOREIGN KEY(`pass_id`) REFERENCES Passes(`pass_id`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_track FOREIGN KEY(`track`) REFERENCES Stations(`track`)
+  CONSTRAINT Trips_track_color FOREIGN KEY(`track_color`) REFERENCES Stations(`track_color`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_in FOREIGN KEY(`station_in`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_name_in FOREIGN KEY(`station_name_in`) REFERENCES Stations(`station_name`)
     ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT Trips_station_out FOREIGN KEY(`station_out`) REFERENCES Stations(`station`)
+  CONSTRAINT Trips_station_name_out FOREIGN KEY(`station_name_out`) REFERENCES Stations(`station_name`)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 );

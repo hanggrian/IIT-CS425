@@ -10,9 +10,9 @@ attribute to another attribute in a Database Management System (DBMS).
 Functional Dependency helps to maintain the quality of data in the database. It
 plays a vital role to find the difference between good and bad database design.
 
-A functional dependency is denoted by an arrow $\rightarrow$. The functional
-dependency of $X$ on $Y$ is represented by $X \rightarrow Y$. Let’s understand
-Functional Dependency in DBMS with example.
+A functional dependency is denoted by an arrow $\to$. The functional dependency
+of $X$ on $Y$ is represented by $X \to Y$. Let's understand functional
+dependency in DBMS with example.
 
 ### Example
 
@@ -32,13 +32,12 @@ Below are the Three most important rules for Functional Dependency in Database:
 
 - **Reflexive rule**: If $X$ is a set of attributes and $Y$ is_subset_of $X$,
   then $X$ holds a value of $Y$.
-- **Augmentation rule**: When $x \rightarrow y$ holds, and $c$ is attribute set,
-  then $ac \rightarrow bc$ also holds. That is adding attributes which do not
-  change the basic dependencies.
+- **Augmentation rule**: When $x \to y$ holds, and $c$ is attribute set,
+  then $ac \to bc$ also holds. That is adding attributes which do not change the
+  basic dependencies.
 - **Transitivity rule**: This rule is very much similar to the transitive rule
-  in algebra if $x \rightarrow y$ holds and $y \rightarrow z$ holds,
-  then $x \rightarrow z$ also holds. $X \rightarrow y$ is called as functionally
-  that determines $y$.
+  in algebra if $x \to y$ holds and $y \to z$ holds, then $x \to z$ also
+  holds. $X \to y$ is called as functionally that determines $y$.
 
 ## Types of functional fependencies in DBMS
 
@@ -74,8 +73,8 @@ dependent on car_model.
 This dependence can be represented like this:
 
 $$
-car\_model \rightarrow maf\_year \\
-car\_model \rightarrow colour
+car\_model \to maf\_year \\
+car\_model \to colour
 $$
 
 ### Trivial Functional Dependency in DBMS
@@ -83,8 +82,8 @@ $$
 The Trivial dependency is a set of attributes which are called a trivial if the
 set of attributes are included in that attribute.
 
-So, $X \rightarrow Y$ is a trivial functional dependency if $Y$ is a subset
-of $X$. Let’s understand with a Trivial Functional Dependency Example.
+So, $X \to Y$ is a trivial functional dependency if $Y$ is a subset of $X$.
+Let's understand with a Trivial Functional Dependency Example.
 
 For example:
 
@@ -99,9 +98,9 @@ Consider this table of with two columns Emp_id and Emp_name.
 {Emp_id, Emp_name} -> Emp_id is a trivial functional dependency as Emp_id is a
 subset of {Emp_id,Emp_name}. Non Trivial Functional Dependency in DBMS
 Functional dependency which also known as a nontrivial dependency occurs
-when $A \rightarrow B$ holds true where $B$ is not a subset of $A$. In a
-relationship, if attribute $B$ is not a subset of attribute $A$, then it is
-considered as a non-trivial dependency.
+when $A \to B$ holds true where $B$ is not a subset of $A$. In a relationship,
+if attribute $B$ is not a subset of attribute $A$, then it is considered as a
+non-trivial dependency.
 
 | Company | CEO | Age |
 | --- | --- | --- |
@@ -109,15 +108,15 @@ considered as a non-trivial dependency.
 | Google | Sundar Pichai | 46 |
 | Apple | Tim Cook | 57 |
 
-(Company} -> {CEO} (if we know the Company, we knows the CEO name)
+(Company) -> {CEO} (if we know the Company, we knows the CEO name)
 
-But CEO is not a subset of Company, and hence it’s non-trivial functional
+But CEO is not a subset of Company, and hence it's non-trivial functional
 dependency.
 
 ### Transitive Dependency in DBMS
 
 A Transitive Dependency is a type of functional dependency which happens
-when “t” is indirectly formed by two functional dependencies. Let’s understand
+when "t" is indirectly formed by two functional dependencies. Let's understand
 with the following Transitive Dependency Example.
 
 | Company | CEO | Age |
@@ -126,7 +125,7 @@ with the following Transitive Dependency Example.
 | Google | Sundar Pichai | 46 |
 | Alibaba | Jack Ma | 54 |
 
-{Company} -> {CEO} (if we know the compay, we know its CEO’s name)
+{Company} -> {CEO} (if we know the compay, we know its CEO's name)
 
 {CEO } -> {Age} If we know the CEO, we know the Age
 

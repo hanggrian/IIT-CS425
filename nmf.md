@@ -36,12 +36,12 @@ The evolution of Normalization in SQL theories is illustrated below-
 Database Normalization Example can be easily understood with the help of a case
 study. Assume, a video library maintains a database of movies rented out.
 Without any normalization in database, all information is stored in one table as
-shown below. Let’s understand Normalization database with normalization example
+shown below. Let's understand Normalization database with normalization example
 with solution:
 
 ![](https://www.guru99.com/images/NormalizationTable1.png)
 
-Here you see Movies Rented column has multiple values. Now let’s move into 1st
+Here you see Movies Rented column has multiple values. Now let's move into 1st
 Normal Forms:
 
 ## 1NF Rules
@@ -59,7 +59,7 @@ The above table in 1NF-
 - Single Column Primary Key that does not functionally dependant on any subset
   of candidate key relation.
 
-It is clear that we can’t move forward to make our simple database in 2nd
+It is clear that we can't move forward to make our simple database in 2nd
 Normalization form unless we partition the table above.
 
 ![](https://www.guru99.com/images/Table2.png)
@@ -120,7 +120,7 @@ into any number of smaller tables without loss of data.
 database experts for some time. Hopefully, we would have a clear & standardized
 definition for 6th Normal Form in the near future…
 
-That’s all to SQL Normalization!!!
+That's all to SQL Normalization!!!
 
 ## Summary
 

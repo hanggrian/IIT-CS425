@@ -8,12 +8,12 @@ import kotlin.test.assertEquals
 class PreferencesTest {
     @Test
     fun test() {
-        val preferences = Preferences.userNodeForPackage(App::class.java)
-        preferences.clear()
+        val prefs = Preferences.userNodeForPackage(App::class.java)
+        prefs.clear()
 
-        assertEquals("default", preferences.get("test", "default"))
+        assertEquals("default", prefs.get("test", "default"))
 
-        preferences.put("test", "something")
-        assertEquals("something", preferences.get("test", ""))
+        prefs.put("test", "something")
+        assertEquals("something", prefs.get("test", ""))
     }
 }

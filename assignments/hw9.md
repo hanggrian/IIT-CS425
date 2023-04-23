@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.9](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw9.pdf): Functional Dependencies
+# [Homework 1.9](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw9.pdf): Functional dependencies
 
 > You are given the below functional dependencies for the
   relation $R(A\ B\ C\ D\ E\ F)$,
@@ -11,10 +11,10 @@
 > $$
 > \begin{array}{llll}
 >   F = \{ \\
->   & A & \rightarrow & BC, \\
->   & C & \rightarrow & DA, \\
->   & D & \rightarrow & E, \\
->   & AD & \rightarrow & F \\
+>   & A & \to & BC, \\
+>   & C & \to & DA, \\
+>   & D & \to & E, \\
+>   & AD & \to & F \\
 >   \}
 > \end{array}
 > $$
@@ -31,12 +31,12 @@
 
 $$
 \begin{array}{lll}
-  A & \rightarrow & B \\
-  A & \rightarrow & C \\
-  C & \rightarrow & D \\
-  C & \rightarrow & A \\
-  D & \rightarrow & E \\
-  AD & \rightarrow & F
+  A & \to & B \\
+  A & \to & C \\
+  C & \to & D \\
+  C & \to & A \\
+  D & \to & E \\
+  AD & \to & F
 \end{array}
 $$
 
@@ -61,11 +61,9 @@ Therefore, there relation keys are $\{A,C\}$.
 
 Backtracking from the highest order:
 
-- Not 3NF/BCNF, because there is transitive
-  dependency $C \rightarrow D \rightarrow E$.
-- Not 2NF, because there is partial dependency $AD \rightarrow F$.
+- Not 3NF/BCNF, because there is transitive dependency $C \to D \to E$.
+- Not 2NF, because there is partial dependency $AD \to F$.
 - Therefore, **the relation is 1NF**.
-
 
 ## Problem 3
 
@@ -73,21 +71,21 @@ Backtracking from the highest order:
 
 $$
 \begin{array}{lll}
-  A & \rightarrow & BC, \\
-  C & \rightarrow & DA, \\
-  D & \rightarrow & E, \\
-  AD & \rightarrow & F
+  A & \to & BC, \\
+  C & \to & DA, \\
+  D & \to & E, \\
+  AD & \to & F
 \end{array}
 $$
 
 ### Step 1: Eliminate redundancy
 
-It can be concluded that $C \rightarrow F$ based on relation:
+It can be concluded that $C \to F$ based on relation:
 
 $$
 \begin{array}{lll}
-  C & \rightarrow & DA, \\
-  AD & \rightarrow & F
+  C & \to & DA, \\
+  AD & \to & F
 \end{array}
 $$
 
@@ -95,20 +93,20 @@ Below is an updated relations, there is no more to deduce.
 
 $$
 \begin{array}{lll}
-  A & \rightarrow & BC, \\
-  C & \rightarrow & F, \\
-  D & \rightarrow & E
+  A & \to & BC, \\
+  C & \to & F, \\
+  D & \to & E
 \end{array}
 $$
 
 ### Step 2: Break down right parts
 
-Breaking down $A \rightarrow BC$ into:
+Breaking down $A \to BC$ into:
 
 $$
 \begin{array}{lll}
-  A & \rightarrow & B, \\
-  A & \rightarrow & C
+  A & \to & B, \\
+  A & \to & C
 \end{array}
 $$
 
@@ -116,12 +114,12 @@ Below is the result.
 
 $$
 \begin{array}{lll}
-  A & \rightarrow & B, \\
-  A & \rightarrow & C, \\
-  C & \rightarrow & F, \\
-  D & \rightarrow & E
+  A & \to & B, \\
+  A & \to & C, \\
+  C & \to & F, \\
+  D & \to & E
 \end{array}
 $$
 
 Therefore, **the canonical cover
-is $\bf \{A \rightarrow B, A \rightarrow B, C \rightarrow F, D \rightarrow E\}$**.
+is $\bf \{A \to B, A \to B, C \to F, D \to E\}$**.

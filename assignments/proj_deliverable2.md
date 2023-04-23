@@ -1,4 +1,4 @@
-# [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
+# [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > Develop a detailed ER-model for the application. Translate the conceptual
   model into a detailed logical model showing relational schema with appropriate
@@ -253,5 +253,5 @@ CREATE TABLE Trips(
 - Possible schema imporovement:
   - [ ] Support traveling by bus, doesn't add many tables but massively change
     the structure of existing tables.
-  - [x] Support membership with weekly and/or monthly payment, potentially adding
-    2-3 more tables.
+  - [x] Support membership with weekly and/or monthly payment, potentially
+    adding 2-3 more tables.

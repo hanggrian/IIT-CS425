@@ -1,9 +1,9 @@
-# [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): CTA
+# [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > Create a conceptual model consisting of the most essential information
   required for the selected application. Explore the website of the selected
   application to identify the relevant data, relationships, semantics,
-  constraints, users, and users’ needs, and interesting use cases.
+  constraints, users, and users' needs, and interesting use cases.
 
 ## Problem 1
 
@@ -126,7 +126,7 @@ CREATE TABLE Passengers(
   - [ ] Add nullability check.
   - [ ] Add default values.
 - Possible schema imporovement:
-  - [ ] Support membership with weekly and/or monthly payment, potentially adding
-    2-3 more tables.
+  - [ ] Support membership with weekly and/or monthly payment, potentially
+    adding 2-3 more tables.
   - [ ] Support traveling by bus, doesn't add many tables but massively change
     the structure of existing tables.
