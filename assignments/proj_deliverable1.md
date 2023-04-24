@@ -1,16 +1,14 @@
 # [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
-> Create a conceptual model consisting of the most essential information
-  required for the selected application. Explore the website of the selected
-  application to identify the relevant data, relationships, semantics,
-  constraints, users, and users' needs, and interesting use cases.
+> **Conceptual model**: Create a conceptual model consisting of the most
+  essential information required for the selected application. Explore the
+  website of the selected application to identify the relevant data,
+  relationships, semantics, constraints, users, and users’ needs, and
+  interesting use cases. Represent the conceptual model using the Entity
+  relationship - Diagram (ERD) showing the most important entities and
+  relationships.
 
-## Problem 1
-
-> Represent the conceptual model using the Entity relationship - Diagram (ERD)
-  showing the most important entities and relationships.
-
-### ER diagram
+## ER diagram
 
 ![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png)
 
@@ -31,9 +29,7 @@
 - A track can be passed by **many** trains, a train is only registered to
   **one** track.
 
-## Extra
-
-### Notes
+## Notes
 
 - **WagonRegistrations** is a bridge table for many-to-many relationship
   between **Wagons** and **Trains**.
@@ -44,7 +40,7 @@
   created every day.
 - Transferrable stations require multiple entries into **Stations**.
 
-### SQL initialization
+## SQL initialization
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS CTA;

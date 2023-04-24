@@ -1,20 +1,30 @@
 # [Project Deliverable 4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
-> The last deliverable requires to write a program in any programming language
-  SQL supports and implement a variety of SQL commands.
-
-## Problem 1
-
-> The application can either be web or desktop application and must be
-  demonstrated on the due date.
+> **Application**: The last deliverable requires to write a program in any
+  programming language SQL supports and implement a variety of SQL commands.
+  Extra points will be awarded to a group that tests a variety of challenging
+  SQL usage (such as set operations, aggregate functions, set membership, set
+  comparison, subqueries using WITH clause, etc.). Further, interesting use
+  cases that can be evaluated with sample queries will earn extra points. The
+  application can either be web or desktop application and must be demonstrated
+  on the due date.
+>
+> | Rubric | Bad | Good | Great | Total |
+> | --- | ---: | ---: | ---: | ---: |
+> | Students have used a programming language to demonstrate the 10 different types of queries tested in the 3rd deliverable. | 0-4 | 5-6 | 7-8 | 9-10 |
+> | Students have demonstrated at least 2 or 3 complex, but interesting queries according to the selected application. | 0-1 | 2-3 | 4-5 | 5 |
+> | The application has a user friendly interface/display with features such as menus, buttons, etc. | 0-1 | 2-3 | 4-5 | 5 |
+> | Students have presented their project in class on the due date and have uploaded all the working files and folders of the project. | 0-4 | 5-6 | 7-8 | 9-10 |
+> | Personal contribution, a group must give a percent contribution of each member across all deliverables. | 0-1 | 2-3 | 4-5 | 5 |
 
 ![App preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/preview.png)
 
 A 3-columns windowed multi-platform desktop app.
 
 - [DMG](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.dmg)
-  &ndash; macOS moutable with one-file application inside. For permission error,
-  run `sudo xattr -cr /Applications/CTA.app`.
+  &ndash; macOS moutable with one-file application inside.
+  - For permission error: run `sudo xattr -cr /Applications/CTA.app`, open app,
+    then click allow on *System Settings > Privacy & Security*.
 - [EXE](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.exe)
   &ndash; Windows installer to default directory.
 - [JAR](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0.jar)
@@ -22,53 +32,130 @@ A 3-columns windowed multi-platform desktop app.
 
 ### Tech stack
 
-- *JavaFX* GUI:
-  - Reactive interface, texts are updated real-time with `Observable`.
-  - Handles file import/export with native picker.
+- *JavaFX* GUI.
 - *Kotlin* language and buildscript.
-- [Ktorm](https://www.ktorm.org/), use SQL with Kotlin DSL.
+- [Ktorm](https://www.ktorm.org/), use SQL result rows as Kotlin objects.
 
-## Problem 2
+## Use case
 
-> Extra points will be awarded to a group that tests a variety of challenging
-  SQL usage (such as set operations, aggregate functions, set membership, set
-  comparison, subqueries using WITH clause, etc.).
+### Case 1
 
-### Sample 1
+**Login dialog**: At the start of use, there is a MySQL login prompt. This
+dialog remembers user input by saving it to local preferences. This MySQL user'
+credential is separate from `db.conductors[i].password`.
 
-At the start of use, there is a MySQL login prompt. This dialog remembers user
-input by saving it to local preferences. Admittedly not the best choice to store
-a password, but security has never been a strong focus of this assignment.
+This `db` instance will be carried around everywhere. There is no global
+instance to database, as it is a bad practice.
 
-![Login dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample1.png)
+```kotlin
+val prefs = Preferences.userNodeForPackage(App::class.java)
+prefs.put("host_ip", hostIp)
+prefs.put("host_port", hostPort)
+prefs.put("schema", schema)
+prefs.put("user", user)
+prefs.put("password", password)
+prefs.putBoolean("keep_sign", keepSignCheck.isSelected)
+prefs.sync()
+prefs.flush()
 
-### Sample 2
+val db = Database.connect(
+    "jdbc:mysql://$hostIp:$hostPort/$schema",
+    driver = "com.mysql.cj.jdbc.Driver",
+    user = user,
+    password = password,
+    logger = Slf4jLoggerAdapter("CTA")
+)
+```
 
-Password are obfuscated with `SHA-256` hash function, the string will be
-generated up to 64 length.
+![Login dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case1.png)
 
-![Conductor table dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample2_1.png)
+### Case 2
 
-![Reset password dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample2_2.png)
+**List items**: Once logged in, the main screen consist of trips, alerts, and
+stations. Table items are populated manually by clicking refresh menu.
 
-![Reset password result.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample2_3.png)
+```kotlin
+val tripTable = tableView<Trip>()
+val alertTable = tableView<Alert>()
+val stationTable = tableView<Station>()
 
-### Sample 3
+"File" {
+    "Refresh" {
+        accelerator = SHORTCUT_DOWN + R
+        onAction {
+            tripTable.items = db.sequenceOf(Trips)
+            alertTable.items = db.sequenceOf(Alerts)
+            stationTable.items = db.sequenceOf(Stations)
+        }
+    }
+}
+```
 
-Adding an alert requires conductor's credential. The password entered here will
-also be hashed and compared to `db.conductors[i].password`, which is already
-hashed.
+![Refresh menu.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case2_1.png)
 
-![Add alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample3_1.png)
+![3 tables in main stage.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case2_2.png)
 
-![View alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/sample3_2.png)
+### Case 3
 
-## Problem 3
+**Randomize password**: Password are obfuscated with `SHA-256` hash function,
+the string will be generated up to 64 length.
 
-> Further, interesting use cases that can be evaluated with sample queries will
-  earn extra points.
+```kotlin
+val digest = java.security.MessageDigest.getInstance("SHA-256")
+digest.update(toByteArray())
+val newPassword = String(digest.digest())
 
-## Extra
+db.update(Conductors) {
+    set(it.password, newPassword)
+    where { it.conductorUsername eq selectedConductor.conductorUsername }
+}
+```
+
+![Conductor table dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_1.png)
+
+![Reset password dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_2.png)
+
+![Reset password result.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_3.png)
+
+### Case 4
+
+**Add alert**: Adding an alert requires conductor's credential. The password
+entered here will also be hashed and compared to `db.conductors[i].password`,
+which is already hashed.
+
+```kotlin
+val alert = Alert {
+    title = titleField.text
+    message = messageArea.text
+    dateStart = dateStartPicker.value
+    dateEnd = dateEndPicker.value
+    track = trackChoice.value
+    conductor = conductorUserChoice.value
+}
+db.alerts.add(alert)
+```
+
+![Add alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case4_1.png)
+
+![View alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case4_2.png)
+
+### Case 5
+
+**Add pass**: Add pass to a passenger specifying date range. If today is in
+range of their passes, the column value will say **Yes**.
+
+```kotlin
+val pass = Pass {
+    passenger = selectedPassenger
+    dateStart = dateStartPicker.value
+    dateEnd = dateEndPicker.value
+}
+db.passes.add(alert)
+```
+
+![Add alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case5_1.png)
+
+![View alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case5_2.png)
 
 > #### Old ER diagram
 >
@@ -231,6 +318,136 @@ CREATE TABLE Trips(
 
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize4.sql)
 / [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data4.sql)
+
+> ## Old SQL statements
+>
+> SQL statements from deliverable 3 still stands.
+>
+> ### Statement 1
+>
+> **Operable tracks**: List how many tracks are actively in use.
+>
+> ```sql
+> SELECT CONCAT(`track`, IF(`is_24h`, ' (24h)', '')) AS `Active stations`
+>   FROM Tracks WHERE `track` IN(SELECT `track` FROM Stations);
+> ```
+>
+> ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement1.png)
+>
+> ### Statement 2
+>
+> **Station's route**: Blue line is the most used track of CTA, list its route
+  and intersections with other lines.
+>
+> ```sql
+> SELECT `track`, `station`, `location`, `zip` FROM Stations
+>   WHERE `station` IN(SELECT `station` FROM Stations WHERE `track` = 'Blue');
+> ```
+>
+> ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement2.png)
+>
+> ### Statement 3
+>
+> **Station's infrastructure**: CTA strives for building quality, here's a
+  statistics of how many infrastructure are in place.
+>
+> ```sql
+> SELECT CONCAT('Elevator ', AVG(`has_elevator`) * 100, '%')
+>   AS `Infrastructure rating` FROM Stations UNION
+> SELECT CONCAT('Parking ', AVG(`has_parking`) * 100, '%')
+>   AS `Infrastructure rating` FROM Stations;
+> ```
+>
+> ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3.png)
+>
+> ### Statement 4
+>
+> **Old alerts**: Service alerts can have indefinite running time. List really
+  old alerts.
+>
+> ```sql
+> SELECT `track`, `title`, `date_start` FROM Alerts
+>   WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL;
+> ```
+>
+> ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement4.png)
+>
+> ### Statement 5
+>
+> **Punish lazy conductors**: Maintaining service alert is the responsibility of
+  the employee who create it. Notify those employees.
+>
+> ```sql
+> SELECT CONCAT(`name`, ' (', `username`, ')') AS `Lazy employees` FROM Conductors
+>   WHERE `username` IN(SELECT `username` FROM Alerts
+>     WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL);
+> ```
+>
+> ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement5.png)
+>
+> ### Statement 6
+>
+> **Old trains**: Old trains are prone to accidents and need to be decommisioned.
+>
+> ```sql
+> SELECT * FROM Trains AS T LEFT JOIN Locomotives AS L
+>   ON T.`serial_no` = L.`serial_no`
+>   WHERE `since` < 1980;
+> ```
+>
+> ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement6.png)
+>
+> ### Statement 7
+>
+> **Train status**: Common attributes of a train: track, conductor, and how many
+  wagons it carries.
+>
+> ```sql
+> SELECT R.`train_id`, `track`, `username`, COUNT(R.`train_id`) AS `Wagon count`
+>   FROM Railcars AS R LEFT JOIN Trains AS T
+>   ON R.`train_id` = T.`train_id` GROUP BY `train_id`;
+> ```
+>
+> ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement7.png)
+>
+> ### Statement 8
+>
+> **Heaviest trains**: Each wagon contain different number of seats, calculate
+  the total.
+>
+> ```sql
+> SELECT R.`train_id`, SUM(W.`seats`) AS `Seat capacity`
+>   FROM Railcars AS R LEFT JOIN Wagons AS W
+>   ON R.`wagon_id` = W.`wagon_id` GROUP BY `train_id`;
+> ```
+>
+> ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement8.png)
+>
+> ### Statement 9
+>
+> **Pass popularity**: Discover how many of CTA users have ongoing passes.
+>
+> ```sql
+> SELECT `pass_id`, `date_start`, P1.`passenger_id`, `name` FROM Passes AS P1
+>   LEFT JOIN Passengers AS P2
+>   ON P1.`passenger_id` = P2.`passenger_id`
+>   WHERE `date_end` >= '2023-01-01';
+> ```
+>
+> ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement9.png)
+>
+> ### Statement 10
+>
+> **Passenger engagement**: Discover how many CTA customers have used the
+  service within this year.
+>
+> ```sql
+> SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
+>   FROM Passengers WHERE `passenger_id`
+>     IN(SELECT `passenger_id` FROM Trips WHERE `timestamp` >= '2023-01-01');
+> ```
+>
+> ![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement10.png)
 
 ## Checklist
 

@@ -8,7 +8,7 @@ plugins {
 application.mainClass.set("com.example.App")
 
 packaging {
-    appName.set("Cheapest Merchandise")
+    appName.set("CTA")
     modules.set(listOf("javafx.controls"))
     verbose.set(true)
 }
@@ -18,6 +18,7 @@ dependencies {
     ktlint(libs.rulebook.ktlint)
     implementation(libs.kotlinx.coroutines.javafx)
     implementation(libs.bundles.ktorm)
+    implementation(libs.bundles.mysql)
     implementation(libs.ktfx)
     implementation(libs.commons.lang3)
     testImplementation(kotlin("test-junit", libs.versions.kotlin.get()))

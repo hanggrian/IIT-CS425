@@ -1,36 +1,38 @@
 # [Project Deliverable 3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
-> Implement the logical model using a suitable relational DBMS. Create the
-  database in the database system using general Data-definition language (DDL)
-  statements. Load mock data (using free online data generator tools) into the
-  database to test a variety of SQL commands.
+> **Physical model**: Implement the logical model using a suitable relational
+  DBMS. Create the database in the database system using general Data-definition
+  language (DDL) statements. Load mock data (using free online data generator
+  tools) into the database to test a variety of SQL commands.
+>
+> | Rubric | Bad | Good | Great | Total |
+> | --- | ---: | ---: | ---: | ---: |
+> | A student has created the database and the necessary relations using SQL DDL commands. | 0-1 | 2-3 | 4-5 | 5 |
+> | The exact Logical model (relation schemas) submitted in 2nd deliverable has been fully implemented in MySQL or PostgreSQL. The student needs to clearly state if the logical model implemented differs from that of the 2nd deliverable. | 0-2 | 4-6 | 7-10 | 10 |
+> | At least 25 records (25 or more) have been loaded into each relation of the database. | 0-2 | 4-6 | 7-10 | 10 |
+> | A student has tested at least 10 different types of queries and has provided: 1) the query statement, 2) the SQL commands, and 3) the query output per query. | 0-1 | 2-3 | 4-5 | 5 |
 
-> #### Old ER diagram
+> ### Old ER diagram
 >
 > <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png"/>
 
-### New ER diagram
+## New ER diagram
 
 ![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.png)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
-> #### Old UML diagram
+> ### Old UML diagram
 >
 > <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png"/>
 
-### New UML diagram
+## New UML diagram
 
 ![The UML diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.png)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
-## Problem 1
-
-> Create the database in the database system using general Data-definition
-  language (DDL) statements.
-
-### SQL initialization
+## SQL initialization
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS CTA;
@@ -170,12 +172,9 @@ CREATE TABLE Trips(
 [View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize3.sql)
 / [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data3.sql)
 
-## Problem 2
+## SQL commands
 
-> Load mock data (using free online data generator tools) into the database to
-  test a variety of SQL commands.
-
-### Subproblem 2A
+### Command 1
 
 Tracks are based on actual tracks.
 
@@ -210,7 +209,7 @@ INSERT INTO Tracks VALUES
 
 ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data1.png)
 
-### Subproblem 2B
+### Command 2
 
 Stations are based on [L map](https://www.transitchicago.com/assets/1/6/ctamap_Lsystem.png).
 
@@ -245,7 +244,7 @@ INSERT INTO Stations VALUES
 
 ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data2.png)
 
-### Subproblem 2C
+### Command 3
 
 ```sql
 INSERT INTO Conductors VALUES
@@ -278,7 +277,7 @@ INSERT INTO Conductors VALUES
 
 ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3.png)
 
-### Subproblem 2D
+### Command 4
 
 Alerts are based on [rail status](https://www.transitchicago.com/travel-information/railstatus/) & [elevator alerts](https://www.transitchicago.com/alerts/elevators/).
 
@@ -338,7 +337,7 @@ INSERT INTO Alerts VALUES
 
 ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data4.png)
 
-### Subproblem 2E
+### Command 5
 
 ```sql
 INSERT INTO Locomotives VALUES
@@ -371,7 +370,7 @@ INSERT INTO Locomotives VALUES
 
 ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data5.png)
 
-### Subproblem 2F
+### Command 6
 
 ```sql
 INSERT INTO Wagons VALUES
@@ -404,7 +403,7 @@ INSERT INTO Wagons VALUES
 
 ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data6.png)
 
-### Subproblem 2G
+### Command 7
 
 ```sql
 INSERT INTO Trains VALUES
@@ -437,7 +436,7 @@ INSERT INTO Trains VALUES
 
 ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data7.png)
 
-### Subproblem 2H
+### Command 8
 
 ```sql
 INSERT INTO Railcars VALUES
@@ -470,7 +469,7 @@ INSERT INTO Railcars VALUES
 
 ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data8.png)
 
-### Subproblem 2I
+### Command 9
 
 ```sql
 INSERT INTO Passengers VALUES
@@ -503,7 +502,7 @@ INSERT INTO Passengers VALUES
 
 ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data9.png)
 
-### Subproblem 2J
+### Command 10
 
 ```sql
 INSERT INTO Passes VALUES
@@ -536,7 +535,7 @@ INSERT INTO Passes VALUES
 
 ![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data10.png)
 
-### Subproblem 2K
+### Command 11
 
 ```sql
 INSERT INTO Trips VALUES
@@ -569,11 +568,9 @@ INSERT INTO Trips VALUES
 
 ![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data11.png)
 
-## Problem 3
+## SQL statements
 
-> Provide 10 SQL statements and English description.
-
-### Subproblem 3A
+### Statement 1
 
 **Operable tracks**: List how many tracks are actively in use.
 
@@ -584,7 +581,7 @@ SELECT CONCAT(`track`, IF(`is_24h`, ' (24h)', '')) AS `Active stations`
 
 ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement1.png)
 
-### Subproblem 3B
+### Statement 2
 
 **Station's route**: Blue line is the most used track of CTA, list its route and
 intersections with other lines.
@@ -596,7 +593,7 @@ SELECT `track`, `station`, `location`, `zip` FROM Stations
 
 ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement2.png)
 
-### Subproblem 3C
+### Statement 3
 
 **Station's infrastructure**: CTA strives for building quality, here's a
 statistics of how many infrastructure are in place.
@@ -610,7 +607,7 @@ SELECT CONCAT('Parking ', AVG(`has_parking`) * 100, '%')
 
 ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3.png)
 
-### Subproblem 3D
+### Statement 4
 
 **Old alerts**: Service alerts can have indefinite running time. List really old
 alerts.
@@ -622,7 +619,7 @@ SELECT `track`, `title`, `date_start` FROM Alerts
 
 ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement4.png)
 
-### Subproblem 3E
+### Statement 5
 
 **Punish lazy conductors**: Maintaining service alert is the responsibility of
 the employee who create it. Notify those employees.
@@ -635,7 +632,7 @@ SELECT CONCAT(`name`, ' (', `username`, ')') AS `Lazy employees` FROM Conductors
 
 ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement5.png)
 
-### Subproblem 3F
+### Statement 6
 
 **Old trains**: Old trains are prone to accidents and need to be decommisioned.
 
@@ -647,7 +644,7 @@ SELECT * FROM Trains AS T LEFT JOIN Locomotives AS L
 
 ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement6.png)
 
-### Subproblem 3G
+### Statement 7
 
 **Train status**: Common attributes of a train: track, conductor, and how many
 wagons it carries.
@@ -660,7 +657,7 @@ SELECT R.`train_id`, `track`, `username`, COUNT(R.`train_id`) AS `Wagon count`
 
 ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement7.png)
 
-### Subproblem 3H
+### Statement 8
 
 **Heaviest trains**: Each wagon contain different number of seats, calculate the
 total.
@@ -673,7 +670,7 @@ SELECT R.`train_id`, SUM(W.`seats`) AS `Seat capacity`
 
 ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement8.png)
 
-### Subproblem 3I
+### Statement 9
 
 **Pass popularity**: Discover how many of CTA users have ongoing passes.
 
@@ -686,7 +683,7 @@ SELECT `pass_id`, `date_start`, P1.`passenger_id`, `name` FROM Passes AS P1
 
 ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement9.png)
 
-### Subproblem 3J
+### Statement 10
 
 **Passenger engagement**: Discover how many CTA customers have used the service
 within this year.

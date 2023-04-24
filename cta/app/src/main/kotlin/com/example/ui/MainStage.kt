@@ -100,12 +100,6 @@ class MainStage(db: Database) : Stage() {
                                 onActionProperty().bind(alertAddMenu.onActionProperty())
                             }
                         }
-                        "Add Station" {
-                            runLater {
-                                disableProperty().bind(stationAddMenu.disableProperty())
-                                onActionProperty().bind(stationAddMenu.onActionProperty())
-                            }
-                        }
                     }
                     "View" {
                         "Conductors" {
@@ -170,24 +164,10 @@ class MainStage(db: Database) : Stage() {
                             contextMenu {
                                 alertAddMenu = "Add" {
                                     onAction {
-                                        AddAlertDialog(db).showAndWait()
-                                            .ifPresent {
-                                                alertTable.items += it
-                                                infoAlert("Alert added.")
-                                            }
-                                    }
-                                }
-                                separatorMenuItem()
-                                "Delete" {
-                                    disableProperty().bind(
-                                        this@tableView.selectionModel.selectedItemProperty().isNull
-                                    )
-                                    onAction {
-                                        // transaction {
-                                        //     this@tableView.selectionModel.selectedItem.delete()
-                                        //     this@tableView.items -=
-                                        //         this@tableView.selectionModel.selectedItem
-                                        // }
+                                        AddAlertDialog(db).showAndWait().ifPresent {
+                                            alertTable.items += it
+                                            infoAlert("Alert added.")
+                                        }
                                     }
                                 }
                             }
@@ -204,24 +184,6 @@ class MainStage(db: Database) : Stage() {
                                             if (hasElevator) append("Elevator, ")
                                             if (hasParking) append("Parking, ")
                                         }.substringBeforeLast(',')
-                                    }
-                                }
-                                contextMenu {
-                                    stationAddMenu = "Add" {
-                                        disableProperty().bind(
-                                            tripTable.selectionModel.selectedItemProperty().isNull
-                                        )
-                                        onAction {
-                                        }
-                                    }
-                                    separatorMenuItem()
-                                    "Delete" {
-                                        disableProperty().bind(
-                                            this@tableView.selectionModel
-                                                .selectedItemProperty().isNull
-                                        )
-                                        onAction {
-                                        }
                                     }
                                 }
                             }

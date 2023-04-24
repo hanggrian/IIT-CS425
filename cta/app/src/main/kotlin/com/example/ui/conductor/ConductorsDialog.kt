@@ -38,19 +38,20 @@ class ConductorsDialog(db: Database) : Dialog<Unit>() {
                 }
                 contextMenu {
                     "Reset Password" {
-                        disableProperty()
-                            .bind(this@tableView.selectionModel.selectedItemProperty().isNull)
+                        val selection = this@tableView.selectionModel
+                        disableProperty().bind(selection.selectedItemProperty().isNull)
                         onAction {
-                            val conductor = this@tableView.selectionModel.selectedItem
-                            ResetPasswordDialog(conductor).showAndWait().ifPresent { password ->
-                                db.update(Conductors) {
-                                    set(it.password, password)
-                                    where {
-                                        it.conductorUsername eq conductor.conductorUsername
+                            ResetPasswordDialog(selection.selectedItem).showAndWait()
+                                .ifPresent { password ->
+                                    db.update(Conductors) {
+                                        set(it.password, password)
+                                        where {
+                                            it.conductorUsername eq
+                                                selection.selectedItem.conductorUsername
+                                        }
                                     }
+                                    infoAlert("Password updated.")
                                 }
-                                infoAlert("Password updated.")
-                            }
                         }
                     }
                 }

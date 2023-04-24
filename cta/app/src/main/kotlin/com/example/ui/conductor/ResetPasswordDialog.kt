@@ -6,6 +6,7 @@ import javafx.scene.control.ButtonType.OK
 import javafx.scene.control.Dialog
 import javafx.scene.control.PasswordField
 import ktfx.dialogs.buttons
+import ktfx.dialogs.errorAlert
 import ktfx.dialogs.headerTitle
 import ktfx.layouts.gridPane
 import ktfx.layouts.label
@@ -18,7 +19,6 @@ class ResetPasswordDialog(conductor: Conductor) : Dialog<String>() {
 
     init {
         headerTitle = "Reset Password"
-        isResizable = true
         dialogPane.content = gridPane {
             hgap = 10.0
             vgap = 10.0
@@ -38,10 +38,12 @@ class ResetPasswordDialog(conductor: Conductor) : Dialog<String>() {
             if (button != OK) {
                 return@setResultConverter null
             }
-            if (conductor.password != "" && conductor.password != oldPasswordField.text) {
+            if (conductor.password != "" && conductor.password != oldPasswordField.text.shaHash) {
+                errorAlert("Old password mismatch.")
                 return@setResultConverter null
             }
             if (newPasswordField.text != newPasswordField2.text) {
+                errorAlert("New password mismatch.")
                 return@setResultConverter null
             }
             newPasswordField.text.shaHash

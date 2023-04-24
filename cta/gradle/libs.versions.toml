@@ -26,3 +26,4 @@ truth = "com.google.truth:truth:1.1.3"
 
 [bundles]
 ktorm = ["ktorm-core", "ktorm-support-mysql"]
+mysql = ["logback-classic", "mysql-connector-java"]

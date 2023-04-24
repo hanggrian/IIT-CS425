@@ -1,18 +1,22 @@
 # [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
-> Develop a detailed ER-model for the application. Translate the conceptual
-  model into a detailed logical model showing relational schema with appropriate
-  data type, primary keys, foreign keys, and any constraints.
+> **Logical model**: Develop a detailed ER-model for the application. Translate
+  the conceptual model into a detailed logical model showing relational schema
+  with appropriate data type, primary keys, foreign keys, and any constraints.
+  You are required to present a detailed ERD and logical structure/schema of the
+  database.
+>
+> | Rubric | Bad | Good | Great | Total |
+> | --- | ---: | ---: | ---: | ---: |
+> | A sudent has a correct and detialed ERD and has included optional attributes, derived attributes and multivalued attributes, weak entities etc. | 0-3 | 4-8 | 9-12 | 12 |
+> | A correct use of primary and foreign keys, and are included in the relation schemas. A student has considered other constraints e.g., disjoint/overlapping generalization etc. | 0-2 | 3-5 | 6-8 | 8 |
+> | A student has written out complete and precise business rules as indicated in the ERD. | 0-3 | 3-6 | 7-10 | 10 |
 
-## Problem 1
-
-> You are required to present a detailed ERD.
-
-> #### Old ER diagram
+> ### Old ER diagram
 >
 > <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png"/>
 
-### New ER diagram
+## New ER diagram
 
 ![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png)
 
@@ -41,11 +45,7 @@
   passenger.
 - A pass can optionally be used **1 and 1** trip.
 
-## Problem 2
-
-> You are required to present a logical structure/schema of the database.
-
-### UML diagram
+## UML diagram
 
 ![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml1.png)
 
@@ -127,9 +127,7 @@ which is an equivalent of *Ventra UPass*.
 | --- | --- | --- | --- |
 | **1** | 2023-03-01 | 2023-04-01 | *1* |
 
-## Extra
-
-### SQL initialization
+## SQL initialization
 
 ```sql
 CREATE TABLE Conductors(

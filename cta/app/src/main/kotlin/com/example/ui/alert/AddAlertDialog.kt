@@ -2,7 +2,10 @@ package com.example.ui.alert
 
 import com.example.dao.Alert
 import com.example.dao.Conductor
+import com.example.dao.Track
+import com.example.dao.alerts
 import com.example.dao.conductors
+import com.example.dao.tracks
 import com.example.shaHash
 import javafx.scene.control.ButtonType.OK
 import javafx.scene.control.ChoiceBox
@@ -24,12 +27,14 @@ import ktfx.layouts.textArea
 import ktfx.layouts.textField
 import ktfx.text.buildStringConverter
 import org.ktorm.database.Database
+import org.ktorm.entity.add
 import org.ktorm.entity.toCollection
 import java.time.LocalDate.now
 
 class AddAlertDialog(db: Database) : Dialog<Alert>() {
     val conductorUserChoice: ChoiceBox<Conductor>
     val conductorPassField: PasswordField
+    val trackChoice: ChoiceBox<Track>
     val titleField: TextField
     val messageArea: TextArea
     val dateStartPicker: DatePicker
@@ -37,7 +42,6 @@ class AddAlertDialog(db: Database) : Dialog<Alert>() {
 
     init {
         headerTitle = "Add Alert"
-        isResizable = true
         dialogPane.content = gridPane {
             hgap = 10.0
             vgap = 10.0
@@ -45,12 +49,17 @@ class AddAlertDialog(db: Database) : Dialog<Alert>() {
             label("Conductor user").grid(row, 0)
             conductorUserChoice = choiceBox(db.conductors.toCollection(mutableObservableListOf())) {
                 converter = buildStringConverter {
-                    fromString { null }
                     toString { it?.conductorUsername.orEmpty() }
                 }
             }.grid(row++, 1 to 2)
             label("Conductor pass").grid(row, 0)
             conductorPassField = passwordField { promptText = "Password" }.grid(row++, 1 to 2)
+            label("Track").grid(row, 0)
+            trackChoice = choiceBox(db.tracks.toCollection(mutableObservableListOf())) {
+                converter = buildStringConverter {
+                    toString { it?.trackColor.orEmpty() }
+                }
+            }.grid(row++, 1)
             label("Title").grid(row, 0)
             titleField = textField { promptText = "Title" }.grid(row++, 1 to 2)
             label("Message").grid(row, 0)
@@ -67,14 +76,14 @@ class AddAlertDialog(db: Database) : Dialog<Alert>() {
                 errorAlert("Wrong password.")
                 return@setResultConverter null
             }
-            Alert.invoke {
+            Alert {
                 title = titleField.text
                 message = messageArea.text
                 dateStart = dateStartPicker.value
                 dateEnd = dateEndPicker.value
-                title = titleField.text
+                track = trackChoice.value
                 conductor = conductorUserChoice.value
-            }
+            }.also { db.alerts.add(it) }
         }
         buttons {
             ok()
