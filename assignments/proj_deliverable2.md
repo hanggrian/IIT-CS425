@@ -47,7 +47,7 @@
 
 ## UML diagram
 
-![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml1.png)
+![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 

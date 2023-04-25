@@ -11,9 +11,9 @@
 > $$
 > \begin{array}{llll}
 >   F = \{ \\
->   & A & \to & BC, \\
->   & C & \to & DA, \\
->   & D & \to & E, \\
+>   & A & \to & BC \\
+>   & C & \to & DA \\
+>   & D & \to & E \\
 >   & AD & \to & F \\
 >   \}
 > \end{array}
@@ -71,9 +71,9 @@ Backtracking from the highest order:
 
 $$
 \begin{array}{lll}
-  A & \to & BC, \\
-  C & \to & DA, \\
-  D & \to & E, \\
+  A & \to & BC \\
+  C & \to & DA \\
+  D & \to & E \\
   AD & \to & F
 \end{array}
 $$
@@ -84,7 +84,7 @@ It can be concluded that $C \to F$ based on relation:
 
 $$
 \begin{array}{lll}
-  C & \to & DA, \\
+  C & \to & DA \\
   AD & \to & F
 \end{array}
 $$
@@ -93,8 +93,8 @@ Below is an updated relations, there is no more to deduce.
 
 $$
 \begin{array}{lll}
-  A & \to & BC, \\
-  C & \to & F, \\
+  A & \to & BC \\
+  C & \to & F \\
   D & \to & E
 \end{array}
 $$
@@ -105,7 +105,7 @@ Breaking down $A \to BC$ into:
 
 $$
 \begin{array}{lll}
-  A & \to & B, \\
+  A & \to & B \\
   A & \to & C
 \end{array}
 $$
@@ -114,9 +114,9 @@ Below is the result.
 
 $$
 \begin{array}{lll}
-  A & \to & B, \\
-  A & \to & C, \\
-  C & \to & F, \\
+  A & \to & B \\
+  A & \to & C \\
+  C & \to & F \\
   D & \to & E
 \end{array}
 $$
