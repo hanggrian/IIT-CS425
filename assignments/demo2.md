@@ -28,40 +28,60 @@ Finding determinants $(CE,D,C)$:
 
 $$
 \begin{array}{llll}
-  (CE)^+ & = & \{CDE\} & \textsf{from } CE \to D \\
-  & = & \{BCDE\} & \textsf{from } D \to B \\
-  & = & \{ABCDE\} & \textsf{from } C \to A \\
-  & = & \textsf{super key} \\
+  (CE)^+ & = & \{CE\} \\
+  & = & \{CDE\} & (CE \to D) \\
+  & = & \{BCDE\} & (D \to B) \\
+  & = & \{ABCDE\} & (C \to A) \\
+  & = & \textsf{candidate key} \\
   \\
-  (D)^+ & = & \{DB\} & \textsf{from } D \to B \\
-  & = & \textsf{not super key} \\
+  (D)^+ & = & \{D\} \\
+  & = & \{DB\} & (D \to B) \\
+  & = & \textsf{not candidate key} \\
   \\
-  (C)^+ & = & \{AC\} & \textsf{from } C \to A \\
-  & = & \textsf{not super key}
+  (C)^+ & = & \{C\} & \\
+  & = & \{AC\} & (C \to A) \\
+  & = & \textsf{not candidate key}
 \end{array}
 $$
+
+**Therefore, the candidate key is $\bf CE$**.
 
 ### Subproblem 1B
 
 > Normal forms the Relation, $R$ satisfies?
 
-The relation is at least 1NF because there is PK.
+![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/demo2.png)
+
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/nmf/demo2.drawio)
+
+The relation has a candidate key so it is at least 1NF. There are partial
+dependencies and a transitive dependency in the relation, therefore it cannot be
+2NF and 3NF.
 
 ### Subproblem 1C
 
 > If not in 3NF, show the process to take it to 3NF?
 
-To determine whether or not a relation is in 3NF, it must have at least one
-extraneous attribute to qualify for 2NF. The 3NF evaluation can start after
-the relation is separated in 2NF.
+To transition into 2NF, all partial dependencies must be excluded:
+
+| ID | Relationship | New Table |
+| --- | --- | --- |
+| PD1 | $CE \to D$ | $R1=\{\mathbf{CE}D\}$ |
+| PD2 | $C \to A$ | $R2=\{\mathbf{C}A\}$ |
+
+To transition into 3NF, all transitive dependencies must be excluded:
+
+| ID | Relationship | New Table |
+| --- | --- | --- |
+| TD1 | $D \to B$ | $R3=\{\mathbf{D}B\}$ |
 
 ### Subproblem 1D
 
 > Compute the canonical cover of the given function dep, $F$.
 
-#### Step 1
+#### Step 1: Decompose dependents
 
-Relation is already decomposed.
+Dependents are already decomposed.
 
 $$
 \begin{array}{llll}
@@ -73,27 +93,54 @@ $$
 \end{array}
 $$
 
-#### Step 2
+#### Step 2: Identify extraneous against determinants
 
-Check if $C$ or $E$ is extraneous from $CE \to \ldots$.
+For $CE \to D$.
 
 $$
 \begin{array}{llll}
-  (E)^+ & = & \{E\} & \textsf{from } CE \to \ldots \\
+  (E)^+ & = & \{E\} \\
   & = & \textsf{not extraneous} \\
   \\
-  (C)^+ & = & \{C\} & \textsf{from } CE \to \ldots \\
-  & = & \{AC\} & \textsf{from } A \to C \\
-  & = & \textsf{not extraneous} \\
+  (C)^+ & = & \{C\} \\
+  & = & \{AC\} & (C \to A) \\
+  & = & \textsf{not extraneous}
 \end{array}
 $$
 
-The relation is not 2NF because both are not extraneous.
+#### Step 3: Identify extraneous against dependents
+
+For $CE \to D$.
+
+$$
+\begin{array}{llll}
+  (CE)^+ & = & \{CE\} \\
+  & = & \{ACE\} & (C \to A) \\
+  & = & \textsf{not extraneous}
+\end{array}
+$$
+
+For $D \to B$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{D\} \\
+  & = & \textsf{not extraneous}
+\end{array}
+$$
+
+For $C \to A$.
+
+$$
+\begin{array}{llll}
+  (C)^+ & = & \{C\} \\
+  & = & \textsf{not extraneous}
+\end{array}
+$$
 
 ## Problem 2
 
-> Provided $R(A,B,C,D,E,F,G)$, compute the canonical (minimal) cover
-  of
+> Provided $R(A,B,C,D,E,F,G)$, compute the canonical (minimal) cover of
 >
 > $$
 > \begin{array}{llll}
@@ -108,9 +155,9 @@ The relation is not 2NF because both are not extraneous.
 > \end{array}
 > $$
 
-#### Step 1
+#### Step 1: Decompose dependents
 
-Decomposing relation.
+Decomposing dependents.
 
 $$
 \begin{array}{llll}
@@ -128,38 +175,82 @@ $$
 \end{array}
 $$
 
-#### Step 2
+#### Step 2: Identify extraneous against determinants
 
-Check if $A$ or $D$ is extraneous from $AD \to \ldots$.
+For $AD \to B$.
 
 $$
 \begin{array}{llll}
-  (D)^+ & = & \{D\} & \textsf{from } AD \to \ldots \\
-  & = & \{DF\} & \textsf{from } D \to F \\
-  & = & \{CDF\} & \textsf{from } F \to C \\
-  & = & \{CDEF\} & \textsf{from } CD \to E \\
-  & = & \{CDEFG\} & \textsf{from } CD \to G \\
+  (D)^+ & = & \{D\} \\
+  & = & \{DF\} & (D \to F) \\
+  & = & \{CDF\} & (F \to C) \\
+  & = & \{CDEF\} & (CD \to E) \\
+  & = & \{CDEFG\} & (CD \to G) \\
   & = & \textsf{not extraneous} \\
   \\
-  (A)^+ & = & \{A\} & \textsf{from } AD \to \ldots \\
-  & = & \textsf{not extraneous} \\
+  (A)^+ & = & \{A\} \\
+  & = & \textsf{not extraneous}
 \end{array}
 $$
 
-Check if $C$ or $D$ is extraneous from $CD \to \ldots$.
+For $AD \to F$.
 
 $$
 \begin{array}{llll}
-  (D)^+ & = & \{D\} & \textsf{from } CD \to \ldots \\
-  & = & \{DF\} & \textsf{from } D \to F \\
-  & = & \{CDF\} & \textsf{from } F \to C \\
-  & = & \{CDEF\} & \textsf{from } CD \to E \\
-  & = & \{CDEFG\} & \textsf{from } CD \to G \\
-  & = & \textsf{extraneous} \\
+  (D)^+ & = & \{CDEFG\} \\
+  & = & \textsf{not extraneous} \\
+  \\
+  (A)^+ & = & \{A\} \\
+  & = & \textsf{not extraneous}
 \end{array}
 $$
 
-Since $C$ is included in $(D)^+$, $CD \to \ldots$ becomes $D \to \ldots$.
+For $CD \to C$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{CDEFG\} \\
+  & = & \textsf{extraneous}
+\end{array}
+$$
+
+Remove it from $CD \to C$ to become $D \to C$.
+
+For $CD \to E$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{CDEFG\} \\
+  & = & \textsf{extraneous}
+\end{array}
+$$
+
+Remove it from $CD \to E$ to become $D \to E$.
+
+For $CD \to G$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{CDEFG\} \\
+  & = & \textsf{extraneous}
+\end{array}
+$$
+
+Remove it from $CD \to G$ to become $D \to G$.
+
+For $BD \to F$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{CDEFG\} \\
+  & = & \textsf{not extraneous} \\
+  \\
+  (B)^+ & = & \{B\} \\
+  & = & \textsf{not extraneous}
+\end{array}
+$$
+
+Therefore the new set is:
 
 $$
 \begin{array}{llll}
@@ -177,36 +268,42 @@ $$
 \end{array}
 $$
 
-### Step 3
+### Step 3: Identify extraneous against dependents
 
-Check if F in F2 is extraneous. For $AD \to B$ in question.
+For $AD \to B$.
 
 $$
 \begin{array}{llll}
-  (AD)^+ & = & \{AD\} & \textsf{from } AD \to \ldots \\
-  & = & \{ACD\} & \textsf{from } D \to C \\
-  & = & \{ACDE\} & \textsf{from } D \to E \\
-  & = & \{ACDEG\} & \textsf{from } D \to G \\
-  & = & \{ACDEFG\} & \textsf{from } D \to F \\
+  (AD)^+ & = & \{AD\} \\
+  & = & \{ACD\} & (D \to C) \\
+  & = & \{ACDE\} & (D \to E) \\
+  & = & \{ACDEG\} & (D \to G) \\
+  & = & \{ACDEFG\} & (D \to F) \\
   & = & \textsf{not extraneous} \\
 \end{array}
 $$
 
-For $AD \to F$ in question.
+For $AD \to F$.
 
 $$
 \begin{array}{llll}
-  (AD)^+ & = & \{AD\} & \textsf{from } AD \to \ldots \\
-  & = & \{ACD\} & \textsf{from } D \to C \\
-  & = & \{ACDE\} & \textsf{from } D \to E \\
-  & = & \{ACDEG\} & \textsf{from } D \to G \\
-  & = & \{ACDEFG\} & \textsf{from } D \to F \\
+  (AD)^+ & = & \{ACDEFG\} \\
   & = & \textsf{extraneous} \\
 \end{array}
 $$
 
-*I'm not sure what is the next step here, the examination guide stops at step
-3.*
+For $D \to C$.
+
+$$
+\begin{array}{llll}
+  (D)^+ & = & \{D\} \\
+  & = & \{CD\} & (D \to C) \\
+  & = & \{CDE\} & (D \to E) \\
+  & = & \{CDEF\} & (D \to F) \\
+  & = & \{CDEFG\} & (D \to G) \\
+  & = & \textsf{extraneous} \\
+\end{array}
+$$
 
 ## Problem 3
 
@@ -230,11 +327,11 @@ Finding determinants $(BC,D)$:
 
 $$
 \begin{array}{llll}
-  (BC)^+ & = & \{ABCDE\} & \textsf{from } BC \to ADE \\
-  & = & \textsf{super key} \\
+  (BC)^+ & = & \{ABCDE\} & (BC \to ADE) \\
+  & = & \textsf{candidate key} \\
   \\
-  (D)^+ & = & \{DB\} & \textsf{from } D \to B \\
-  & = & \textsf{not super key} \\
+  (D)^+ & = & \{DB\} & (D \to B) \\
+  & = & \textsf{not candidate key} \\
 \end{array}
 $$
 

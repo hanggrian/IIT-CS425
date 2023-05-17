@@ -1,4 +1,4 @@
-# [Project Deliverable 4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Application**: The last deliverable requires to write a program in any
   programming language SQL supports and implement a variety of SQL commands.

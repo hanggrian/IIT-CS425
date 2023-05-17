@@ -48,7 +48,7 @@ CREATE TABLE Salaries(
 
 > `FIRST_VALUE()` = [give row num as answer]
 
-`FIRST_VALUE` returns the lowest salary from $n$-th row.
+> **Definition**: `FIRST_VALUE` returns the lowest salary from $n$-th row.
 
 Because the table is already sorted (by salary), the first row will always be
 lower than current row. **Therefore the result is 2500**.
@@ -63,7 +63,7 @@ SELECT `row_num`, FIRST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 
 > `LAST_VALUE`() = [give row num as answer]
 
-`LAST_VALUE` returns the highest salary from $n$-th row.
+> **Definition**: `LAST_VALUE` returns the highest salary from $n$-th row.
 
 Because the table is already sorted (by salary), the current row will always be
 higher than any previous row. **Therefore the result is salary of current row**.

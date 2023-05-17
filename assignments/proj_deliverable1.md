@@ -1,4 +1,4 @@
-# [Project Deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Conceptual model**: Create a conceptual model consisting of the most
   essential information required for the selected application. Explore the

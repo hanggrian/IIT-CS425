@@ -23,9 +23,9 @@
 
 > What are the keys for the relation?
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/functional-dependency/nmf.png)
+![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/hw9.png)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/functional-dependency/nmf.drawio)
+[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/nmf/hw9.drawio)
 
 ### Step 1: Break down right parts
 
@@ -44,12 +44,12 @@ $$
 
 $$
 \begin{array}{llll}
-  A^+ = \{ABCDEF\} & \textsf{A is superkey} \\
-  B^+ = \{B\} & \textsf{B is not superkey} \\
-  C^+ = \{ABCDEF\} & \textsf{C is superkey} \\
-  D^+ = \{DE\} & \textsf{D is not superkey} \\
-  E^+ = \{E\} & \textsf{E is not superkey} \\
-  F^+ = \{F\} & \textsf{F is not superkey}
+  (A)^+ = \{ABCDEF\} & \textsf{A is superkey} \\
+  (B)^+ = \{B\} & \textsf{B is not superkey} \\
+  (C)^+ = \{ABCDEF\} & \textsf{C is superkey} \\
+  (D^)+ = \{DE\} & \textsf{D is not superkey} \\
+  (E)^+ = \{E\} & \textsf{E is not superkey} \\
+  (F)^+ = \{F\} & \textsf{F is not superkey}
 \end{array}
 $$
 

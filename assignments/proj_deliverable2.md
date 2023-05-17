@@ -1,4 +1,4 @@
-# [Project Deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Logical model**: Develop a detailed ER-model for the application. Translate
   the conceptual model into a detailed logical model showing relational schema
