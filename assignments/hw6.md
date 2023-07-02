@@ -9,7 +9,7 @@
 Several notes about this solution:
 
 - `grade` is flagged as **erroneous use of relationship attributes** according
-  to [lecture 6th](https://github.com/hendraanggrian/IIT-CS425/blob/assets/lec6.pdf),
+  to [lecture 6th](https://github.com/hendraanggrian/IIT-CS425/blob/assets/lect6.pdf),
   thus will be ignored.
 - The relationship names (`teaches`, `takes`, etc.) in the ER diagram above are
   being used as foreign key contraint names in the SQL table.
