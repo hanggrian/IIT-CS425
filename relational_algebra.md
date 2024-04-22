@@ -1,4 +1,4 @@
-# [Relational Algebra](https://www.geeksforgeeks.org/introduction-of-relational-algebra-in-dbms/)
+# [Relational algebra](https://www.geeksforgeeks.org/introduction-of-relational-algebra-in-dbms/)
 
 - [Selection ($\sigma$)](#selection)
 - [Projection ($\pi$)](#projection)
@@ -20,12 +20,12 @@ is a relational algebra expression, whose result is a relation.
 
 > #### Example
 >
-> | Roll | Name | Department | Fees | Team |
-> | --- | --- | --- | --- | --- |
-> | 1 | Bikash | CSE | 22000 | A |
-> | 2 | Josh | CSE | 34000 | A |
-> | 3 | Kevin | ECE | 36000 | C |
-> | 4 | Ben | ECE | 56000 | D |
+> Roll | Name | Department | Fees | Team
+> --- | --- | --- | --- | ---
+> 1 | Bikash | CSE | 22000 | A
+> 2 | Josh | CSE | 34000 | A
+> 3 | Kevin | ECE | 36000 | C
+> 4 | Ben | ECE | 56000 | D
 >
 > Select all the student of Team A.
 >
@@ -33,6 +33,7 @@ is a relational algebra expression, whose result is a relation.
 >
 > Select all the students of department ECE whose fees is greater than equal to
   10000 and belongs to Team other than A.
+>
 > $$\sigma_\text{Fees >= 10000} (\sigma_\text{Class != 'A'} (\text{Student}))$$
 
 ### Projection ($\pi$)
@@ -45,12 +46,12 @@ $R$ is generally a relational algebra expression, which results in a relation.
 
 > #### Example
 >
-> | Class | Dept | Position |
-> | --- | --- | --- |
-> | 5 | CSE | Assistant Professor |
-> | 5 | CSE | Assistant Professor |
-> | 6 | EE | Assistant Professor |
-> | 6 | EE | Assistant Professor |
+> Class | Dept | Position
+> --- | --- | ---
+> 5 | CSE | Assistant Professor
+> 5 | CSE | Assistant Professor
+> 6 | EE | Assistant Professor
+> 6 | EE | Assistant Professor
 >
 > Project class and Dept from Faculty.
 >
@@ -73,21 +74,21 @@ operator.
 > <tr><th>Student</th><th>Faculty</th></tr>
 > <tr><td>
 
-| First | Last |
-| --- | --- |
-| Aisha | Arora |
-| Bikash | Dutta |
-| Makku | Singh |
-| Raju | Chopra |
+First | Last
+--- | ---
+Aisha | Arora
+Bikash | Dutta
+Makku | Singh
+Raju | Chopra
 
 > </td><td>
 
-| FirstN | LastN |
-| --- | --- |
-| Raj | Kumar |
-| Honey | Chand |
-| Makku | Singh |
-| Karan | Rao |
+FirstN | LastN
+--- | ---
+Raj | Kumar
+Honey | Chand
+Makku | Singh
+Karan | Rao
 
 > </td></tr>
 > </table>
@@ -127,13 +128,13 @@ name $X$.
 
 > #### Example
 >
-> | Sno | Name |
-> | --- | --- |
-> | 2600 | Ronny |
-> | 2655 | Raja |
+> Sno | Name
+> --- | ---
+> 2600 | Ronny
+> 2655 | Raja
 >
 > Query to rename the relation Student as Male Student and the attributes of
-> Student – RollNo, SName as (Sno, Name).
+  Student – RollNo, SName as (Sno, Name).
 >
 > $$\rho_\text{MaleStudent(Sno, Name)} \ \pi_\text{RollNo, SName} (\sigma_\text{Condition} (\text{Student}))$$
 
@@ -150,17 +151,17 @@ Cross Product operator.
 > <tr><th>Student</th><th>Faculty</th></tr>
 > <tr><td>
 
-| SNO | FNAME | LNAME |
-| --- | --- | --- |
-| 1 | Albert | Singh |
-| 2 | Nora | Fatehi |
+SNO | FNAME | LNAME
+--- | --- | ---
+1 | Albert | Singh
+2 | Nora | Fatehi
 
 > </td><td>
 
-| ROLLNO | AGE |
-| --- | --- |
-| 5 | 18 |
-| 9 | 21 |
+ROLLNO | AGE
+--- | ---
+5 | 18
+9 | 21
 
 > </td></tr>
 > </table>
@@ -177,20 +178,20 @@ Cross Product operator.
 > <tr><th>Employee</th><th>Dept</th></tr>
 > <tr><td>
 
-| Name | EmpId | DeptName |
-| --- | --- | --- |
-| Harry | 3415 | Finance |
-| Sally | 2241 | Sales |
-| George | 3401 | Finance |
-| Harriet | 2202 | Sales |
+Name | EmpId | DeptName
+--- | --- | ---
+Harry | 3415 | Finance
+Sally | 2241 | Sales
+George | 3401 | Finance
+Harriet | 2202 | Sales
 
 > </td><td>
 
-| DeptName | Manager |
-| --- | --- |
-| Finance | George |
-| Sales | Harriet |
-| Production | Charles |
+DeptName | Manager
+--- | ---
+Finance | George
+Sales | Harriet
+Production | Charles
 
 > </td></tr>
 > </table>

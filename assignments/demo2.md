@@ -64,16 +64,16 @@ dependencies and a transitive dependency in the relation, therefore it cannot be
 
 To transition into 2NF, all partial dependencies must be excluded:
 
-| ID | Relationship | New Table |
-| --- | --- | --- |
-| PD1 | $CE \to D$ | $R1=\{\mathbf{CE}D\}$ |
-| PD2 | $C \to A$ | $R2=\{\mathbf{C}A\}$ |
+ID | Relationship | New Table
+--- | --- | ---
+PD1 | $CE \to D$ | $R1=\{\mathbf{CE}D\}$
+PD2 | $C \to A$ | $R2=\{\mathbf{C}A\}$
 
 To transition into 3NF, all transitive dependencies must be excluded:
 
-| ID | Relationship | New Table |
-| --- | --- | --- |
-| TD1 | $D \to B$ | $R3=\{\mathbf{D}B\}$ |
+ID | Relationship | New Table
+--- | --- | ---
+TD1 | $D \to B$ | $R3=\{\mathbf{D}B\}$
 
 ### Subproblem 1D
 

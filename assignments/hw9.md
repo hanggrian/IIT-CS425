@@ -23,7 +23,7 @@
 
 > What are the keys for the relation?
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/hw9.png)
+![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/hw9.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/nmf/hw9.drawio)
 

@@ -10,7 +10,7 @@
 
 ## ER diagram
 
-![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png)
+![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
@@ -123,6 +123,6 @@ CREATE TABLE Passengers(
   - [ ] Add default values.
 - Possible schema imporovement:
   - [ ] Support membership with weekly and/or monthly payment, potentially
-    adding 2-3 more tables.
+        adding 2-3 more tables.
   - [ ] Support traveling by bus, doesn't add many tables but massively change
-    the structure of existing tables.
+        the structure of existing tables.

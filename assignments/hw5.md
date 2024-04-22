@@ -7,23 +7,23 @@
 
 > Give the answers (assume `ORDER BY` salary).
 >
-> | row_num | first_name | last_name | salary |
-> | ---: | --- | ---| ---: |
-> | 1 | Karen | Colmenares | 2500 |
-> | 2 | Guy | Himuro | 2600 |
-> | 3 | Irene | Mikkilineni | 2700 |
-> | 4 | Sigal | Tobias | 2800 |
-> | 5 | Shelli | Baida | 2900 |
-> | 6 | Alexander | Khoo | 3100 |
-> | 7 | Britney | Everett | 3900 |
-> | 8 | Sarah | Bell | 4000 |
-> | 9 | Diana | Lorentz | 4200 |
-> | 10 | Jennifer | Whalen | 4400 |
-> | 11 | David | Austin | 4800 |
-> | 12 | Valli | Pataballa | 4800 |
-> | 13 | Bruce | Ernst | 6000 |
-> | 14 | Pat | Fay | 6000 |
-> | 15 | Charles | Johnson | 6200 |
+> row_num | first_name | last_name | salary
+> ---: | --- | ---| ---:
+> 1 | Karen | Colmenares | 2500
+> 2 | Guy | Himuro | 2600
+> 3 | Irene | Mikkilineni | 2700
+> 4 | Sigal | Tobias | 2800
+> 5 | Shelli | Baida | 2900
+> 6 | Alexander | Khoo | 3100
+> 7 | Britney | Everett | 3900
+> 8 | Sarah | Bell | 4000
+> 9 | Diana | Lorentz | 4200
+> 10 | Jennifer | Whalen | 4400
+> 11 | David | Austin | 4800
+> 12 | Valli | Pataballa | 4800
+> 13 | Bruce | Ernst | 6000
+> 14 | Pat | Fay | 6000
+> 15 | Charles | Johnson | 6200
 
 ### SQL initialization
 

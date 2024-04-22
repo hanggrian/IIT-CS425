@@ -1,6 +1,6 @@
 # [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw6.pdf): University ER
 
-> ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/hw1_6_fig1.png)
+> ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/hw6_1.png)
 
 ## Problem 1
 

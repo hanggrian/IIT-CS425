@@ -9,7 +9,7 @@
 
 ### UML diagram
 
-![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.png)
+![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/uml.drawio)
 
@@ -27,17 +27,17 @@ same class would require multiple entries of *Classes*.
 <tr><th>Students</th><th>Classes</th></tr>
 <tr><td>
 
-| **id** | name |
-| --- | --- |
-| **0** | Mike |
-| **1** | John |
+**id** | name
+--- | ---
+**0** | Mike
+**1** | John
 
 </td><td>
 
-| **id** | name | student_id |
-| --- | --- | --- |
-| **0** | CS101 | 0 |
-| **1** | CS101 | 1 |
+**id** | name | student_id
+--- | --- | ---
+**0** | CS101 | 0
+**1** | CS101 | 1
 
 </td></tr>
 </table>
@@ -53,23 +53,23 @@ To mitigate this behavior, *Registrations* bridge the connection between
 <tr><th>Students</th><th>Classes</th><th>Registrations</th></tr>
 <tr><td>
 
-| **id** | name |
-| --- | --- |
-| **0** | Mike |
-| **1** | John |
+**id** | name
+--- | ---
+**0** | Mike
+**1** | John
 
 </td><td>
 
-| **id** | name |
-| --- | --- |
-| **0** | CS101 |
+**id** | name
+--- | ---
+**0** | CS101
 
 </td><td>
 
-| student_id | class_id |
-| --- | --- |
-| 0 | 0 |
-| 1 | 0 |
+student_id | class_id
+--- | ---
+0 | 0
+1 | 0
 
 </td></tr>
 </table>
@@ -83,10 +83,10 @@ unrelated from the class last year, but may share some of the same elements.
 <tr><th>Classes</th></tr>
 <tr><td>
 
-| id | name |
-| --- | --- |
-| 0 | CS101 |
-| 1 | CS101 |
+id | name
+--- | ---
+0 | CS101
+1 | CS101
 
 </td></tr>
 </table>
@@ -99,16 +99,16 @@ primary key, because course codes are unique (e.g.: CS425, CS430, etc.).
 <tr><th>Classes</th><th>Courses</th></tr>
 <tr><td>
 
-| id | course_id |
-| --- | --- |
-| 0 | CS101 |
-| 1 | CS101 |
+id | course_id
+--- | ---
+0 | CS101
+1 | CS101
 
 </td><td>
 
-| id | name |
-| --- | --- |
-| CS101 | Database Organization |
+id | name
+--- | ---
+CS101 | Database Organization
 
 </td></tr>
 </table>

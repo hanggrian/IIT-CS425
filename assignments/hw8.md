@@ -18,13 +18,13 @@
 
 ### ER diagram
 
-![The ER diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/er.png)
+![The ER diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/er.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/er.drawio)
 
 ### UML diagram
 
-![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/uml.png)
+![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/uml.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/uml.drawio)
 
@@ -99,12 +99,12 @@ Below are 4 rows selected as dummy data. The current limitation is
 `Prerequisites` being a simple column, instead of recursive relationship of
 table `Courses`.
 
-| Name | Qualify | Promotion Code | Year | Course | Convenor | Periods | Mark | Symbol |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Abbot | N | CON | 2019 | BOT202 | Marx | BOT104 or ZOO103 | 5th Daily	54 | 3 |
-| Chang | N | CON | 2019 | MAM200 | Bush | MAM100 | 4th Daily | 66 | 2- |
-| Hassan | N | CON | 2019 | CSC117 | Carrey | | 4th or 5th Daily | 60 | 2- |
-| Inggs | N | CON | 2019 | ZOO203 | Lee | BOT104 or ZOO103 | 5th Daily	66 | 2- |
+Name | Qualify | Promotion Code | Year | Course | Convenor | Periods | Mark | Symbol
+--- | --- | --- | --- | --- | --- | --- | --- | ---
+Abbot | N | CON | 2019 | BOT202 | Marx | BOT104 or ZOO103 | 5th Daily	54 | 3
+Chang | N | CON | 2019 | MAM200 | Bush | MAM100 | 4th Daily | 66 | 2-
+Hassan | N | CON | 2019 | CSC117 | Carrey | | 4th or 5th Daily | 60 | 2-
+Inggs | N | CON | 2019 | ZOO203 | Lee | BOT104 or ZOO103 | 5th Daily	66 | 2-
 
 ### SQL data
 
@@ -153,7 +153,7 @@ INSERT INTO TimeSlots VALUES
 > Give any one functional dependency that holds for this information, and state
   in simple words what your functional dependency tells us about the data.
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/nmf.png)
+![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/nmf.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/nmf.drawio)
 

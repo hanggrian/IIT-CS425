@@ -9,13 +9,13 @@
   application can either be web or desktop application and must be demonstrated
   on the due date.
 >
-> | Rubric | Bad | Good | Great | Total |
-> | --- | ---: | ---: | ---: | ---: |
-> | Students have used a programming language to demonstrate the 10 different types of queries tested in the 3rd deliverable. | 0-4 | 5-6 | 7-8 | 9-10 |
-> | Students have demonstrated at least 2 or 3 complex, but interesting queries according to the selected application. | 0-1 | 2-3 | 4-5 | 5 |
-> | The application has a user friendly interface/display with features such as menus, buttons, etc. | 0-1 | 2-3 | 4-5 | 5 |
-> | Students have presented their project in class on the due date and have uploaded all the working files and folders of the project. | 0-4 | 5-6 | 7-8 | 9-10 |
-> | Personal contribution, a group must give a percent contribution of each member across all deliverables. | 0-1 | 2-3 | 4-5 | 5 |
+> Rubric | Bad | Good | Great | Total
+> --- | ---: | ---: | ---: | ---:
+> Students have used a programming language to demonstrate the 10 different types of queries tested in the 3rd deliverable. | 0-4 | 5-6 | 7-8 | 9-10
+> Students have demonstrated at least 2 or 3 complex, but interesting queries according to the selected application. | 0-1 | 2-3 | 4-5 | 5
+> The application has a user friendly interface/display with features such as menus, buttons, etc. | 0-1 | 2-3 | 4-5 | 5
+> Students have presented their project in class on the due date and have uploaded all the working files and folders of the project. | 0-4 | 5-6 | 7-8 | 9-10
+> Personal contribution, a group must give a percent contribution of each member across all deliverables. | 0-1 | 2-3 | 4-5 | 5
 
 ![App preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/preview.png)
 
@@ -159,21 +159,21 @@ db.passes.add(alert)
 
 > #### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.png"/>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.svg"/>
 
 ### New ER diagram
 
-![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er4.png)
+![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er4.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 > #### Old UML diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.png"/>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.svg"/>
 
 ### New UML diagram
 
-![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml4.png)
+![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml4.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
@@ -461,6 +461,6 @@ CREATE TABLE Trips(
   - [x] Add default values.
 - Possible schema imporovement:
   - [ ] ~~Support traveling by bus, doesn't add many tables but massively change
-    the structure of existing tables~~.
+        the structure of existing tables~~.
   - [x] Support membership with weekly and/or monthly payment, potentially
-    adding 2-3 more tables.
+        adding 2-3 more tables.

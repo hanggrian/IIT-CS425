@@ -5,30 +5,30 @@
   language (DDL) statements. Load mock data (using free online data generator
   tools) into the database to test a variety of SQL commands.
 >
-> | Rubric | Bad | Good | Great | Total |
-> | --- | ---: | ---: | ---: | ---: |
-> | A student has created the database and the necessary relations using SQL DDL commands. | 0-1 | 2-3 | 4-5 | 5 |
-> | The exact Logical model (relation schemas) submitted in 2nd deliverable has been fully implemented in MySQL or PostgreSQL. The student needs to clearly state if the logical model implemented differs from that of the 2nd deliverable. | 0-2 | 4-6 | 7-10 | 10 |
-> | At least 25 records (25 or more) have been loaded into each relation of the database. | 0-2 | 4-6 | 7-10 | 10 |
-> | A student has tested at least 10 different types of queries and has provided: 1) the query statement, 2) the SQL commands, and 3) the query output per query. | 0-1 | 2-3 | 4-5 | 5 |
+> Rubric | Bad | Good | Great | Total
+> --- | ---: | ---: | ---: | ---:
+> A student has created the database and the necessary relations using SQL DDL commands. | 0-1 | 2-3 | 4-5 | 5
+> The exact Logical model (relation schemas) submitted in 2nd deliverable has been fully implemented in MySQL or PostgreSQL. The student needs to clearly state if the logical model implemented differs from that of the 2nd deliverable. | 0-2 | 4-6 | 7-10 | 10
+> At least 25 records (25 or more) have been loaded into each relation of the database. | 0-2 | 4-6 | 7-10 | 10
+> A student has tested at least 10 different types of queries and has provided: 1) the query statement, 2) the SQL commands, and 3) the query output per query. | 0-1 | 2-3 | 4-5 | 5
 
 > ### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png"/>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.svg"/>
 
 ## New ER diagram
 
-![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.png)
+![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 > ### Old UML diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png"/>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.svg"/>
 
 ## New UML diagram
 
-![The UML diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.png)
+![The UML diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
@@ -708,6 +708,6 @@ SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
   - [x] Add default values.
 - Possible schema imporovement:
   - [ ] Support traveling by bus, doesn't add many tables but massively change
-    the structure of existing tables.
+        the structure of existing tables.
   - [x] Support membership with weekly and/or monthly payment, potentially
-    adding 2-3 more tables.
+        adding 2-3 more tables.

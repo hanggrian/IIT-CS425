@@ -1,4 +1,4 @@
-# [MySQL Database](https://www.w3schools.com/MySQL/mysql_create_db.asp)
+# [MySQL database](https://www.w3schools.com/MySQL/mysql_create_db.asp)
 
 ## CREATE, DROP DATABASE
 
@@ -145,12 +145,12 @@ ALTER TABLE Persons AUTO_INCREMENT = 100;
 
 ## Dates
 
-| Data Type | Format |
-| --- | --- |
-| `DATE` | YYYY-MM-DD |
-| `DATETIME` | YYYY-MM-DD HH:mm:ss |
-| `TIMESTAMP` | YYYY-MM-DD HH:mm:ss |
-| `YEAR` | YYYY or YY |
+Data Type | Format
+--- | ---
+`DATE` | YYYY-MM-DD
+`DATETIME` | YYYY-MM-DD HH:mm:ss
+`TIMESTAMP` | YYYY-MM-DD HH:mm:ss
+`YEAR` | YYYY or YY
 
 ## Views
 

@@ -6,19 +6,19 @@
   You are required to present a detailed ERD and logical structure/schema of the
   database.
 >
-> | Rubric | Bad | Good | Great | Total |
-> | --- | ---: | ---: | ---: | ---: |
-> | A sudent has a correct and detialed ERD and has included optional attributes, derived attributes and multivalued attributes, weak entities etc. | 0-3 | 4-8 | 9-12 | 12 |
-> | A correct use of primary and foreign keys, and are included in the relation schemas. A student has considered other constraints e.g., disjoint/overlapping generalization etc. | 0-2 | 3-5 | 6-8 | 8 |
-> | A student has written out complete and precise business rules as indicated in the ERD. | 0-3 | 3-6 | 7-10 | 10 |
+> Rubric | Bad | Good | Great | Total
+> --- | ---: | ---: | ---: | ---:
+> A sudent has a correct and detialed ERD and has included optional attributes, derived attributes and multivalued attributes, weak entities etc. | 0-3 | 4-8 | 9-12 | 12
+> A correct use of primary and foreign keys, and are included in the relation schemas. A student has considered other constraints e.g., disjoint/overlapping generalization etc. | 0-2 | 3-5 | 6-8 | 8
+> A student has written out complete and precise business rules as indicated in the ERD. | 0-3 | 3-6 | 7-10 | 10
 
 > ### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.png"/>
+> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.svg"/>
 
 ## New ER diagram
 
-![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.png)
+![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
@@ -47,7 +47,7 @@
 
 ## UML diagram
 
-![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.png)
+![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
@@ -56,76 +56,76 @@
 A conductor is a CTA employee with 2 jobs: operating a train (mostly in
 locomotive) and announcing service alerts.
 
-| <small>Conductors</small><br>**social_sec** | <br>name | <br>birth |
-| --- | --- | --- |
-| **1234567890** | Jane Doe | 1990-01-01 |
+<small>Conductors</small><br>**social_sec** | <br>name | <br>birth
+--- | --- | ---
+**1234567890** | Jane Doe | 1990-01-01
 
 Alerts are to be displayed in every station.
 
-| <small>Alerts</small><br>**id** | <br>message | <br>date_start | <br>date_end | <br>*conductor_sec* |
-| --- | --- | --- | --- | --- |
-| **1** | Elevator maintenance at Damen. | 2023-03-28 | 2023-04-04 | *1234567890* |
+<small>Alerts</small><br>**id** | <br>message | <br>date_start | <br>date_end | <br>*conductor_sec*
+--- | --- | --- | --- | ---
+**1** | Elevator maintenance at Damen. | 2023-03-28 | 2023-04-04 | *1234567890*
 
 ### *Stations* & *Tracks*
 
 A station is a train stop, transferrable station requires multiple entries.
 
-| <small>Stations</small><br>**lat** | <br>**lng** | <br>name | <br>zip | <br>has_parking | <br>has_elevator | <br>*track_color* |
-| --- | --- | --- | --- | --- | --- | --- |
-| **41.9100** | **87.6780** | Damen | 60622 | FALSE | FALSE | *Blue* |
+<small>Stations</small><br>**lat** | <br>**lng** | <br>name | <br>zip | <br>has_parking | <br>has_elevator | <br>*track_color*
+--- | --- | --- | --- | --- | --- | ---
+**41.9100** | **87.6780** | Damen | 60622 | FALSE | FALSE | *Blue*
 
 A track is a collection of stations.
 
-| <small>Tracks</small><br>**color** | <br>is_24h |
-| --- | --- |
-| **Blue** | FALSE |
+<small>Tracks</small><br>**color** | <br>is_24h
+--- | ---
+**Blue** | FALSE
 
 ### *Locomotives*, *Wagons*, *Trains* & *Railcars*
 
 Every entry into locomotives and wagons are tied into a real-world object. They
 are individual parts of a train line.
 
-| <small>Locomotives</small><br>**serial_no** | <br>since |
-| --- | --- |
-| **X101** | 1985 |
+<small>Locomotives</small><br>**serial_no** | <br>since
+--- | ---
+**X101** | 1985
 
-| <small>Wagons</small><br>**id** | <br>seats |
-| --- | --- |
-| **7501** | 40 |
-| **7502** | 50 |
+<small>Wagons</small><br>**id** | <br>seats
+--- | ---
+**7501** | 40
+**7502** | 50
 
 An entry of trains is a combination of a locomotive and wagons. railcars is a
 bridge table that represent that relationship.
 
-| <small>Trains</small><br>**id** | <br>*track_color* | <br>*locomotive_no* | <br>*conductor_sec* |
-| --- | --- | --- | --- |
-| **1** | *Blue* | *X101* | *1234567890* |
+<small>Trains</small><br>**id** | <br>*track_color* | <br>*locomotive_no* | <br>*conductor_sec*
+--- | --- | --- | ---
+**1** | *Blue* | *X101* | *1234567890*
 
-| <small>Railcars</small><br>**train_id** | <br>**wagon_id** |
-| --- | --- |
-| **1** | **7501** |
-| **1** | **7502** |
+<small>Railcars</small><br>**train_id** | <br>**wagon_id**
+--- | ---
+**1** | **7501**
+**1** | **7502**
 
 ### *Passengers*, *Trips* & *Passes*
 
 The last section of the scheme is related to customers and payments. An entry
 into passengers equalize a new *Ventra* account.
 
-| <small>Passengers</small><br>**id** | <br>name |
-| --- | --- |
-| **1** | Hendra Anggrian |
+<small>Passengers</small><br>**id** | <br>name
+--- | ---
+**1** | Hendra Anggrian
 
 A trip is a history of single travel. Each pass is potentially paid with a pass,
 which is an equivalent of *Ventra UPass*.
 
-| <small>Trips</small><br>**timestamp** | <br>**passenger_id** | <br>fare | <br>*station1_lat* | <br>*station1_lng* | <br>*station2_lat* | <br>*station2_lng* | <br>*pass_id* |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **2023-03-28 12:00:00** | **1** | 5 | *41.9100* | *87.6780* | *41.9100* | *87.6780* | *1* |
-| **2023-03-28 13:00:00** | **1** | 5 | *41.9100* | *87.6780* | *41.9100* | *87.6780* | NULL |
+<small>Trips</small><br>**timestamp** | <br>**passenger_id** | <br>fare | <br>*station1_lat* | <br>*station1_lng* | <br>*station2_lat* | <br>*station2_lng* | <br>*pass_id*
+--- | --- | --- | --- | --- | --- | --- | ---
+**2023-03-28 12:00:00** | **1** | 5 | *41.9100* | *87.6780* | *41.9100* | *87.6780* | *1*
+**2023-03-28 13:00:00** | **1** | 5 | *41.9100* | *87.6780* | *41.9100* | *87.6780* | NULL
 
-| <small>Passes</small><br>**id** | <br>date_start | <br>date_end | <br>*passenger_id* |
-| --- | --- | --- | --- |
-| **1** | 2023-03-01 | 2023-04-01 | *1* |
+<small>Passes</small><br>**id** | <br>date_start | <br>date_end | <br>*passenger_id*
+--- | --- | --- | ---
+**1** | 2023-03-01 | 2023-04-01 | *1*
 
 ## SQL initialization
 
@@ -250,6 +250,6 @@ CREATE TABLE Trips(
   - [x] Add default values.
 - Possible schema imporovement:
   - [ ] Support traveling by bus, doesn't add many tables but massively change
-    the structure of existing tables.
+        the structure of existing tables.
   - [x] Support membership with weekly and/or monthly payment, potentially
-    adding 2-3 more tables.
+        adding 2-3 more tables.

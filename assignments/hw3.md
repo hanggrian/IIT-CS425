@@ -8,36 +8,36 @@
 **Note**: *Captains* are implied to be a carbon copy of *Sailors*, but I made
 slight changes in columns' name.
 
-| <small>Sailors</small><br>Sname | <br>SID | <br>Rating | <br>Age |
-| --- | ---: | ---: | ---: |
-| Marx | 23 | 8 | 52 |
-| Martin | 25 | 9 | 51 |
-| Adams | 27 | 8 | 36 |
-| Carrey | 33 | 10 | 22 |
+<small>Sailors</small><br>Sname | <br>SID | <br>Rating | <br>Age
+--- | ---: | ---: | ---:
+Marx | 23 | 8 | 52
+Martin | 25 | 9 | 51
+Adams | 27 | 8 | 36
+Carrey | 33 | 10 | 22
 
-| <small>Captains</small><br>Cname | <br>CID | <br>Rating | <br>Age |
-| --- | ---: | ---: | ---: |
-| Marx | 23 | 8 | 52 |
-| Martin | 25 | 9 | 51 |
-| Adams | 27 | 8 | 36 |
-| Carrey | 33 | 10 | 22 |
+<small>Captains</small><br>Cname | <br>CID | <br>Rating | <br>Age
+--- | ---: | ---: | ---:
+Marx | 23 | 8 | 52
+Martin | 25 | 9 | 51
+Adams | 27 | 8 | 36
+Carrey | 33 | 10 | 22
 
-| <small>Boats</small><br>Bname | <br>BID | <br>Fee | <br>Location |
-| --- | ---: | ---: | --- |
-| Wayfarer | 109 | 120 | Hout Bay |
-| SeaPride | 108 | 500 | Fish Hoek |
-| Yupie | 101 | 400 | Hout Bay |
-| Joy | 104 | 200 | Hout Bay |
+<small>Boats</small><br>Bname | <br>BID | <br>Fee | <br>Location
+--- | ---: | ---: | ---
+Wayfarer | 109 | 120 | Hout Bay
+SeaPride | 108 | 500 | Fish Hoek
+Yupie | 101 | 400 | Hout Bay
+Joy | 104 | 200 | Hout Bay
 
-| <small>Reserves</small><br>SID | <br>BID | <br>Day | <br>Deposit |
-| ---: | ---: | :---: | ---: |
-| 23 | 109 | 2014-08-01 | 120 |
-| 23 | 108 | 2014-08-08 | 120 |
-| 25 | 101 | 2014-08-08 | 0 |
-| 27 | 101 | 2014-08-09 | 100 |
-| 27 | 109 | 2014-08-15 | 120 |
-| 33 | 109 | 2014-09-04 | 0 |
-| 33 | 104 | 2014-09-11 | 0 |
+<small>Reserves</small><br>SID | <br>BID | <br>Day | <br>Deposit
+---: | ---: | :---: | ---:
+23 | 109 | 2014-08-01 | 120
+23 | 108 | 2014-08-08 | 120
+25 | 101 | 2014-08-08 | 0
+27 | 101 | 2014-08-09 | 100
+27 | 109 | 2014-08-15 | 120
+33 | 109 | 2014-09-04 | 0
+33 | 104 | 2014-09-11 | 0
 
 ### SQL initialization
 
@@ -332,9 +332,9 @@ INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 
 ### Added *Boats*
 
-| Bname | BID | Fee | Location |
-| --- | ---: | ---: | --- |
-| Nino | 110 | 150 | Fish Hoek |
+Bname | BID | Fee | Location
+--- | ---: | ---: | ---
+Nino | 110 | 150 | Fish Hoek
 
 ## Problem 23
 
@@ -348,11 +348,11 @@ DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 
 ### Removed *Reserves*
 
-| SID | BID | Day | Deposit |
-| ---: | ---: | :---: | ---: |
-| 25 | 101 | 2014-08-08 | 0 |
-| 33 | 109 | 2014-09-04 | 0 |
-| 33 | 104 | 2014-09-11 | 0 |
+SID | BID | Day | Deposit
+---: | ---: | :---: | ---:
+25 | 101 | 2014-08-08 | 0
+33 | 109 | 2014-09-04 | 0
+33 | 104 | 2014-09-11 | 0
 
 ## Problem 24
 
@@ -366,13 +366,13 @@ UPDATE Boats SET `Fee` = `Fee` * 1.12;
 
 ### Updated **Boats**
 
-| Bname | BID | Fee | Location |
-| --- | ---: | ---: | --- |
-| Wayfarer | 109 | **134** | Hout Bay |
-| SeaPride | 108 | **560** | Fish Hoek |
-| Yupie | 101 | **448** | Hout Bay |
-| Joy | 104 | **224** | Hout Bay |
-| Nino | 110 | **168** | Fish Hoek |
+Bname | BID | Fee | Location
+--- | ---: | ---: | ---
+Wayfarer | 109 | **134** | Hout Bay
+SeaPride | 108 | **560** | Fish Hoek
+Yupie | 101 | **448** | Hout Bay
+Joy | 104 | **224** | Hout Bay
+Nino | 110 | **168** | Fish Hoek
 
 ## Problem 25
 
@@ -387,12 +387,12 @@ CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
 
 #### Created *Bookings* view
 
-| SID | BID | Day |
-| ---: | ---: | :---: |
-| 23 | 108 | 2014-08-08 |
-| 23 | 109 | 2014-08-01 |
-| 27 | 101 | 2014-08-09 |
-| 27 | 109 | 2014-08-15 |
+SID | BID | Day
+---: | ---: | :---:
+23 | 108 | 2014-08-08
+23 | 109 | 2014-08-01
+27 | 101 | 2014-08-09
+27 | 109 | 2014-08-15
 
 ## Problem 26
 
@@ -429,13 +429,13 @@ ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 
 ### Updated *Boats*
 
-| Bname | BID | Fee | Location | NEEDSREPAIR |
-| --- | ---: | ---: | --- | --- |
-| Wayfarer | 109 | 134 | Hout Bay | **N** |
-| SeaPride | 108 | 560 | Fish Hoek | **N** |
-| Yupie | 101 | 448 | Hout Bay | **N** |
-| Joy | 104 | 224 | Hout Bay | **N** |
-| Nino | 110 | 158 | Fish Hoek | **N** |
+Bname | BID | Fee | Location | NEEDSREPAIR
+--- | ---: | ---: | --- | ---
+Wayfarer | 109 | 134 | Hout Bay | **N**
+SeaPride | 108 | 560 | Fish Hoek | **N**
+Yupie | 101 | 448 | Hout Bay | **N**
+Joy | 104 | 224 | Hout Bay | **N**
+Nino | 110 | 158 | Fish Hoek | **N**
 
 ## Problem 28
 
@@ -449,12 +449,12 @@ ALTER TABLE Sailors DROP `Age`;
 
 ### Updated *Sailors*
 
-| Sname | SID | Rating |
-| --- | ---: | ---: |
-| Marx | 23 | 8 |
-| Martin | 25 | 9 |
-| Adams | 27 | 8 |
-| Carrey | 33 | 10 |
+Sname | SID | Rating
+--- | ---: | ---:
+Marx | 23 | 8
+Martin | 25 | 9
+Adams | 27 | 8
+Carrey | 33 | 10
 
 ## Problem 29
 

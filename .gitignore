@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+
+# IDEA
+*.iml
+.idea/
+out/
+
+# Gradle
+.gradle/
+build/
+local.properties
+
+# draw.io
+.$*.drawio*

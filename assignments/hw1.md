@@ -8,7 +8,7 @@
 
 ### UML diagram
 
-![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.png)
+![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.svg)
 
 [View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/uml.drawio)
 
