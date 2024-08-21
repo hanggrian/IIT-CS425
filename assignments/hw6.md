@@ -1,6 +1,6 @@
-# [Homework 1.6](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw6.pdf): University ER
+# [Homework 1.6](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw6.pdf): University ER
 
-> ![The ER model.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/assignments/hw6_1.png)
+> ![The ER model.](https://github.com/hanggrian/IIT-CS425/raw/assets/assignments/hw6_1.png)
 
 ## Problem 1
 
@@ -9,7 +9,7 @@
 Several notes about this solution:
 
 - `grade` is flagged as **erroneous use of relationship attributes** according
-  to [lecture 6th](https://github.com/hendraanggrian/IIT-CS425/blob/assets/lect6.pdf),
+  to [lecture 6th](https://github.com/hanggrian/IIT-CS425/blob/assets/lect6.pdf),
   thus will be ignored.
 - The relationship names (`teaches`, `takes`, etc.) in the ER diagram above are
   being used as foreign key contraint names in the SQL table.
@@ -107,4 +107,4 @@ CREATE TABLE Sections(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-er/initialize.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/university-er/initialize.sql)

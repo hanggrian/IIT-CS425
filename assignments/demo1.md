@@ -1,4 +1,4 @@
-# [Demo 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/demo1.pdf): Normalization
+# [Demo 1](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/demo1.pdf): Normalization
 
 ## Problem 1
 

@@ -1,4 +1,4 @@
-# [Homework 1.8](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw8.pdf): Greendale Community College
+# [Homework 1.8](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw8.pdf): Greendale Community College
 
 > A spreadsheet has been created that stores results of students at Greendale
   Community College. This includes annual promotion code `REN` (excluded), `CON`
@@ -7,7 +7,7 @@
   relational database that can represent the information contained in the
   spreadsheet as closely and completely as possible.
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)
 
 ## Problem 1
 
@@ -18,15 +18,15 @@
 
 ### ER diagram
 
-![The ER diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/er.svg)
+![The ER diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/greendale-community-college/er.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/er.drawio)
 
 ### UML diagram
 
-![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/uml.svg)
+![The UML diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/greendale-community-college/uml.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/uml.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/uml.drawio)
 
 ### SQL initialization
 
@@ -86,7 +86,7 @@ CREATE TABLE TimeSlots(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/initialize.sql)
 
 ## Problem 2
 
@@ -146,16 +146,16 @@ INSERT INTO TimeSlots VALUES
   (NULL, 5, DEFAULT, DEFAULT, 'ZOO203');
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/data.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/data.sql)
 
 ## Problem 3
 
 > Give any one functional dependency that holds for this information, and state
   in simple words what your functional dependency tells us about the data.
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/greendale-community-college/nmf.svg)
+![The NMF diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/greendale-community-college/nmf.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/greendale-community-college/nmf.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/greendale-community-college/nmf.drawio)
 
 Dependency diagram above is constructed only from `Students.csv`, not the ER or
 UML diagram.

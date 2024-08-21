@@ -1,4 +1,4 @@
-# [Project deliverable 3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 3](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Physical model**: Implement the logical model using a suitable relational
   DBMS. Create the database in the database system using general Data-definition
@@ -14,23 +14,23 @@
 
 > ### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.svg"/>
+> <img width="480" src="https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er2.svg"/>
 
 ## New ER diagram
 
-![The ER diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.svg)
+![The ER diagram stage 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er3.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 > ### Old UML diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.svg"/>
+> <img width="480" src="https://github.com/hanggrian/IIT-CS425/raw/assets/cta/uml2.svg"/>
 
 ## New UML diagram
 
-![The UML diagram stage 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.svg)
+![The UML diagram stage 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/uml3.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
 ## SQL initialization
 
@@ -169,8 +169,8 @@ CREATE TABLE Trips(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize3.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data3.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/cta/initialize3.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/cta/data3.sql)
 
 ## SQL commands
 
@@ -207,7 +207,7 @@ INSERT INTO Tracks VALUES
   ('Amber', 0);
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data1.png)
+![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data1.png)
 
 ### Command 2
 
@@ -242,7 +242,7 @@ INSERT INTO Stations VALUES
   ('Pink', 'Pulaski', 41.7997, 87.7244, '5106 South Pulaski Road', '60632', 1, 0);
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data2.png)
+![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data2.png)
 
 ### Command 3
 
@@ -275,11 +275,12 @@ INSERT INTO Conductors VALUES
   ('marsh4', DEFAULT, 'Shelley Marsh', '1994-01-01', 2023 - 1994, '202-555-0166');
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data3.png)
+![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data3.png)
 
 ### Command 4
 
-Alerts are based on [rail status](https://www.transitchicago.com/travel-information/railstatus/) & [elevator alerts](https://www.transitchicago.com/alerts/elevators/).
+Alerts are based on [rail status](https://www.transitchicago.com/travel-information/railstatus/)
+& [elevator alerts](https://www.transitchicago.com/alerts/elevators/).
 
 ```sql
 INSERT INTO Alerts VALUES
@@ -335,7 +336,7 @@ INSERT INTO Alerts VALUES
     '2023-01-12', NULL, 'Orange', 'marsh4');
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data4.png)
+![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data4.png)
 
 ### Command 5
 
@@ -368,7 +369,7 @@ INSERT INTO Locomotives VALUES
   ('2500', 2003);
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data5.png)
+![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data5.png)
 
 ### Command 6
 
@@ -401,7 +402,7 @@ INSERT INTO Wagons VALUES
   ('2501', 40), ('2502', 50);
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data6.png)
+![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data6.png)
 
 ### Command 7
 
@@ -434,7 +435,7 @@ INSERT INTO Trains VALUES
   (25, 'Yellow', '2500', 'marsh4');
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data7.png)
+![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data7.png)
 
 ### Command 8
 
@@ -467,7 +468,7 @@ INSERT INTO Railcars VALUES
   (25, '2501'), (25, '2502');
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data8.png)
+![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data8.png)
 
 ### Command 9
 
@@ -500,7 +501,7 @@ INSERT INTO Passengers VALUES
   (25, 'Abner Doubledeal');
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data9.png)
+![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data9.png)
 
 ### Command 10
 
@@ -533,7 +534,7 @@ INSERT INTO Passes VALUES
   (25, '2023-12-27', '2024-03-27', 25);
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data10.png)
+![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data10.png)
 
 ### Command 11
 
@@ -566,7 +567,7 @@ INSERT INTO Trips VALUES
   (DEFAULT, 25, NULL, 25, 'Purple', 'Howard', 'Foster');
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/data11.png)
+![Screenschot for answer 11.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/data11.png)
 
 ## SQL statements
 
@@ -579,7 +580,7 @@ SELECT CONCAT(`track`, IF(`is_24h`, ' (24h)', '')) AS `Active stations`
  FROM Tracks WHERE `track` IN(SELECT `track` FROM Stations);
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement1.png)
+![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement1.png)
 
 ### Statement 2
 
@@ -591,7 +592,7 @@ SELECT `track`, `station`, `location`, `zip` FROM Stations
   WHERE `station` IN(SELECT `station` FROM Stations WHERE `track` = 'Blue');
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement2.png)
+![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement2.png)
 
 ### Statement 3
 
@@ -605,7 +606,7 @@ SELECT CONCAT('Parking ', AVG(`has_parking`) * 100, '%')
   AS `Infrastructure rating` FROM Stations;
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3.png)
+![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement3.png)
 
 ### Statement 4
 
@@ -617,7 +618,7 @@ SELECT `track`, `title`, `date_start` FROM Alerts
   WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL;
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement4.png)
+![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement4.png)
 
 ### Statement 5
 
@@ -630,7 +631,7 @@ SELECT CONCAT(`name`, ' (', `username`, ')') AS `Lazy employees` FROM Conductors
     WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL);
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement5.png)
+![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement5.png)
 
 ### Statement 6
 
@@ -642,7 +643,7 @@ SELECT * FROM Trains AS T LEFT JOIN Locomotives AS L
   WHERE `since` < 1980;
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement6.png)
+![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement6.png)
 
 ### Statement 7
 
@@ -655,7 +656,7 @@ SELECT R.`train_id`, `track`, `username`, COUNT(R.`train_id`) AS `Wagon count`
   ON R.`train_id` = T.`train_id` GROUP BY `train_id`;
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement7.png)
+![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement7.png)
 
 ### Statement 8
 
@@ -668,7 +669,7 @@ SELECT R.`train_id`, SUM(W.`seats`) AS `Seat capacity`
   ON R.`wagon_id` = W.`wagon_id` GROUP BY `train_id`;
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement8.png)
+![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement8.png)
 
 ### Statement 9
 
@@ -681,7 +682,7 @@ SELECT `pass_id`, `date_start`, P1.`passenger_id`, `name` FROM Passes AS P1
   WHERE `date_end` >= '2023-01-01';
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement9.png)
+![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement9.png)
 
 ### Statement 10
 
@@ -694,7 +695,7 @@ SELECT CONCAT(`passenger_id`, '. ', `name`) AS `Recent customers`
     IN(SELECT `passenger_id` FROM Trips WHERE `timestamp` >= '2023-01-01');
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement10.png)
+![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement10.png)
 
 ## Checklist
 

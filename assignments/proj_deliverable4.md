@@ -1,4 +1,4 @@
-# [Project deliverable 4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 4](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Application**: The last deliverable requires to write a program in any
   programming language SQL supports and implement a variety of SQL commands.
@@ -17,17 +17,17 @@
 > Students have presented their project in class on the due date and have uploaded all the working files and folders of the project. | 0-4 | 5-6 | 7-8 | 9-10
 > Personal contribution, a group must give a percent contribution of each member across all deliverables. | 0-1 | 2-3 | 4-5 | 5
 
-![App preview.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/preview.png)
+![App preview.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/preview.png)
 
 A 3-columns windowed multi-platform desktop app.
 
-- [DMG](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.dmg)
+- [DMG](https://github.com/hanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.dmg)
   &ndash; macOS moutable with one-file application inside.
   - For permission error: run `sudo xattr -cr /Applications/CTA.app`, open app,
     then click allow on *System Settings > Privacy & Security*.
-- [EXE](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.exe)
+- [EXE](https://github.com/hanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0-x64.exe)
   &ndash; Windows installer to default directory.
-- [JAR](https://github.com/hendraanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0.jar)
+- [JAR](https://github.com/hanggrian/IIT-CS425/releases/download/proj-deliverable4/cta-1.0.jar)
   &ndash; JRE executable that requires version 17+.
 
 ### Tech stack
@@ -67,7 +67,7 @@ val db = Database.connect(
 )
 ```
 
-![Login dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case1.png)
+![Login dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case1.png)
 
 ### Case 2
 
@@ -91,9 +91,9 @@ val stationTable = tableView<Station>()
 }
 ```
 
-![Refresh menu.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case2_1.png)
+![Refresh menu.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case2_1.png)
 
-![3 tables in main stage.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case2_2.png)
+![3 tables in main stage.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case2_2.png)
 
 ### Case 3
 
@@ -111,11 +111,11 @@ db.update(Conductors) {
 }
 ```
 
-![Conductor table dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_1.png)
+![Conductor table dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case3_1.png)
 
-![Reset password dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_2.png)
+![Reset password dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case3_2.png)
 
-![Reset password result.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case3_3.png)
+![Reset password result.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case3_3.png)
 
 ### Case 4
 
@@ -135,9 +135,9 @@ val alert = Alert {
 db.alerts.add(alert)
 ```
 
-![Add alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case4_1.png)
+![Add alert dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case4_1.png)
 
-![View alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case4_2.png)
+![View alert dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case4_2.png)
 
 ### Case 5
 
@@ -153,29 +153,29 @@ val pass = Pass {
 db.passes.add(alert)
 ```
 
-![Add alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case5_1.png)
+![Add alert dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case5_1.png)
 
-![View alert dialog.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/case5_2.png)
+![View alert dialog.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/case5_2.png)
 
 > #### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er3.svg"/>
+> <img width="480" src="https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er3.svg"/>
 
 ### New ER diagram
 
-![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er4.svg)
+![The ER diagram stage 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er4.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 > #### Old UML diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml3.svg"/>
+> <img width="480" src="https://github.com/hanggrian/IIT-CS425/raw/assets/cta/uml3.svg"/>
 
 ### New UML diagram
 
-![The ER diagram stage 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml4.svg)
+![The ER diagram stage 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/uml4.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
 ### SQL initialization
 
@@ -316,8 +316,8 @@ CREATE TABLE Trips(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize4.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data4.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/cta/initialize4.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/cta/data4.sql)
 
 > ## Old SQL statements
 >
@@ -332,7 +332,7 @@ CREATE TABLE Trips(
 >   FROM Tracks WHERE `track` IN(SELECT `track` FROM Stations);
 > ```
 >
-> ![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement1.png)
+> ![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement1.png)
 >
 > ### Statement 2
 >
@@ -344,7 +344,7 @@ CREATE TABLE Trips(
 >   WHERE `station` IN(SELECT `station` FROM Stations WHERE `track` = 'Blue');
 > ```
 >
-> ![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement2.png)
+> ![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement2.png)
 >
 > ### Statement 3
 >
@@ -358,7 +358,7 @@ CREATE TABLE Trips(
 >   AS `Infrastructure rating` FROM Stations;
 > ```
 >
-> ![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement3.png)
+> ![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement3.png)
 >
 > ### Statement 4
 >
@@ -370,7 +370,7 @@ CREATE TABLE Trips(
 >   WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL;
 > ```
 >
-> ![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement4.png)
+> ![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement4.png)
 >
 > ### Statement 5
 >
@@ -383,7 +383,7 @@ CREATE TABLE Trips(
 >     WHERE `date_start` < '2022-01-01' AND `date_end` IS NULL);
 > ```
 >
-> ![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement5.png)
+> ![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement5.png)
 >
 > ### Statement 6
 >
@@ -395,7 +395,7 @@ CREATE TABLE Trips(
 >   WHERE `since` < 1980;
 > ```
 >
-> ![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement6.png)
+> ![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement6.png)
 >
 > ### Statement 7
 >
@@ -408,7 +408,7 @@ CREATE TABLE Trips(
 >   ON R.`train_id` = T.`train_id` GROUP BY `train_id`;
 > ```
 >
-> ![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement7.png)
+> ![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement7.png)
 >
 > ### Statement 8
 >
@@ -421,7 +421,7 @@ CREATE TABLE Trips(
 >   ON R.`wagon_id` = W.`wagon_id` GROUP BY `train_id`;
 > ```
 >
-> ![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement8.png)
+> ![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement8.png)
 >
 > ### Statement 9
 >
@@ -434,7 +434,7 @@ CREATE TABLE Trips(
 >   WHERE `date_end` >= '2023-01-01';
 > ```
 >
-> ![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement9.png)
+> ![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement9.png)
 >
 > ### Statement 10
 >
@@ -447,7 +447,7 @@ CREATE TABLE Trips(
 >     IN(SELECT `passenger_id` FROM Trips WHERE `timestamp` >= '2023-01-01');
 > ```
 >
-> ![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/statement10.png)
+> ![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/statement10.png)
 
 ## Checklist
 

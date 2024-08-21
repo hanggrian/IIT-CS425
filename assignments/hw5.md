@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.5](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw5.pdf): Workplace OLAP
+# [Homework 1.5](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw5.pdf): Workplace OLAP
 
 > Give the answers (assume `ORDER BY` salary).
 >
@@ -41,8 +41,8 @@ CREATE TABLE Salaries(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/workplace-olap/initialize.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/workplace-olap/data.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/workplace-olap/initialize.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/workplace-olap/data.sql)
 
 ## Problem 1
 
@@ -57,7 +57,7 @@ lower than current row. **Therefore the result is 2500**.
 SELECT `row_num`, FIRST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/1.png)
+![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/1.png)
 
 ## Problem 2
 
@@ -72,7 +72,7 @@ higher than any previous row. **Therefore the result is salary of current row**.
 SELECT `row_num`, LAST_VALUE(`salary`) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/2.png)
+![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/2.png)
 
 ## Problem 3
 
@@ -89,7 +89,7 @@ SELECT `row_num`, `LEAD`
   WHERE `first_name` = 'Guy';
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/3.png)
+![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/3.png)
 
 ## Problem 4
 
@@ -106,7 +106,7 @@ SELECT `row_num`, `LAG`
   WHERE `first_name` = 'Pat';
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/4.png)
+![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/4.png)
 
 ## Problem 5
 
@@ -123,7 +123,7 @@ SELECT `row_num`, `RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/5.png)
+![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/5.png)
 
 ## Problem 6
 
@@ -140,7 +140,7 @@ SELECT `row_num`, `RANK`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/6.png)
+![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/6.png)
 
 ## Problem 7
 
@@ -159,7 +159,7 @@ SELECT `row_num`, `DENSE_RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/7.png)
+![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/7.png)
 
 ## Problem 8
 
@@ -178,7 +178,7 @@ SELECT `row_num`, `DENSE_RANK`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/8.png)
+![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/8.png)
 
 ## Problem 9
 
@@ -196,7 +196,7 @@ SELECT `row_num`, `ROW_NUMBER`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/9.png)
+![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/9.png)
 
 ## Problem 10
 
@@ -214,7 +214,7 @@ SELECT `row_num`, `ROW_NUMBER`
   WHERE `first_name` = 'Bruce';
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/10.png)
+![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/10.png)
 
 ## Problem 11
 
@@ -233,7 +233,7 @@ SELECT `row_num`, `PERCENT_RANK`
   WHERE `first_name` = 'Valli';
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/11.png)
+![Screenschot for answer 11.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/11.png)
 
 ## Problem 12
 
@@ -248,7 +248,7 @@ The table length is 15, **therefore the division are 4, 4, 4, and 3**.
 SELECT `row_num`, NTILE(4) OVER(ORDER BY `salary`) FROM Salaries;
 ```
 
-![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/12.png)
+![Screenschot for answer 12.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/12.png)
 
 ## Problem 13
 
@@ -268,7 +268,7 @@ SELECT `row_num`, `CUME_DIST_3`
   WHERE `row_num` = 3;
 ```
 
-![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/13.png)
+![Screenschot for answer 13.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/13.png)
 
 ## Problem 14
 
@@ -288,4 +288,4 @@ SELECT `row_num`, `CUME_DIST_12`
   WHERE `row_num` = 12;
 ```
 
-![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/workplace-olap/14.png)
+![Screenschot for answer 14.](https://github.com/hanggrian/IIT-CS425/raw/assets/workplace-olap/14.png)

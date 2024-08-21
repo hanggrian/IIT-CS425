@@ -1,4 +1,4 @@
-# [Project deliverable 1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 1](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Conceptual model**: Create a conceptual model consisting of the most
   essential information required for the selected application. Explore the
@@ -10,9 +10,9 @@
 
 ## ER diagram
 
-![The ER diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.svg)
+![The ER diagram stage 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er1.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 ### Rules
 
@@ -110,8 +110,8 @@ CREATE TABLE Passengers(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize1.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data1.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/cta/initialize1.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/cta/data1.sql)
 
 ## Checklist
 

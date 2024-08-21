@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Demo 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/demo2.pdf): Functional Dependency
+# [Demo 2](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/demo2.pdf): Functional Dependency
 
 ## Problem 1
 
@@ -50,9 +50,9 @@ $$
 
 > Normal forms the Relation, $R$ satisfies?
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/demo2.png)
+![The NMF diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/nmf/demo2.png)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/nmf/demo2.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/nmf/demo2.drawio)
 
 The relation has a candidate key so it is at least 1NF. There are partial
 dependencies and a transitive dependency in the relation, therefore it cannot be

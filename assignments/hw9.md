@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$']] }, messageStyle: 'none' });</script>
 
-# [Homework 1.9](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw9.pdf): Functional dependencies
+# [Homework 1.9](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw9.pdf): Functional dependencies
 
 > You are given the below functional dependencies for the
   relation $R(A\ B\ C\ D\ E\ F)$,
@@ -23,9 +23,9 @@
 
 > What are the keys for the relation?
 
-![The NMF diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/nmf/hw9.svg)
+![The NMF diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/nmf/hw9.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/nmf/hw9.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/nmf/hw9.drawio)
 
 ### Step 1: Break down right parts
 

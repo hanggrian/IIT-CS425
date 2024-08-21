@@ -1,4 +1,4 @@
-# [Homework 1.1](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw1.docx): University DB
+# [Homework 1.1](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw1.docx): University DB
 
 ## Problem 1
 
@@ -8,9 +8,9 @@
 
 ### UML diagram
 
-![The UML diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/university-db/uml.svg)
+![The UML diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/university-db/uml.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/uml.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/university-db/uml.drawio)
 
 ## Problem 2
 
@@ -86,5 +86,5 @@ CREATE TABLE Schedules(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/initialize.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/university-db/data.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/university-db/initialize.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/university-db/data.sql)

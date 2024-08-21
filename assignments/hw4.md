@@ -1,4 +1,4 @@
-# [Homework 1.4](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw4.pdf): Basketball DB
+# [Homework 1.4](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw4.pdf): Basketball DB
 
 > Create FOUR (4) relations called Coach, Person, Player, and Team, each
   containing the same column names as those found in the corresponding CSV data
@@ -65,8 +65,8 @@ CREATE TABLE Coaches(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/basketball-db/initialize.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/tree/main/basketball-db/)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/basketball-db/initialize.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/tree/main/basketball-db/)
 
 ## Problem 1
 
@@ -81,7 +81,7 @@ SELECT COUNT(*) AS `LOADED` FROM Coaches
   UNION SELECT COUNT(*) AS `LOADED` FROM Teams;
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/1.png)
+![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/1.png)
 
 ## Problem 2
 
@@ -92,7 +92,7 @@ SELECT COUNT(*) AS `LOADED` FROM Coaches
 SELECT * FROM Teams ORDER BY `TmID`;
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/2.png)
+![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/2.png)
 
 ## Problem 3
 
@@ -105,7 +105,7 @@ SELECT * FROM Teams ORDER BY `TmID`;
 SELECT `TmId` FROM Teams WHERE `Name` LIKE 'mil%w%k%';
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/3.png)
+![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/3.png)
 
 ## Problem 4
 
@@ -117,7 +117,7 @@ SELECT `TmId` FROM Teams WHERE `Name` LIKE 'mil%w%k%';
 SELECT MIN(`Games`) AS `LOWEST`, MAX(`Games`) AS `HIGHEST` FROM Coaches;
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/4.png)
+![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/4.png)
 
 ## Problem 5
 
@@ -131,7 +131,7 @@ SELECT `BioID`, `TmID`, `Points`, `Attempts` FROM Players
   ORDER BY `Points` DESC, `BioID` ASC;
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/5.png)
+![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/5.png)
 
 ## Problem 6
 
@@ -142,7 +142,7 @@ SELECT `BioID`, `TmID`, `Points`, `Attempts` FROM Players
 SELECT `BioID` FROM Persons WHERE `BirthCountry` IN('GAB', 'EGY');
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/6.png)
+![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/6.png)
 
 ## Problem 7
 
@@ -158,7 +158,7 @@ SELECT p.`Points` AS `PlayerPoints`, t.`TmID` AS `TeamName`,
     AND p.`TmID` = t.`TmID`;
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/7.png)
+![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/7.png)
 
 ## Problem 8
 
@@ -172,7 +172,7 @@ SELECT pe.`BioID` FROM Persons AS pe, Players AS pl
     AND(`BirthCity` IS NULL OR `BirthCity` = '');
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/8a.png)
+![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/8a.png)
 
 ### Alternative answer 8B
 
@@ -184,7 +184,7 @@ SELECT `BioID` FROM Persons
     AND(`BirthCity` IS NULL OR `BirthCity` = '');
 ```
 
-![Screenschot for alternative answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/8b.png)
+![Screenschot for alternative answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/8b.png)
 
 ## Problem 9
 
@@ -195,7 +195,7 @@ SELECT `BioID`, `Won` FROM Coaches
   WHERE `Won` = (SELECT MAX(`Won`) FROM Coaches);
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/9.png)
+![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/9.png)
 
 ## Problem 10
 
@@ -206,7 +206,7 @@ SELECT `BioID`, `Won` FROM Coaches
 SELECT SUM(`Points` = 0) / COUNT(*) * 100 AS `NONSCORERS` FROM Players;
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/10.png)
+![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/10.png)
 
 ## Problem 11
 
@@ -217,7 +217,7 @@ SELECT SUM(`Points` = 0) / COUNT(*) * 100 AS `NONSCORERS` FROM Players;
 SELECT SUM(`Lost` > `Won`) AS `LOSERS` FROM Teams;
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/11.png)
+![Screenschot for answer 11.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/11.png)
 
 ## Problem 12
 
@@ -227,7 +227,7 @@ SELECT SUM(`Lost` > `Won`) AS `LOSERS` FROM Teams;
 SELECT `ConfID`, COUNT(*) AS `CONFSIZE` FROM Teams GROUP BY `ConfID`;
 ```
 
-![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/12.png)
+![Screenschot for answer 12.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/12.png)
 
 ## Problem 13
 
@@ -238,7 +238,7 @@ SELECT `ConfID`, COUNT(*) AS `CONFSIZE` FROM Teams GROUP BY `ConfID`;
 SELECT COUNT(DISTINCT `BirthCountry`) AS `NUMLANDS` FROM Persons;
 ```
 
-![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/13.png)
+![Screenschot for answer 13.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/13.png)
 
 ## Problem 14
 
@@ -256,7 +256,7 @@ SELECT a.`Won`, a.`Lost`, a.`Name` AS `TEAM1`, a.`Name` AS `TEAM2`
     AND a.`Name` < b.`Name`;
 ```
 
-![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/14.png)
+![Screenschot for answer 14.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/14.png)
 
 ## Problem 15
 
@@ -269,7 +269,7 @@ SELECT `Ranking`, AVG(`Lost`) AS `AVLOSSES` FROM Teams
   GROUP BY `Ranking` ORDER BY `Ranking`;
 ```
 
-![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/15.png)
+![Screenschot for answer 15.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/15.png)
 
 ## Problem 16
 
@@ -283,4 +283,4 @@ SELECT 'INVALID' AS `ANYPROBLEMS` FROM Teams
   WHERE `Games` <> `Won` + `Lost`;
 ```
 
-![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/basketball-db/16.png)
+![Screenschot for answer 16.](https://github.com/hanggrian/IIT-CS425/raw/assets/basketball-db/16.png)

@@ -1,4 +1,4 @@
-# [Homework 1.7](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw7.pdf): Launchpad ER
+# [Homework 1.7](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw7.pdf): Launchpad ER
 
 > Launch Pad business rules:
 >
@@ -37,9 +37,9 @@
 
 ### ER diagram
 
-![The ER diagram.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/launchpad-er/er.svg)
+![The ER diagram.](https://github.com/hanggrian/IIT-CS425/raw/assets/launchpad-er/er.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-er/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/launchpad-er/er.drawio)
 
 ## Problem 2
 
@@ -124,4 +124,4 @@ CREATE TABLE Missions(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/launchpad-er/initialize.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/launchpad-er/initialize.sql)

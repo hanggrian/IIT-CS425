@@ -1,4 +1,4 @@
-# [Homework 1.3](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/hw3.docx): Sailing DB
+# [Homework 1.3](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/hw3.docx): Sailing DB
 
 > Implement the database schema (SailingDB) found in the attachment pdf below
   and insert the data as shown in each table. You are provided with the query
@@ -84,8 +84,8 @@ CREATE TABLE Reserves(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/sailing-db/initialize.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/sailing-db/data.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/sailing-db/initialize.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/sailing-db/data.sql)
 
 ## Problem 1
 
@@ -95,7 +95,7 @@ CREATE TABLE Reserves(
 SELECT * FROM Sailors;
 ```
 
-![Screenschot for answer 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/1.png)
+![Screenschot for answer 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/1.png)
 
 ## Problem 2
 
@@ -106,7 +106,7 @@ SELECT * FROM Sailors;
 SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 ```
 
-![Screenschot for answer 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/2.png)
+![Screenschot for answer 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/2.png)
 
 ## Problem 3
 
@@ -116,7 +116,7 @@ SELECT `SID`, `Rating` * 10, `Age` FROM Sailors ORDER BY `Rating` DESC;
 SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 ```
 
-![Screenschot for answer 3.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/3.png)
+![Screenschot for answer 3.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/3.png)
 
 ## Problem 4
 
@@ -127,7 +127,7 @@ SELECT `Sname` FROM Sailors WHERE `Rating` <= 9 ORDER BY `Sname`;
 SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 ```
 
-![Screenschot for answer 4.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/4.png)
+![Screenschot for answer 4.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/4.png)
 
 ## Problem 5
 
@@ -137,7 +137,7 @@ SELECT SUM(`Deposit`) AS `TOTAL`, COUNT(`Deposit`) AS `HOWMANY` FROM Reserves;
 SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 ```
 
-![Screenschot for answer 5.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/5.png)
+![Screenschot for answer 5.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/5.png)
 
 ## Problem 6
 
@@ -147,7 +147,7 @@ SELECT * FROM Boats WHERE `Location` LIKE '_is%k';
 SELECT DISTINCT `Location` FROM Boats;
 ```
 
-![Screenschot for answer 6.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/6.png)
+![Screenschot for answer 6.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/6.png)
 
 ## Problem 7
 
@@ -157,7 +157,7 @@ SELECT DISTINCT `Location` FROM Boats;
 SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 ```
 
-![Screenschot for answer 7.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/7.png)
+![Screenschot for answer 7.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/7.png)
 
 ## Problem 8
 
@@ -167,7 +167,7 @@ SELECT `Bname` FROM Boats WHERE `Fee` IS NOT NULL;
 SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 ```
 
-![Screenschot for answer 8.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/8.png)
+![Screenschot for answer 8.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/8.png)
 
 ## Problem 9
 
@@ -177,7 +177,7 @@ SELECT `BID` FROM Boats WHERE `BID` NOT IN(SELECT `BID` FROM Reserves);
 SELECT * FROM Reserves, Boats WHERE Reserves.`BID` = Boats.`BID`;
 ```
 
-![Screenschot for answer 9.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/9.png)
+![Screenschot for answer 9.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/9.png)
 
 ## Problem 10
 
@@ -190,7 +190,7 @@ SELECT `Sname`, `Day`, `Bname`
   WHERE s.`SID` = r.`SID` AND r.`BID` = b.`BID`;
 ```
 
-![Screenschot for answer 10.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/10.png)
+![Screenschot for answer 10.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/10.png)
 
 ## Problem 11
 
@@ -200,7 +200,7 @@ SELECT `Sname`, `Day`, `Bname`
 SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`;
 ```
 
-![Screenschot for answer 11.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/11.png)
+![Screenschot for answer 11.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/11.png)
 
 ## Problem 12
 
@@ -212,7 +212,7 @@ SELECT `BID`, AVG(`Deposit`) FROM Reserves GROUP BY `BID`
   HAVING COUNT(DISTINCT `SID`) > 1;
 ```
 
-![Screenschot for answer 12.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/12.png)
+![Screenschot for answer 12.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/12.png)
 
 ## Problem 13
 
@@ -226,7 +226,7 @@ SELECT `BID`, AVG(`Deposit`) AS `AVERAGEDEPOSIT` FROM Reserves
   ORDER BY `AVERAGEDEPOSIT`;
 ```
 
-![Screenschot for answer 13.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/13.png)
+![Screenschot for answer 13.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/13.png)
 
 ## Problem 14
 
@@ -239,7 +239,7 @@ SELECT `Sname`, `Rating` FROM Sailors
     AND `SID` IN(SELECT `SID` FROM Reserves WHERE `Deposit` = 0);
 ```
 
-![Screenschot for answer 14.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/14.png)
+![Screenschot for answer 14.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/14.png)
 
 ## Problem 15
 
@@ -249,7 +249,7 @@ SELECT `Sname`, `Rating` FROM Sailors
 SELECT `Bname` FROM Boats WHERE `Location` NOT IN('Hout Bay', 'Fish Hoek');
 ```
 
-![Screenschot for answer 15.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/15.png)
+![Screenschot for answer 15.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/15.png)
 
 ## Problem 16
 
@@ -260,7 +260,7 @@ SELECT DISTINCT `Bname` FROM Boats
   WHERE `Fee` > SOME(SELECT `Fee` FROM Boats WHERE `Location` = 'Hout Bay');
 ```
 
-![Screenschot for answer 16.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/16.png)
+![Screenschot for answer 16.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/16.png)
 
 ## Problem 17
 
@@ -271,7 +271,7 @@ SELECT `Sname` FROM Sailors
   WHERE EXISTS(SELECT * FROM Captains WHERE Captains.`CID` = Sailors.`SID`);
 ```
 
-![Screenschot for answer 17.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/17.png)
+![Screenschot for answer 17.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/17.png)
 
 ## Problem 18
 
@@ -282,7 +282,7 @@ SELECT `Bname` FROM Boats AS b
   WHERE EXISTS(SELECT `BID` FROM Reserves WHERE Reserves.`BID` = b.`BID`);
 ```
 
-![Screenschot for answer 18.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/18.png)
+![Screenschot for answer 18.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/18.png)
 
 ## Problem 19
 
@@ -296,7 +296,7 @@ SELECT `SID`, `TotalDeposit`
   AS RESULT(`SID`, `NumBoats`, `TotalDeposit`) WHERE `NumBoats` > 1;
 ```
 
-![Screenschot for answer 19.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/19.png)
+![Screenschot for answer 19.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/19.png)
 
 ## Problem 20
 
@@ -306,7 +306,7 @@ SELECT `SID`, `TotalDeposit`
 SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for answer 20.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/20.png)
+![Screenschot for answer 20.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/20.png)
 
 ## Problem 21
 
@@ -317,7 +317,7 @@ SELECT * FROM Boats INNER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 ```
 
-![Screenschot for answer 21.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/21.png)
+![Screenschot for answer 21.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/21.png)
 
 ## Problem 22
 
@@ -328,7 +328,7 @@ SELECT * FROM Boats LEFT OUTER JOIN Reserves ON Boats.`BID` = Reserves.`BID`;
 INSERT INTO Boats VALUES('Nino', 110, 150, 'Fish Hoek');
 ```
 
-![Screenschot for answer 22.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/22.png)
+![Screenschot for answer 22.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/22.png)
 
 ### Added *Boats*
 
@@ -344,7 +344,7 @@ Nino | 110 | 150 | Fish Hoek
 DELETE FROM Reserves WHERE `Deposit` IS NULL OR `Deposit` = 0;
 ```
 
-![Screenschot for answer 23.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/23.png)
+![Screenschot for answer 23.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/23.png)
 
 ### Removed *Reserves*
 
@@ -362,7 +362,7 @@ SID | BID | Day | Deposit
 UPDATE Boats SET `Fee` = `Fee` * 1.12;
 ```
 
-![Screenschot for answer 24.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/24.png)
+![Screenschot for answer 24.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/24.png)
 
 ### Updated **Boats**
 
@@ -383,7 +383,7 @@ Nino | 110 | **168** | Fish Hoek
 CREATE VIEW Bookings AS SELECT `SID`, `BID`, `Day` FROM Reserves;
 ```
 
-![Screenschot for answer 25.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/25.png)
+![Screenschot for answer 25.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/25.png)
 
 #### Created *Bookings* view
 
@@ -413,7 +413,7 @@ CREATE TABLE Reserves(
 );
 ```
 
-![Screenschot for answer 26.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/26.png)
+![Screenschot for answer 26.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/26.png)
 
 > There seem to be a `reserves_chk_1` error.
 
@@ -425,7 +425,7 @@ CREATE TABLE Reserves(
 ALTER TABLE Boats ADD `NEEDSREPAIR` CHAR(1) DEFAULT 'N';
 ```
 
-![Screenschot for answer 27.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/27.png)
+![Screenschot for answer 27.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/27.png)
 
 ### Updated *Boats*
 
@@ -445,7 +445,7 @@ Nino | 110 | 158 | Fish Hoek | **N**
 ALTER TABLE Sailors DROP `Age`;
 ```
 
-![Screenschot for answer 28.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/28.png)
+![Screenschot for answer 28.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/28.png)
 
 ### Updated *Sailors*
 
@@ -465,4 +465,4 @@ Carrey | 33 | 10
 DROP TABLE Captains;
 ```
 
-![Screenschot for answer 29.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/sailing-db/29.png)
+![Screenschot for answer 29.](https://github.com/hanggrian/IIT-CS425/raw/assets/sailing-db/29.png)

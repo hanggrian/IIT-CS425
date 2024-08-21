@@ -1,4 +1,4 @@
-# [Project deliverable 2](https://github.com/hendraanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
+# [Project deliverable 2](https://github.com/hanggrian/IIT-CS425/blob/assets/assignments/proj.pdf): *Chicago Transit Authority (CTA)*
 
 > **Logical model**: Develop a detailed ER-model for the application. Translate
   the conceptual model into a detailed logical model showing relational schema
@@ -14,13 +14,13 @@
 
 > ### Old ER diagram
 >
-> <img width="480" src="https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er1.svg"/>
+> <img width="480" src="https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er1.svg"/>
 
 ## New ER diagram
 
-![The ER diagram stage 2.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/er2.svg)
+![The ER diagram stage 2.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/er2.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/er.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/er.drawio)
 
 ### Rules
 
@@ -47,9 +47,9 @@
 
 ## UML diagram
 
-![The UML diagram stage 1.](https://github.com/hendraanggrian/IIT-CS425/raw/assets/cta/uml2.svg)
+![The UML diagram stage 1.](https://github.com/hanggrian/IIT-CS425/raw/assets/cta/uml2.svg)
 
-[View diagram file](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/uml.drawio)
+[View diagram file](https://github.com/hanggrian/IIT-CS425/blob/main/cta/uml.drawio)
 
 ### *Conductors* & *Alerts*
 
@@ -235,8 +235,8 @@ CREATE TABLE Trips(
 );
 ```
 
-[View full code](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/initialize2.sql)
-/ [data](https://github.com/hendraanggrian/IIT-CS425/blob/main/cta/data2.sql)
+[View full code](https://github.com/hanggrian/IIT-CS425/blob/main/cta/initialize2.sql)
+/ [data](https://github.com/hanggrian/IIT-CS425/blob/main/cta/data2.sql)
 
 ## Checklist
 
